@@ -1,0 +1,67 @@
+
+//
+//  PrefixHeader.pch
+//  FZWeibo
+//
+//  Created by 付智鹏 on 15/12/23.
+//  Copyright © 2015年 付智鹏. All rights reserved.
+//
+#ifdef __OBJC__
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "AFNetworking.h"
+#import "YYModel.h"
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "EnumerationDefinition.h"
+#import "BlockDefinition.h"
+#import "PPConst.h"
+
+#define NTES_USE_CLEAR_BAR - (BOOL)useClearBar{return YES;}
+
+#define NTES_FORBID_INTERACTIVE_POP - (BOOL)forbidInteractivePop{return YES;}
+
+#define SLog(format, ...) printf("class: <%p %s:(%d) > method: %s \n%s\n", self, [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, __PRETTY_FUNCTION__, [[NSString stringWithFormat:(format), ##__VA_ARGS__] UTF8String] )
+
+
+#define URL_LOCAL @"http://xiaoqu.meidyy.com/api/"
+#define DEFAULT_FONT(s)     [UIFont fontWithName:@"ArialMT" size:s]
+#define HEIGHT (self.view.size.height)
+#define WIDTH (self.view.size.width)
+#define KScreenHeight [[UIScreen mainScreen] bounds].size.height
+#define KScreenWigth [[UIScreen mainScreen] bounds].size.width
+
+#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+
+//判断是否是ipad
+#define ls_isPad ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+//判断iPhone4系列
+#define kiPhone4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) && !ls_isPad : NO)
+//判断iPhone5系列
+#define kiPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) && !ls_isPad : NO)
+//判断iPhone6 6s 7系列
+#define kiPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) && !ls_isPad : NO)
+//判断iPhoneX，Xs（iPhoneX，iPhoneXs）
+#define IS_IPHONE_X ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) && !ls_isPad : NO)
+
+//判断iPhoneXr
+#define IS_IPHONE_Xr ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(828, 1792), [[UIScreen mainScreen] currentMode].size) && !ls_isPad : NO)
+//判断iPhoneXsMax
+#define IS_IPHONE_Xs_Max ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].size)&& !ls_isPad : NO)
+//判断iPhoneX所有系列
+#define IS_PhoneXAll (IS_IPHONE_X || IS_IPHONE_Xr || IS_IPHONE_Xs_Max || (SCREEN_HEIGHT == 812))
+#define StatusBar_Height (IS_PhoneXAll? 44.0 : 20.0)
+#define TabBar_Height (IS_PhoneXAll ? 83.0 : 49.0)
+#define NavBar_Height (IS_PhoneXAll ? 88.0 : 64.0)
+
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#ifdef DEBUG//调试状态,打开LOG功能
+#define FZLog(...)NSLog(__VA_ARGS__)
+#else//发布状态,关闭LOG功能
+#endif
+
+#endif /* PrefixHeader_pch */
+#endif
