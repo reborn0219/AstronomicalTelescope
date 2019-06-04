@@ -9,6 +9,8 @@
 #import "LoginViewController.h"
 #import "SLWebViewController.h"
 #import "UDPManage.h"
+#import "WebViewVC.h"
+#import "WebViewController.h"
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UIView *backV;
 @property (weak, nonatomic) IBOutlet UIView *blueLV;
@@ -28,9 +30,13 @@
     [mg startListenClientSocketMessage];
 }
 - (IBAction)connectDeviceAction:(id)sender {
-    SLWebViewController *webVC = [[SLWebViewController alloc]init];
-    [self presentViewController:webVC animated:YES completion:nil];
+//    SLWebViewController *webVC = [[SLWebViewController alloc]init];
+//    [self presentViewController:webVC animated:YES completion:nil];
+//    WebViewVC *webVC = [[WebViewVC alloc]init];
+//    [self presentViewController:webVC animated:YES completion:nil];
     
+    WebViewController *webVC = [[WebViewController alloc]init];
+    [self presentViewController:webVC animated:YES completion:nil];
 }
 
 @end

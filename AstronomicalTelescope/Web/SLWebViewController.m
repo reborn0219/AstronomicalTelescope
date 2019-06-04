@@ -168,7 +168,7 @@
 }
 
 - (void)localHtmlClicked{
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"JStoOC.html" ofType:nil];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Main.html" ofType:nil];
     NSString *htmlString = [[NSString alloc]initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
     [_webView loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
 }

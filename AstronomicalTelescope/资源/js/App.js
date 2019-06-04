@@ -1,3 +1,4 @@
+
 function AnythingToJson(v){
 	var r;
 	if(typeof(v)=="string" || typeof(v)=="object"){
@@ -107,7 +108,6 @@ function GetLocalGPS(){
 
 function DeviceClose(){
 	PhoneInterface.close();
-    window.webkit.messageHandlers.close.postMessage("");
 }
 
 //通知APP已经启动成功
