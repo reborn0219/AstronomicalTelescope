@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>APP测试页面</title>
+		<script language="javascript" src="js/jquery-3.3.1.min.js"></script>
+		<script language="javascript" src="js/App.js"></script>
+		<style>
+			body{
+				overflow: hidden;
+				margin:0px;
+				padding: 0px;
+				color:#ABABAB;
+				background-color: #232323;
+			}
+			.Hide{
+				display:none;
+			}
+
+			*{
+				font-family:微软雅黑;
+				font-size: 28px;
+			}
+			.LogContent{
+				overflow-y:scroll;
+				width: calc(100% - 40px);
+				height:800px;
+				line-height: 50px;
+				padding: 20px;
+				border-bottom:#ABABAB solid 2px;
+				background-color: #232323;
+			}
+			.buttons{
+				height:100px;
+				padding:20px;
+			}
+			.buttons button{
+				width:200px;
+				height: 80px;
+				border-radius: 5px;
+				border:#4cae4c solid 2px;
+				background-color:#5cb85c;
+				color:#FFF;
+				font-weight: bold;
+				margin-right: 20px;
+				margin-bottom: 20px;
+				outline: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="LogContent"></div>
+		<div class="buttons">
+			<button id="sync">同步请求</button>
+			<button id="aync1">重要异步请求</button>
+			<button id="aync2">10次异步请求</button>
+			<button id="goback">回到首页</button>
+			<button id="close">关闭APP</button>
+			<button id="show">隐藏引导页</button>
+			<button id="gps">获得GPS</button>
+			<button id="read">读取JSON</button>
+			<br/>
+			<button id="alert_1">提示弹窗</button>
+			<button id="alert_2">确认弹窗</button>
+			<button id="alert_3">警告弹窗</button>
+			<button id="alert_4">错误弹窗</button>
+			<button id="alert_5">信息弹窗</button>
+		</div>
+	</body>
+	<script>
+		var ii=0;
+		$(document).ready(function(){
+			testFunction();
+			log("测试程序启动，进入Ready 方法");
+			log("准备调用 PhoneInterface.ready()");
+			try{
+				NoticeAppReady();
+				log("调用完毕 PhoneInterface.ready()");
+			}catch(err){
+				error(err);
+			}
+		});
+		function log(msg){
+			$(".LogContent").html($(".LogContent").html()+"<label style='color:#4C9D2F'>"+dateFormat(new Date())+"</label>&emsp;"+msg+"<br />");
+			$(".LogContent").scrollTop($(".LogContent").prop("scrollHeight"));
+		}
+		function error(msg){
+			$(".LogContent").html($(".LogContent").html()+"<label style='color:#4C9D2F'>"+dateFormat(new Date())+"</label>&emsp;<label style='color:#b70007'>"+msg+"</label><br />");
+			$(".LogContent").scrollTop($(".LogContent").prop("scrollHeight"));
+		}
+		
+		function BrowserReady(){
+			log("被APP调用了_BrowserReady方法");
+			zoomPage();
+			log("准备调用 PhoneInterface.showview()");
+			try{
+				ShowView();
+				log("调用完毕 PhoneInterface.showview()");
+			}catch(err){
+				error(err);
+			}
+			log("测试页面启动完毕");
+			log("");
+		}
+		
+		function dateFormat(time)   
+		{ //author: meizz   
+			var datetime = new Date();
+			datetime.setTime(time);
+			var hour = datetime.getHours()< 10 ? "0" + datetime.getHours() : datetime.getHours();
+			var minute = datetime.getMinutes()< 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+			var second = datetime.getSeconds()< 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+			return hour+":"+minute+":"+second; 
+		}
+		
+		function testFunction(){
+			$("#sync").click(function(){
+				//同步请求
+				log("发送同步请求");
+				try{
+					var req={type:"devices"}
+					var _r = SendCommand("GetInfo",req);
+					log("发送同步请求完毕，结果 : " + JSON.stringify(_r));
+				}catch(err){
+					error(err);
+				}
+			})
+			
+			$("#aync1").click(function(){
+				//同步请求
+				log("发送重要的异步请求");
+				try{
+					var req={type:"main"}
+					SendCommandA("GetInfo",req,callback1,true);
+					log("发送重要的异步请求完毕");
+				}catch(err){
+					error(err);
+				}
+			})
+			$("#aync2").click(function(){
+				//同步请求
+				log("准备开始发送10次非重要异步请求");
+				for(var i=1 ; i<=10 ; i++){
+					try{
+						log("&emsp;非重要异步请求：" + i);
+						var req={type:"main",index:i}
+						SendCommandA("GetInfo",req,callback2,false);
+					}catch(err){
+						error(err);
+					}
+					
+				}
+				
+				log("10次非重要异步请求发送完毕");
+			});
+			$("#goback").click(function(){
+				log("准备调用 PhoneInterface.gohome()");
+				try{
+					GoHome();
+				log("调用完毕 PhoneInterface.gohome()");
+				}catch(err){
+					error(err);
+				}
+			});
+			
+			$("#close").click(function(){
+				log("准备调用 PhoneInterface.close()");
+				try{
+					DeviceClose();
+					log("调用完毕 PhoneInterface.close()");
+				}catch(err){
+					error(err);
+				}
+			});
+			
+			$("#show").click(function(){
+				log("准备调用 PhoneInterface.showview()");
+				try{
+					ShowView();
+					log("调用完毕 PhoneInterface.showview()");
+				}catch(err){
+					error(err);
+				}
+			});
+			$("#gps").click(function(){
+				log("准备调用 PhoneInterface.getGPS()");
+				try{
+					var _r= GetLocalGPS();
+					log("调用完毕 PhoneInterface.getGPS() ， 结果 : " + JSON.stringify(_r));
+				}catch(err){
+					error(err);
+				}
+			});
+			$("#read").click(function(){
+				log("准备调用 PhoneInterface.getJSON('js/lang/zh-cn.json')");
+				try{
+					_GetJSON('js/lang/zh-cn.json',callback3);
+					log("调用完毕 PhoneInterface.getJSON('js/lang/zh-cn.json')");
+				}catch(err){
+					error(err);
+				}
+			});
+			$("#alert_1").click(function(){
+				log("准备调用弹窗函数（提示），没有任何回调");
+				try{
+					MessageBox.Show({
+						title:"提示弹窗"
+						,content:"单击这个按钮会弹出一个提示弹窗界面"
+					});
+				}catch(err){
+					error(err);
+				}
+			});
+			$("#alert_2").click(function(){
+				log("准备调用弹窗函数（确认），有回调");
+				try{
+					MessageBox.Show({
+						title:"确认弹窗"
+						,flag:MessageBox.FLAG_QUERY
+						,buttons:MessageBox.BUTTONS_YES_NO
+						,content:"这是一个确认窗口，有是否按钮和问号标志，请问你选择哪个按钮？"
+						,callback:function(data){
+							log("弹窗返回结果：" + JSON.stringify(data));
+						}
+					});
+				}catch(err){
+					error(err);
+				}
+			});
+			
+			$("#alert_3").click(function(){
+				log("准备调用弹窗函数（警告），有回调");
+				try{
+					MessageBox.Show({
+						title:"警告弹窗"
+						,flag:MessageBox.FLAG_WARNING
+						,content:"这是一个警告窗口，有个黄色叹号标志，并且有回调。"
+						,callback:function(data){
+							log("弹窗返回结果：" + JSON.stringify(data));
+						}
+					});
+				}catch(err){
+					error(err);
+				}
+			});
+			
+			$("#alert_4").click(function(){
+				log("准备调用弹窗函数（错误），没有任何回调");
+				try{
+					MessageBox.Show({
+						title:"错误弹窗"
+						,flag:MessageBox.FLAG_ERROR
+						,content:"这是一个警告窗口，有个叹号标志，并且有回调。"
+						,callback:function(data){
+							log("弹窗返回结果：" +JSON.stringify(data));
+						}
+					});
+				}catch(err){
+					error(err);
+				}
+			});
+			
+			$("#alert_5").click(function(){
+				log("准备调用弹窗函数（信息），没有任何回调");
+				try{
+					MessageBox.Show({
+						title:"信息弹窗"
+						,flag:MessageBox.FLAG_INFORMATION
+						,content:"这是一个警告窗口，有个白色叹号标志，并且有回调。"
+						,callback:function(data){
+							log("弹窗返回结果：" + JSON.stringify(data));
+						}
+					});
+				}catch(err){
+					error(err);
+				}
+			});
+		}
+		
+		function callback1(_r){
+			log("重要的异步请求收到回调，结果 = " +JSON.stringify(_r));
+		}
+		
+		function callback2(_r){
+			log("非重要的异步请求收到回调，结果 = " +JSON.stringify(_r));
+		}
+		
+		function callback3(_r){
+			log("调用json文件结果返回，结果 = " +JSON.stringify(_r));
+		}
+		
+		function zoomPage(){
+			/*
+			获得浏览器宽度，zoom=浏览器宽度/1920，得出缩放比
+			设置body的zoom属性
+			*/
+			var bodyWidth = document.body.clientWidth;
+			var zoom = bodyWidth/1920;
+			APPZoom=zoom;
+			$("body").css("zoom",zoom);
+			log("获得页面大小：" + bodyWidth +"缩放比：" + zoom);
+		}
+	</script>
+</html>

@@ -7,7 +7,7 @@
 //
 
 #import "LoginViewController.h"
-
+#import "UDPManage.h"
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UIView *backV;
 @property (weak, nonatomic) IBOutlet UIView *blueLV;
@@ -23,7 +23,8 @@
     self.backV.layer.cornerRadius = 5;
     self.blueLV.layer.cornerRadius = 5;
     self.blueV.layer.cornerRadius = 5;
-
+    UDPManage *mg = [[UDPManage alloc]init];
+    [mg startListenClientSocketMessage];
 }
 
 @end

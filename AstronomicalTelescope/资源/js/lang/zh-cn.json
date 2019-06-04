@@ -1,0 +1,366 @@
+{
+	"language": "zh-cn",
+	"frametype": {
+		"light": "亮场",
+		"bias": "偏置",
+		"dark": "暗场",
+		"flat": "平场",
+		"flatdark": "暗平场"
+	},
+	"main": {
+		"status": {
+			"idle": "设备空闲",
+			"task": "执行任务",
+			"exposure": "单帧曝光",
+			"focusing": "自动调焦",
+			"calibration": "设备校准",
+			"goto": "目标GOTO",
+			"closeing": "正在关机",
+			"error": "设备错误"
+		},
+		"devices": {
+			"idle": "空闲",
+			"ready": "准备",
+			"exposure": "曝光",
+			"down": "读出",
+			"error": "错误",
+			"move": "移动",
+			"goto": "GOTO",
+			"track": "跟踪",
+			"empty": "空"
+		},
+		"labels": {
+			"mount_goto": "赤道仪Goto中...",
+			"mount_stop": "停止GOTO"
+		},
+		"alert": {
+			"goto_title": "GOTO",
+			"goto_msg": "目标当前时间在地平线以下，是否继续GOTO？"
+		}
+	},
+	"exposure": {
+		"setting": {
+			"title": "曝光参数设置",
+			"timetitle": "曝光时间",
+			"filtertitle": "滤镜",
+			"gain":"Gain",
+			"offset":"Offset"
+		},
+		"labels": {
+			"_1": "按钮的打印信息",
+			"getready": "准备中",
+			"reading": "读取中"
+		},
+		"alert": {
+			"error_title": "曝光失败",
+			"unable_title": "无法执行",
+			"stop_title": "终止曝光",
+			"drak_title": "暗场拍摄",
+			"error_msg": "曝光失败，错误原因 : {0}",
+			"unable_task": "操作失败，任务执行中...",
+			"unable_goto": "赤道仪正在Goto，请等待Goto完毕再执行此项操作。",
+			"unable_calibration": "赤道仪正在校准，请等待校准完毕再执行此项操作。",
+			"unable_focusing": "主相机正在对焦，请等对焦准完毕再执行此项操作。",
+			"unable_error": "当前不可拍摄，请检查相机连接是否正常。",
+			"stop_msg": "需要停止曝光吗？",
+			"dark_msg": "执行暗场拍摄，请确认镜头盖已经关闭。",
+			"devices_does_not_exist": "主相机不在线，无法进行曝光！",
+			"time_err_title": "时间设置错误",
+			"time_err_content": "曝光时间最长不可超过{0}分钟"
+		}
+	},
+	"guider": {
+		"labels": {
+			"ra_rms": "赤经偏移",
+			"dec_rms": "赤纬偏移",
+			"count_rms": "累计",
+			"clear": "清空数据",
+			"start": "开启导星",
+			"stop": "停止导星",
+			"lmsg_stoped": "停止导星",
+			"lmsg_error": "导星错误",
+			"lmsg_calibration": "校准:{0}",
+			"total": "累计"
+		},
+		"alert": {
+			"guider_error_title": "导星错误",
+			"guider_error": "导星出现错误，导星停止，原因 : {0}",
+			"guider_stop_title": "停止导星",
+			"guider_stop": "是否停止导星？",
+			"devices_does_not_exist": "赤道仪或导星相机不在线，无法开启导星！"
+		}
+	},
+	"task": {
+		"targettitle": "拍摄目标",
+		"select_target": "请选择目标",
+		"options": {
+			"start_guider": "自动开启导星",
+			"cfw_f": "切换滤镜后自动对焦",
+			"es_f": "事件开始前自动对焦",
+			"time_f_a": "间隔  ",
+			"time_f_b": "  秒后自动对焦",
+			"eb_c": "事件开始前重新在校准赤道仪",
+			"time_ct_a": "间隔  ",
+			"time_ct_b": "  秒重新校准赤道仪",
+			"te_home": "任务结束后赤道仪归位",
+			"te_shutdown": "任务结束后关机"
+		},
+		"event": {
+			"maintitle": "拍摄事件",
+			"snumber": "序号",
+			"frametype": "类型",
+			"filter": "滤镜",
+			"times": "曝光时间",
+			"bin": "BIN",
+			"count": "数量",
+			"controller": "操作",
+			"addnewevent": "添加新事件"
+		},
+		"start": "执行任务",
+		"stop": "停止任务",
+		"labels": {
+			"exec": "执行 : {0}",
+			"es_time": "预估时长 : {0}",
+			"es_size": "预估大小 : {0}",
+			"es_count": "拍摄数量 : {0} 张"
+		},
+		"alert": {
+			"error_title": "任务执行错误",
+			"unable_title": "无法执行",
+			"stop_title": "停止任务",
+			"error_msg": "任务执行错误，错误原因 : {0}",
+			"del_title": "删除确认",
+			"delevent_msg": "确定要删除该事件吗？",
+			"unable_msg": "无法执行任务 : {0}",
+			"unable_unhorizon": "目标在地平线一下，无法开始任务",
+			"unable_notarget": "请选择您要拍摄的目标天体。",
+			"stop_msg": "确定要停止本次任务执行吗？",
+			"unable_busyness": "设备忙碌中，无法执行任务！",
+			"camera_does_not_exist": "主相机不在线，无法执行任务！",
+			"focuser_does_not_exist": "主相机电动调焦器不在线，无法执行任务，请关闭调焦相关设置！",
+			"guider_does_not_exist": "赤道仪或导星相机不在线，无法执行任务，请关闭自动导星相关设置！",
+			"filterwheels_does_not_exist": "滤镜轮不在线，无法执行任务，请关闭滤镜相关设置！",
+			"other_devices_does_not_title": "设备不存在",
+			"other_devices_does_not_exist": "您设置的任务中包含暗场和平场事件，但镜头盖和平场板不在线，执行任务将不会自动关闭镜头盖。",
+			"setting_error_title": "参数设置错误",
+			"size_error_content": "单事件拍摄数量不能超过100张！"
+		}
+	},
+	"settings": {
+		"devices": {
+			"maintitle": "设备管理",
+			"mount": "赤道仪",
+			"camera": "主镜",
+			"guidercamera": "导星镜",
+			"focuser": "调焦器",
+			"filterwheels": "滤镜轮",
+			"brand": "品牌 : ",
+			"model": "型号 : ",
+			"port": "端口 : ",
+			"longitude": "经度 : ",
+			"latitude": "纬度 : ",
+			"time": "时间 : ",
+			"syncgps": "与手机GPS同步",
+			"size": "分辨率 : ",
+			"color": "色彩 : ",
+			"caliber": "口径 : ",
+			"focal": "焦距 : ",
+			"ff": "焦比 : ",
+			"gain": "Gain : ",
+			"offset": "Offset : ",
+			"iso": "ISO",
+			"hole": "孔位 : ",
+			"opencool": "是否打开制冷",
+			"temperature": "制冷温度",
+			"now_position": "当前位置 : ",
+			"max_position": "最大位置 : ",
+			"tag": "标签 : ",
+			"markcolor": "标注颜色 : ",
+			"unidentified": "未识别",
+			"c_color": "彩色",
+			"c_monochrome": "黑白",
+			"alert": {
+				"settingerror": "无法执行任务",
+				"longitude_error": "请输入正确格式的经度。\n范围是0°00′00″到179°59′59″\nE为东经，W西经\n\n注意：度部分不可超过180，分秒部分不可超过60，都为正整数",
+				"latitude_error": "请输入正确格式的纬度。\n范围是0°00′00″到89°59′59″\nS为南半球，N为北半球\n\n注意：度部分不可超过90，分秒部分不可超过60，都为正整数",
+				"time_error": "请输入正确的赤道仪时间，格式为：年-月-日 时:分:秒\n\n如：2019-03-14 22:03:14",
+				"caliber_error": "请输入正确的望远镜口径！",
+				"focal_error": "请输入正确的望远镜焦距！",
+				"gain_error": "请输入正确的Gain值，取值范围为0 - {0}",
+				"offset_error": "请输入正确的Offset值，取值范围为0 - {0}",
+				"temp_error": "请输入正确的制冷温度，制冷范围-50°C 到 0°C",
+				"focuser_error": "请输入正确的焦点位置，范围为0 - {0}",
+				"focuser_max_error": "焦点最大值必须是大于0的整数！",
+				"sync_title": "GPS同步成功",
+				"sync_msg": "GPS已与手机同步成功",
+				"device_used":"设备正在使用，无法修改，请停止相机功能后再进行修改！"
+			}
+		},
+		"system": {
+			"maintitle": "系统设置",
+			"editpassword": "修改登录密码",
+			"editwifipassword": "修改WIFI密码",
+			"inputnewpassword": "请输入新密码",
+			"okbtn": "确    定",
+			"devicename": "设备名称",
+			"inputdevicename": "请输入新名称",
+			"homesetting": "赤道仪HOME位设置",
+			"local": "当前赤道仪数值",
+			"sethome": "设置为HOME位",
+			"setpark": "设置为PARK位",
+			"gohome": "回到HOME位",
+			"gopark": "回到PARK位",
+			"clearguiderdata": "清除导星校准数据",
+			"clearbtn": "清    除",
+			"video": "实时取景",
+			"openvideo": "开启实时取景",
+			"videotime": "实时取景曝光时长",
+			"shutdown":"关机",
+			"reboot":"重启",
+			"alert": {
+				"change_pwd_title": "修改密码",
+				"change_pwd_content_error": "修改密码失败，密码必须是8-16个由大小写字母、数字、特殊符号组成的字符串！",
+				"change_pwd_content_complete": "登录密码修改成功，该密码为登录系统密码，不是WIFI连接密码！重启设备后生效！",
+				"change_wifipwd_content_complete": "登录密码修改成功，该密码为WIFI连接密码，不是系统登录密码！重启设备后生效！",
+				"change_name_title": "修改设备名称",
+				"change_name_content_error": "无法修改设备名称！\n设备名称长度必须在6-16个字符之间，由字母开头，名称内可以包含大小写字母、数字和下划线！",
+				"change_name_content_complete": "设备名称修改成功,重启设备后生效！",
+				"clear_guider_title": "删除导星校准数据",
+				"clear_guider_content": "是否删除导星校准数据？这将导致下次启动导星的时候进行重新校准！",
+				"clear_guider_complete": "导星校准数据已清空，下次启动导星时会重新校准赤道仪和导星相机。",
+				"set_complete_title": "设置成功",
+				"set_home_content": "已经将赤道仪当前位置设置为Home位。",
+				"set_prak_content": "已经将赤道仪当前位置设置为Park位。",
+				"move_mount": "设置赤道仪",
+				"move_prak_query": "确定将赤道仪移动至Park位吗？",
+				"move_home_query": "确定将赤道仪移动至Home位吗？",
+				"shutdown_title":"关机确认",
+				"reboot_title":"重启确认",
+				"shutdown_content":"这个操作将停止一切正在执行的动作，确认要关机吗？",
+				"reboot_content":"这个操作将停止一切正在执行的动作，确认要重启吗？"
+			}
+		},
+		"display": {
+			"maintitle": "显示设置",
+			"ds": "设备状态",
+			"ds_label": "在主界面中显示顶部状态栏",
+			"guider": "导星",
+			"guider_label": "在主界面中显示导星数据",
+			"cd": "相机属性",
+			"cd_label": "在主界面中显示相机的拍摄参数",
+			"ml": "赤道仪位置",
+			"ml_label": "在主界面中显示赤道仪当前的位置信息",
+			"mc": "赤道仪控制",
+			"mc_label": "在主界面中显示赤道仪控制盘",
+			"ec": "曝光控制",
+			"ec_label": "在主界面中显示曝光控制按钮组",
+			"calibration": "校准工具",
+			"calibration_label": "在主界面左侧显示校准按钮组"
+		},
+		"file": {
+			"maintitle": "文件管理",
+			"nontask_files": "非任务拍摄",
+			"alert": {
+				"del_title": "删除确认",
+				"del_dir_msg": "确定要删除该文件夹吗？\n这将是不可恢复的操作！",
+				"del_file_msg": "确定要删除该文件吗？\n这将是不可恢复的操作！"
+			}
+		},
+		"about": {
+			"name": "司天监 移动版 1.0",
+			"info": "    司天监是碳十四公司设计研发的一款天文摄影辅助工具。您将通过无线操作方式，使用司天监APP实现相机对焦、赤道仪校准、星体目标搜索、精准GOTO、导星跟踪、任务拍摄等功能。<br />    司天监专为天文摄影初学者设计，拍摄过程中的大量复杂功能可以选择通过系统自动方式实现，简单实用的操作体验将使您的星空拍摄之旅更具趣味性。"
+		},
+		"feedback": {
+			"maintitle": "意见反馈",
+			"submit": "提    交",
+			"contact": "微信公众号 : C14space<br />QQ群 : 2788597<br />商务合作 : c14space@c14.xyz"
+		},
+		"alert": {}
+	},
+	"numbercard": {
+		"ok": "确定",
+		"cancel": "取消"
+	},
+	"targetserach": {
+		"speed": "手动速率",
+		"maintitle": "拍摄目标检索",
+		"boutique_btn": "精选",
+		"boutique_title": "精选天体",
+		"targetstype": "目标类型",
+		"iscb": "系内天体",
+		"cluster": "星团",
+		"en": "发射星云",
+		"rn": "反射星云",
+		"galaxy": "星系",
+		"dn": "暗星云",
+		"pn": "行星星云",
+		"comet": "彗星",
+		"min_angle": "最小高度",
+		"unlimited": "不限",
+		"max_time": "可拍摄时长",
+		"size": "大小范围",
+		"search_btn": "    筛    选",
+		"alert": {
+			"errdata_title": "错误数据",
+			"errsize_msg": "请输入搜索天体范围最小值，大小在0-1000之间！"
+		},
+		"labels": {
+			"ra": "赤经",
+			"dec": "赤纬",
+			"altitude": "高度角",
+			"azimuth": "方位角",
+			"magnitude": "星等",
+			"size": "大小",
+			"type": "类型"
+		}
+	},
+	"picturepreview": {
+		"loading_title": "图片加载中...",
+		"save": "保存到手机",
+		"alert": {
+			"del_title": "删除确认",
+			"delfile_msg": "确定要删除这张照片吗？"
+		}
+	},
+	"focuser": {
+		"camera": "主  镜",
+		"guidercamera": "导星镜",
+		"times": "曝光时长",
+		"params":"曝光设置",
+		"start_auto": "自动对焦",
+		"stop_auto": "停止对焦",
+		"focus": "焦点 : {0}",
+		"hfr": "半宽 : {0}",
+		"autoing": "正在自动对焦...",
+		"timestitle": "曝光时间设置",
+		"paramstitle":"曝光参数设置",
+		"gain":"Gain",
+		"offset":"Offset",
+		"status": {
+			"focusing": "自动对焦 : 调焦中...",
+			"exping": "自动对焦 : 拍摄中..."
+		},
+		"alert": {
+			"unsupport_title": "不支持调焦",
+			"unsupport_msg": "导星镜不支持电动调焦！",
+			"unable_title": "无法执行",
+			"focuser_does_not_exist": "主相机电动调焦器不在线，无法调焦！",
+			"device_actived_error":"设备处于非空闲状态，无法进入调焦，如果需要调焦，请停止一些真在执行的动作。"
+		}
+	},
+	"calibration": {
+		"maintitle": "赤道仪校准",
+		"targetposition": "目标位置",
+		"ci": "解析图像",
+		"sync": "同步赤道仪",
+		"goto": "GOTO到目标位置",
+		"ok_btn": "确    定",
+		"cancel_btn": "取    消",
+		"alert": {
+			"cancel_title": "取消校准",
+			"cancel_msg": "确定取消本次校准吗？",
+			"error_title": "无法校准",
+			"errordata_msg": "该数据无法进行校准！"
+		}
+	}
+}
