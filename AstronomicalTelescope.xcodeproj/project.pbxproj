@@ -18,10 +18,8 @@
 		2F439F01229BCAA600DD430B /* AstronomicalTelescopeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F439F00229BCAA600DD430B /* AstronomicalTelescopeUITests.m */; };
 		2F439F13229BCB3900DD430B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F439F11229BCB3900DD430B /* LoginViewController.m */; };
 		2F439F14229BCB3900DD430B /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F439F12229BCB3900DD430B /* LoginViewController.xib */; };
-		2F9883BE22A6612A0023326F /* jquery-3.3.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F9883B922A6612A0023326F /* jquery-3.3.1.min.js */; };
-		2F9883BF22A6612A0023326F /* zh-cn.json in Resources */ = {isa = PBXBuildFile; fileRef = 2F9883BB22A6612A0023326F /* zh-cn.json */; };
-		2F9883C022A6612A0023326F /* App.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F9883BC22A6612A0023326F /* App.js */; };
-		2F9883C122A6612A0023326F /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 2F9883BD22A6612A0023326F /* Main.html */; };
+		2F9883C422A66F500023326F /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 2F9883C222A66F4F0023326F /* Main.html */; };
+		2F9883C522A66F500023326F /* js in Resources */ = {isa = PBXBuildFile; fileRef = 2F9883C322A66F4F0023326F /* js */; };
 		2FA5E82122A0BF9E001BC56E /* SLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA5E81F22A0BF9E001BC56E /* SLWebViewController.m */; };
 		2FA5E82722A0C482001BC56E /* PatrolHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA5E82322A0C482001BC56E /* PatrolHttpRequest.m */; };
 		2FA5E82822A0C482001BC56E /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA5E82522A0C482001BC56E /* BaseRequest.m */; };
@@ -68,10 +66,8 @@
 		2F439F10229BCB3900DD430B /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		2F439F11229BCB3900DD430B /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		2F439F12229BCB3900DD430B /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		2F9883B922A6612A0023326F /* jquery-3.3.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-3.3.1.min.js"; sourceTree = "<group>"; };
-		2F9883BB22A6612A0023326F /* zh-cn.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "zh-cn.json"; sourceTree = "<group>"; };
-		2F9883BC22A6612A0023326F /* App.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = App.js; sourceTree = "<group>"; };
-		2F9883BD22A6612A0023326F /* Main.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Main.html; sourceTree = "<group>"; };
+		2F9883C222A66F4F0023326F /* Main.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Main.html; sourceTree = "<group>"; };
+		2F9883C322A66F4F0023326F /* js */ = {isa = PBXFileReference; lastKnownFileType = folder; path = js; sourceTree = "<group>"; };
 		2FA5E81E22A0BEF1001BC56E /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		2FA5E81F22A0BF9E001BC56E /* SLWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLWebViewController.m; sourceTree = "<group>"; };
 		2FA5E82022A0BF9E001BC56E /* SLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLWebViewController.h; sourceTree = "<group>"; };
@@ -197,28 +193,10 @@
 		2F9883B722A6612A0023326F /* 资源 */ = {
 			isa = PBXGroup;
 			children = (
-				2F9883B822A6612A0023326F /* js */,
-				2F9883BD22A6612A0023326F /* Main.html */,
+				2F9883C322A66F4F0023326F /* js */,
+				2F9883C222A66F4F0023326F /* Main.html */,
 			);
 			path = "资源";
-			sourceTree = "<group>";
-		};
-		2F9883B822A6612A0023326F /* js */ = {
-			isa = PBXGroup;
-			children = (
-				2F9883B922A6612A0023326F /* jquery-3.3.1.min.js */,
-				2F9883BA22A6612A0023326F /* lang */,
-				2F9883BC22A6612A0023326F /* App.js */,
-			);
-			path = js;
-			sourceTree = "<group>";
-		};
-		2F9883BA22A6612A0023326F /* lang */ = {
-			isa = PBXGroup;
-			children = (
-				2F9883BB22A6612A0023326F /* zh-cn.json */,
-			);
-			path = lang;
 			sourceTree = "<group>";
 		};
 		2FA5E82222A0C43A001BC56E /* Api */ = {
@@ -360,13 +338,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F439F14229BCB3900DD430B /* LoginViewController.xib in Resources */,
-				2F9883C122A6612A0023326F /* Main.html in Resources */,
+				2F9883C522A66F500023326F /* js in Resources */,
 				2F439EE9229BCAA600DD430B /* LaunchScreen.storyboard in Resources */,
-				2F9883BF22A6612A0023326F /* zh-cn.json in Resources */,
-				2F9883BE22A6612A0023326F /* jquery-3.3.1.min.js in Resources */,
 				2F439EE6229BCAA600DD430B /* Assets.xcassets in Resources */,
+				2F9883C422A66F500023326F /* Main.html in Resources */,
 				2F439EE4229BCAA100DD430B /* Main.storyboard in Resources */,
-				2F9883C022A6612A0023326F /* App.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

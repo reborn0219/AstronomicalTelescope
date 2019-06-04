@@ -18,6 +18,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
+    _allowRotation = NO;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     LoginViewController * loginVC = [[LoginViewController alloc]init];
     self.window.rootViewController = loginVC;
@@ -53,5 +54,19 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(nullable UIWindow *)window
 
+{
+    
+    if (_allowRotation == YES) {
+        
+        return UIInterfaceOrientationMaskLandscapeLeft;
+        
+    }else{
+        
+        return (UIInterfaceOrientationMaskPortrait);
+        
+    }
+    
+}
 @end

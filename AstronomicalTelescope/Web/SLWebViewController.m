@@ -1,6 +1,7 @@
 
 #import "SLWebViewController.h"
 #import <WebKit/WebKit.h>
+#import "AppDelegate.h"
 // WKWebView 内存不释放的问题解决
 @interface WeakWebViewScriptMessageDelegate : NSObject<WKScriptMessageHandler>
 
@@ -44,6 +45,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    appDelegate.allowRotation = YES;//(以上2行代码,可以理解为打开横屏开关)
+    
+    [self setNewOrientation:YES];
     
     [self setupNavigationItem];
     
@@ -88,8 +94,50 @@
                               context:context];
     }
 }
+- (void)setNewOrientation:(BOOL)fullscreen
 
+{
+    
+    if (fullscreen) {
+        
+        NSNumber *resetOrientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationUnknown];
+        
+        [[UIDevice currentDevice] setValue:resetOrientationTarget forKey:@"orientation"];
+        
+        
+        
+        NSNumber *orientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+        
+        [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];
+        
+    }else{
+        
+        NSNumber *resetOrientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationUnknown];
+        
+        [[UIDevice currentDevice] setValue:resetOrientationTarget forKey:@"orientation"];
+        
+        
+        
+        NSNumber *orientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+        
+        [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];
+        
+    }
+    
+}
+- (void)back
 
+{
+    
+    AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    appDelegate.allowRotation = NO;//关闭横屏仅允许竖屏
+    
+    [self setNewOrientation:NO];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
 - (void)setupNavigationItem{
     // 后退按钮
     UIButton * goBackButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -194,17 +242,23 @@
         //这个类主要用来做native与JavaScript的交互管理
         WKUserContentController * wkUController = [[WKUserContentController alloc] init];
         //注册一个name为jsToOcNoPrams的js方法 设置处理接收JS方法的对象
-        [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"jsToOcNoPrams"];
-        [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"jsToOcWithPrams"];
+        [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"close"];
+        [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"getGPS"];
+        [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"GetLocalGPS"];
+        [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"DeviceClose"];
+        [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"MessageBox"];
+        [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"ready"];
+
+        
         
         config.userContentController = wkUController;
         
-        //以下代码适配文本大小
-        NSString *jSString = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
-        //用于进行JavaScript注入
-        WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jSString injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
-        [config.userContentController addUserScript:wkUScript];
-        
+//        //以下代码适配文本大小
+//        NSString *jSString = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+//        //用于进行JavaScript注入
+//        WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jSString injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+//        [config.userContentController addUserScript:wkUScript];
+//        
         _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) configuration:config];
         // UI代理
         _webView.UIDelegate = self;
@@ -220,7 +274,7 @@
         //        [_webView loadRequest:request];
         
         
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"JStoOC.html" ofType:nil];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"Main.html" ofType:nil];
         NSString *htmlString = [[NSString alloc]initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
         [_webView loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
         
@@ -290,7 +344,7 @@
     //用message.body获得JS传出的参数体
     NSDictionary * parameter = message.body;
     //JS调用OC
-    if([message.name isEqualToString:@"jsToOcNoPrams"]){
+    if([message.name isEqualToString:@"ready"]){
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"js调用到了oc" message:@"不带参数" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:([UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         }])];

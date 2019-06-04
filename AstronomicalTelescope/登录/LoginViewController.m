@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "SLWebViewController.h"
 #import "UDPManage.h"
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UIView *backV;
@@ -25,6 +26,11 @@
     self.blueV.layer.cornerRadius = 5;
     UDPManage *mg = [[UDPManage alloc]init];
     [mg startListenClientSocketMessage];
+}
+- (IBAction)connectDeviceAction:(id)sender {
+    SLWebViewController *webVC = [[SLWebViewController alloc]init];
+    [self presentViewController:webVC animated:YES completion:nil];
+    
 }
 
 @end

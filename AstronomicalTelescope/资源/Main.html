@@ -184,6 +184,8 @@
 				}
 			});
 			$("#gps").click(function(){
+                
+
 				log("准备调用 PhoneInterface.getGPS()");
 				try{
 					var _r= GetLocalGPS();
@@ -262,6 +264,7 @@
 			});
 			
 			$("#alert_5").click(function(){
+                                
 				log("准备调用弹窗函数（信息），没有任何回调");
 				try{
 					MessageBox.Show({
