@@ -6,14 +6,14 @@
 //  Copyright © 2016年 石家庄优思交通智能科技有限公司. All rights reserved.
 
 #import "WebViewVC.h"
-#import "USTimes.h"
+#import "PhoneInterface.h"
 #import <WebKit/WebKit.h>
 #import "AppDelegate.h"
 
 @interface WebViewVC ()<UIWebViewDelegate>
 {
     
-    USTimes *ustimes;///JS 交互对象
+    PhoneInterface *ustimes;///JS 交互对象
    
 }
 @property (nonatomic,strong) UIWebView *webView;
@@ -40,7 +40,7 @@
     [self.view addSubview:self.webView];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.webView.delegate = self;
-    ustimes=[[USTimes alloc]init];
+    ustimes=[[PhoneInterface alloc]init];
     ustimes.webVC = self;
     self.webView.dataDetectorTypes = UIDataDetectorTypeNone;//禁止自动检测网页上的电话号码，单机可以拨打
     
@@ -48,7 +48,7 @@
     
     
     self.webView.allowsInlineMediaPlayback = YES;
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"index.html" ofType:nil];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Main.html" ofType:nil];
     NSString *htmlString = [[NSString alloc]initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
     [_webView loadHTMLString:htmlString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
 
@@ -123,7 +123,7 @@
 //    
     _context=[webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
     
-    _context[@"ustimes"] = ustimes;
+    _context[@"PhoneInterface"] = ustimes;
     
     _context[@"test1"] = ^() {
         NSArray *args = [JSContext currentArguments];
@@ -196,5 +196,31 @@
 }
 -(void)ready{
     NSLog(@"2222");
+    
+    [self setHost:@"192.168.0.1"];
+    
 }
+-(void)setHost:(NSString *)host{
+    JSValue *add = self.context[@"_SetHost"];
+    NSLog(@"Func==add: %@", add);
+    [add callWithArguments:@[host]];
+    
+    [self browserReady];
+}
+-(void)browserReady{
+    JSValue *add = self.context[@"_BrowserReady"];
+    NSLog(@"Func==add: %@", add);
+    [add callWithArguments:@[]];
+}
+-(void)showview{
+    
+}
+-(void)dialog:(NSString*)title :(NSString*)content :(NSString*)flag :(NSString*)buttons :(NSString*)callid{
+    
+    JSValue *add = self.context[@"__MessageBox_Callback"];
+    NSLog(@"Func==add: %@", add);
+    NSDictionary *dic = @{@"callid":callid,@"result":@"0"};
+    [add callWithArguments:@[[dic mj_JSONString]]];
+}
+
 @end

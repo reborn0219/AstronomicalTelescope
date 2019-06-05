@@ -13,15 +13,19 @@
 @protocol  JSPortocol <JSExport>
 
 -(void)scan;
--(void)ready:(id)param;
+-(void)ready;
+-(void)showview;
+-(void)dialog:(NSString*)title :(NSString*)content :(NSString*)flag :(NSString*)buttons :(NSString*)callid;
 
 @end
 
-@interface USTimes : NSObject<JSPortocol>
+@interface PhoneInterface : NSObject<JSPortocol>
 
 @property(nonatomic,retain)WebViewVC *webVC;
 
 -(void)scan;
--(void)ready:(id)param;
+-(void)ready;
+-(void)showview;
+-(void)dialog:(NSString*)title :(NSString*)content :(NSString*)flag :(NSString*)buttons :(NSString*)callid;
 
 @end

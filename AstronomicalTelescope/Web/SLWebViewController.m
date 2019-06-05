@@ -256,9 +256,9 @@
 //        //以下代码适配文本大小
 //        NSString *jSString = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
 //        //用于进行JavaScript注入
-//        WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jSString injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
-//        [config.userContentController addUserScript:wkUScript];
-//        
+        WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:@"PhoneInterface" injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:YES];
+        [config.userContentController addUserScript:wkUScript];
+        
         _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) configuration:config];
         // UI代理
         _webView.UIDelegate = self;

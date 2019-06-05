@@ -8,5 +8,5 @@ target 'AstronomicalTelescope' do
     pod 'YYModel'
     pod 'AFNetworking'
     pod 'CocoaAsyncSocket'
-
+    pod 'MJExtension'
 end

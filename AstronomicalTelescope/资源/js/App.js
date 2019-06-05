@@ -79,8 +79,12 @@ function __ShowMessageBox(arg){
 }
 //回调函数
 function __MessageBox_Callback(data){
+    log("====-00009988887777"+ data);
+
 	if(data!=undefined){
 		var callid=data.callid;
+        log("====-00009988887777"+ callid);
+
 		if(callid!=undefined){
 			var m=_MessageBoxList[callid];		//取出
 			delete _MessageBoxList[callid];		//删除

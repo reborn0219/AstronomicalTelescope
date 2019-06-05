@@ -32,11 +32,11 @@
 - (IBAction)connectDeviceAction:(id)sender {
 //    SLWebViewController *webVC = [[SLWebViewController alloc]init];
 //    [self presentViewController:webVC animated:YES completion:nil];
-//    WebViewVC *webVC = [[WebViewVC alloc]init];
-//    [self presentViewController:webVC animated:YES completion:nil];
-    
-    WebViewController *webVC = [[WebViewController alloc]init];
+    WebViewVC *webVC = [[WebViewVC alloc]init];
     [self presentViewController:webVC animated:YES completion:nil];
+//
+//    WebViewController *webVC = [[WebViewController alloc]init];
+//    [self presentViewController:webVC animated:YES completion:nil];
 }
 
 @end

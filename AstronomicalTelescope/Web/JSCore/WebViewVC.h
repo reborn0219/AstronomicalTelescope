@@ -17,5 +17,7 @@
 @property(nonatomic,strong) JSContext *context;
 -(void)scan;
 -(void)ready;
+-(void)showview;
+-(void)dialog:(NSString*)title :(NSString*)content :(NSString*)flag :(NSString*)buttons :(NSString*)callid;
 
 @end
