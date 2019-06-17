@@ -28,6 +28,8 @@
 		2FA5E82722A0C482001BC56E /* PatrolHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA5E82322A0C482001BC56E /* PatrolHttpRequest.m */; };
 		2FA5E82822A0C482001BC56E /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA5E82522A0C482001BC56E /* BaseRequest.m */; };
 		2FA5E82C22A0C4EF001BC56E /* PPConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA5E82A22A0C4EF001BC56E /* PPConst.m */; };
+		4BACEF7322B7F09400C5D5DB /* MessageBoxVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BACEF7122B7F09400C5D5DB /* MessageBoxVC.m */; };
+		4BACEF7422B7F09400C5D5DB /* MessageBoxVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BACEF7222B7F09400C5D5DB /* MessageBoxVC.xib */; };
 		779A0ED2B0142A1B624AC710 /* libPods-AstronomicalTelescope.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3E8DB55388669AFCD0ACA29 /* libPods-AstronomicalTelescope.a */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +92,9 @@
 		2FA5E82A22A0C4EF001BC56E /* PPConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPConst.m; sourceTree = "<group>"; };
 		2FA5E82B22A0C4EF001BC56E /* BlockDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockDefinition.h; sourceTree = "<group>"; };
 		2FA5E82D22A0C54D001BC56E /* EnumerationDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationDefinition.h; sourceTree = "<group>"; };
+		4BACEF7022B7F09400C5D5DB /* MessageBoxVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageBoxVC.h; sourceTree = "<group>"; };
+		4BACEF7122B7F09400C5D5DB /* MessageBoxVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageBoxVC.m; sourceTree = "<group>"; };
+		4BACEF7222B7F09400C5D5DB /* MessageBoxVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageBoxVC.xib; sourceTree = "<group>"; };
 		5DDD1D9A364297F76D27DA4B /* Pods-AstronomicalTelescope.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AstronomicalTelescope.release.xcconfig"; path = "Target Support Files/Pods-AstronomicalTelescope/Pods-AstronomicalTelescope.release.xcconfig"; sourceTree = "<group>"; };
 		613F2B9A4A5E09021DBA6E79 /* Pods-AstronomicalTelescope.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AstronomicalTelescope.debug.xcconfig"; path = "Target Support Files/Pods-AstronomicalTelescope/Pods-AstronomicalTelescope.debug.xcconfig"; sourceTree = "<group>"; };
 		F3E8DB55388669AFCD0ACA29 /* libPods-AstronomicalTelescope.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AstronomicalTelescope.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,6 +204,9 @@
 				2F439F10229BCB3900DD430B /* LoginViewController.h */,
 				2F439F11229BCB3900DD430B /* LoginViewController.m */,
 				2F439F12229BCB3900DD430B /* LoginViewController.xib */,
+				4BACEF7022B7F09400C5D5DB /* MessageBoxVC.h */,
+				4BACEF7122B7F09400C5D5DB /* MessageBoxVC.m */,
+				4BACEF7222B7F09400C5D5DB /* MessageBoxVC.xib */,
 			);
 			path = "登录";
 			sourceTree = "<group>";
@@ -371,6 +379,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BACEF7422B7F09400C5D5DB /* MessageBoxVC.xib in Resources */,
 				2F9883CE22A687E40023326F /* index.html in Resources */,
 				2F439F14229BCB3900DD430B /* LoginViewController.xib in Resources */,
 				2F9883C522A66F500023326F /* js in Resources */,
@@ -430,6 +439,7 @@
 				2F9883CB22A67C890023326F /* WebViewVC.m in Sources */,
 				2F439F13229BCB3900DD430B /* LoginViewController.m in Sources */,
 				2F9883CC22A67C890023326F /* PhoneInterface.m in Sources */,
+				4BACEF7322B7F09400C5D5DB /* MessageBoxVC.m in Sources */,
 				2FA5E82122A0BF9E001BC56E /* SLWebViewController.m in Sources */,
 				2F439EE1229BCAA100DD430B /* ViewController.m in Sources */,
 				2FA5E82C22A0C4EF001BC56E /* PPConst.m in Sources */,

@@ -9,7 +9,7 @@
 #import "PhoneInterface.h"
 #import <WebKit/WebKit.h>
 #import "AppDelegate.h"
-
+#import "MessageBoxVC.h"
 @interface WebViewVC ()<UIWebViewDelegate>
 {
     
@@ -217,10 +217,13 @@
 }
 -(void)dialog:(NSString*)title :(NSString*)content :(NSString*)flag :(NSString*)buttons :(NSString*)callid{
     
-    JSValue *add = self.context[@"__MessageBox_Callback"];
-    NSLog(@"Func==add: %@", add);
-    NSDictionary *dic = @{@"callid":callid,@"result":@"0"};
-    [add callWithArguments:@[[dic mj_JSONString]]];
+//    JSValue *add = self.context[@"__MessageBox_Callback"];
+//    NSLog(@"Func==add: %@", add);
+//    NSDictionary *dic = @{@"callid":callid,@"result":@"0"};
+//    [add callWithArguments:@[[dic mj_JSONString]]];
+    
+    MessageBoxVC * messageVC = [[MessageBoxVC alloc]init];
+    [self presentViewController:messageVC animated:YES completion:nil];
 }
 
 @end
