@@ -181,22 +181,9 @@
     }
     
 }
-- (void)back
 
-{
-    
-    AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    appDelegate.allowRotation = NO;//关闭横屏仅允许竖屏
-    
-    [self setNewOrientation:NO];
-    
-    [self.navigationController popViewControllerAnimated:YES];
-    
-}
 -(void)ready{
-    NSLog(@"2222");
-    
+    NSLog(@"ready被调用");
     [self setHost:@"192.168.0.1"];
     
 }
@@ -204,7 +191,6 @@
     JSValue *add = self.context[@"_SetHost"];
     NSLog(@"Func==add: %@", add);
     [add callWithArguments:@[host]];
-    
     [self browserReady];
 }
 -(void)browserReady{
@@ -213,7 +199,30 @@
     [add callWithArguments:@[]];
 }
 -(void)showview{
+    NSLog(@"showview被调用");
     
+}
+-(NSDictionary *)getGPS{
+    NSLog(@"getGPS被调用");
+
+    return @{
+        @"longitude":@"39",
+        @"latitude":@"114",
+        @"datetime":@"2019-06-18 09:22:31"
+    };
+}
+-(void)gohome{
+    NSLog(@"gohome被调用");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        appDelegate.allowRotation = NO;//关闭横屏仅允许竖屏
+        
+        [self setNewOrientation:NO];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
+ 
+
 }
 -(void)dialog:(NSString*)title :(NSString*)content :(NSString*)flag :(NSString*)buttons :(NSString*)callid{
     
@@ -222,8 +231,14 @@
 //    NSDictionary *dic = @{@"callid":callid,@"result":@"0"};
 //    [add callWithArguments:@[[dic mj_JSONString]]];
     
+    
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+
     MessageBoxVC * messageVC = [[MessageBoxVC alloc]init];
-    [self presentViewController:messageVC animated:YES completion:nil];
+    [messageVC showInVC:self Type:1];
+    });
+
 }
 
 @end

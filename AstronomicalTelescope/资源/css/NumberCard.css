@@ -1,0 +1,116 @@
+@charset "utf-8";
+/* 数字输入表 */
+
+.NumberCard *{
+	font-size: 50px;
+}
+
+.NumberCard{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: var(--Color_BlackA);
+	z-index: 40000;
+}
+.NumberCard_Back{
+	position: absolute;
+	bottom:170px;
+	height:740px;
+	width: 560px;
+	background-color:var(--Color_Gray);
+	border-radius: 10px;
+	z-index: 20000;
+	overflow: hidden;
+}
+.ReturnContent{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	float: left;
+	height:100px;
+	width:calc(100% - 180px);
+	line-height: 100px;
+	text-align: center;
+	padding: 10px;
+	margin: 20px;
+	overflow: hidden;
+	background-color: var(--Color_White);
+	color:var(--Color_Black);
+	border-radius: 10px;
+	font-weight: bold;
+	font-style: italic;
+	border-radius: 10px 0px 0px 10px;
+	margin-right: 0px;
+	font-size: 40px;
+}
+.ContentRemove{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	height:100px;
+	width:100px;
+	line-height: 100px;
+	text-align: center;
+	padding: 10px;
+	margin: 20px;
+	overflow: hidden;
+	background-color: var(--Color_Green);
+	color:var(--Color_Black);
+	font-weight: bold;
+	border-radius: 0px 10px 10px 0px;
+	margin-left: 0px;
+	border-left: var(--Color_GreenA) solid 2px;
+	
+}
+
+.NC_Number{
+	float: left;
+	width:100px;
+	height: 100px;
+	line-height: 100px;
+	margin: 20px;
+	background-color: var(--Color_GreenA);
+	color:var(--Color_Black);
+	border-radius: 5px;
+	font-weight: bold;
+	text-align: center;
+	
+}
+.NC_Additional , .NC_Numbers , .NC_Buttons{
+	position:absolute;
+	float: left;
+}
+.NC_Additional{
+	position: absolute;
+	top: 180px;
+	right: 0px;
+	height: 600px;
+}
+.NC_Numbers{
+	position: absolute;
+	top: 180px;
+	width: 560px;
+	height: 420px;
+}
+.NC_Buttons{
+	top: 600px;
+	width: 560px;
+	height: 140px;
+}
+.NCB_OK , .NCB_Cancel{
+	float: left;
+	margin:20px;
+	width:235px;
+	height:100px;
+	line-height: 100px;
+	margin: 20px;
+	border-radius: 5px;
+	font-weight: bold;
+	text-align: center;
+	color:var(--Color_Black);
+	background-color:var(--Color_White);
+	
+}
+.NCB_OK{background-color:var(--Color_Green);}

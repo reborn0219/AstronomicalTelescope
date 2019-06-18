@@ -10,7 +10,12 @@
 
 
 @implementation PhoneInterface
-
+-(void)gohome{
+    [self.webVC gohome];
+}
+-(NSDictionary *)getGPS{
+  return  [self.webVC getGPS];
+}
 - (void)scan{
     [self.webVC scan];
 }

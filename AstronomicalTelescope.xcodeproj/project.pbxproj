@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1883313F22A27F140023378D /* UDPManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883313E22A27F140023378D /* UDPManage.m */; };
+		2F140EB922B891CC00B241B9 /* PopListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F140EB722B891CC00B241B9 /* PopListCell.m */; };
+		2F140EBA22B891CC00B241B9 /* PopListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F140EB822B891CC00B241B9 /* PopListCell.xib */; };
 		2F439EDE229BCAA100DD430B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F439EDD229BCAA100DD430B /* AppDelegate.m */; };
 		2F439EE1229BCAA100DD430B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F439EE0229BCAA100DD430B /* ViewController.m */; };
 		2F439EE4229BCAA100DD430B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F439EE2229BCAA100DD430B /* Main.storyboard */; };
@@ -18,11 +20,13 @@
 		2F439F01229BCAA600DD430B /* AstronomicalTelescopeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F439F00229BCAA600DD430B /* AstronomicalTelescopeUITests.m */; };
 		2F439F13229BCB3900DD430B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F439F11229BCB3900DD430B /* LoginViewController.m */; };
 		2F439F14229BCB3900DD430B /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F439F12229BCB3900DD430B /* LoginViewController.xib */; };
-		2F9883C422A66F500023326F /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 2F9883C222A66F4F0023326F /* Main.html */; };
-		2F9883C522A66F500023326F /* js in Resources */ = {isa = PBXBuildFile; fileRef = 2F9883C322A66F4F0023326F /* js */; };
+		2F8CF56422B8818C00A79DF5 /* js in Resources */ = {isa = PBXBuildFile; fileRef = 2F8CF55F22B8818C00A79DF5 /* js */; };
+		2F8CF56522B8818C00A79DF5 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 2F8CF56022B8818C00A79DF5 /* images */; };
+		2F8CF56622B8818C00A79DF5 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 2F8CF56122B8818C00A79DF5 /* Main.html */; };
+		2F8CF56722B8818C00A79DF5 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 2F8CF56222B8818C00A79DF5 /* fonts */; };
+		2F8CF56822B8818C00A79DF5 /* css in Resources */ = {isa = PBXBuildFile; fileRef = 2F8CF56322B8818C00A79DF5 /* css */; };
 		2F9883CB22A67C890023326F /* WebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9883C822A67C890023326F /* WebViewVC.m */; };
 		2F9883CC22A67C890023326F /* PhoneInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9883C922A67C890023326F /* PhoneInterface.m */; };
-		2F9883CE22A687E40023326F /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 2F9883CD22A687E40023326F /* index.html */; };
 		2F9883D222A68A3D0023326F /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9883D022A68A3D0023326F /* WebViewController.m */; };
 		2FA5E82122A0BF9E001BC56E /* SLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA5E81F22A0BF9E001BC56E /* SLWebViewController.m */; };
 		2FA5E82722A0C482001BC56E /* PatrolHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA5E82322A0C482001BC56E /* PatrolHttpRequest.m */; };
@@ -53,6 +57,9 @@
 /* Begin PBXFileReference section */
 		1883313D22A27F140023378D /* UDPManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UDPManage.h; sourceTree = "<group>"; };
 		1883313E22A27F140023378D /* UDPManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UDPManage.m; sourceTree = "<group>"; };
+		2F140EB622B891CB00B241B9 /* PopListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopListCell.h; sourceTree = "<group>"; };
+		2F140EB722B891CC00B241B9 /* PopListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopListCell.m; sourceTree = "<group>"; };
+		2F140EB822B891CC00B241B9 /* PopListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopListCell.xib; sourceTree = "<group>"; };
 		2F439ED9229BCAA100DD430B /* AstronomicalTelescope.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AstronomicalTelescope.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F439EDC229BCAA100DD430B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2F439EDD229BCAA100DD430B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -72,13 +79,15 @@
 		2F439F10229BCB3900DD430B /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		2F439F11229BCB3900DD430B /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		2F439F12229BCB3900DD430B /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		2F9883C222A66F4F0023326F /* Main.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Main.html; sourceTree = "<group>"; };
-		2F9883C322A66F4F0023326F /* js */ = {isa = PBXFileReference; lastKnownFileType = folder; path = js; sourceTree = "<group>"; };
+		2F8CF55F22B8818C00A79DF5 /* js */ = {isa = PBXFileReference; lastKnownFileType = folder; path = js; sourceTree = "<group>"; };
+		2F8CF56022B8818C00A79DF5 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		2F8CF56122B8818C00A79DF5 /* Main.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Main.html; sourceTree = "<group>"; };
+		2F8CF56222B8818C00A79DF5 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
+		2F8CF56322B8818C00A79DF5 /* css */ = {isa = PBXFileReference; lastKnownFileType = folder; path = css; sourceTree = "<group>"; };
 		2F9883C722A67C890023326F /* PhoneInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneInterface.h; sourceTree = "<group>"; };
 		2F9883C822A67C890023326F /* WebViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewVC.m; sourceTree = "<group>"; };
 		2F9883C922A67C890023326F /* PhoneInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneInterface.m; sourceTree = "<group>"; };
 		2F9883CA22A67C890023326F /* WebViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewVC.h; sourceTree = "<group>"; };
-		2F9883CD22A687E40023326F /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		2F9883D022A68A3D0023326F /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		2F9883D122A68A3D0023326F /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		2FA5E81E22A0BEF1001BC56E /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -207,6 +216,9 @@
 				4BACEF7022B7F09400C5D5DB /* MessageBoxVC.h */,
 				4BACEF7122B7F09400C5D5DB /* MessageBoxVC.m */,
 				4BACEF7222B7F09400C5D5DB /* MessageBoxVC.xib */,
+				2F140EB622B891CB00B241B9 /* PopListCell.h */,
+				2F140EB722B891CC00B241B9 /* PopListCell.m */,
+				2F140EB822B891CC00B241B9 /* PopListCell.xib */,
 			);
 			path = "登录";
 			sourceTree = "<group>";
@@ -214,9 +226,11 @@
 		2F9883B722A6612A0023326F /* 资源 */ = {
 			isa = PBXGroup;
 			children = (
-				2F9883CD22A687E40023326F /* index.html */,
-				2F9883C322A66F4F0023326F /* js */,
-				2F9883C222A66F4F0023326F /* Main.html */,
+				2F8CF56322B8818C00A79DF5 /* css */,
+				2F8CF56222B8818C00A79DF5 /* fonts */,
+				2F8CF56022B8818C00A79DF5 /* images */,
+				2F8CF55F22B8818C00A79DF5 /* js */,
+				2F8CF56122B8818C00A79DF5 /* Main.html */,
 			);
 			path = "资源";
 			sourceTree = "<group>";
@@ -379,13 +393,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F8CF56822B8818C00A79DF5 /* css in Resources */,
 				4BACEF7422B7F09400C5D5DB /* MessageBoxVC.xib in Resources */,
-				2F9883CE22A687E40023326F /* index.html in Resources */,
+				2F8CF56622B8818C00A79DF5 /* Main.html in Resources */,
+				2F8CF56422B8818C00A79DF5 /* js in Resources */,
+				2F140EBA22B891CC00B241B9 /* PopListCell.xib in Resources */,
 				2F439F14229BCB3900DD430B /* LoginViewController.xib in Resources */,
-				2F9883C522A66F500023326F /* js in Resources */,
 				2F439EE9229BCAA600DD430B /* LaunchScreen.storyboard in Resources */,
 				2F439EE6229BCAA600DD430B /* Assets.xcassets in Resources */,
-				2F9883C422A66F500023326F /* Main.html in Resources */,
+				2F8CF56722B8818C00A79DF5 /* fonts in Resources */,
+				2F8CF56522B8818C00A79DF5 /* images in Resources */,
 				2F439EE4229BCAA100DD430B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -443,6 +460,7 @@
 				2FA5E82122A0BF9E001BC56E /* SLWebViewController.m in Sources */,
 				2F439EE1229BCAA100DD430B /* ViewController.m in Sources */,
 				2FA5E82C22A0C4EF001BC56E /* PPConst.m in Sources */,
+				2F140EB922B891CC00B241B9 /* PopListCell.m in Sources */,
 				2F439EEC229BCAA600DD430B /* main.m in Sources */,
 				2F9883D222A68A3D0023326F /* WebViewController.m in Sources */,
 				2FA5E82822A0C482001BC56E /* BaseRequest.m in Sources */,

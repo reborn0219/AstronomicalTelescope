@@ -150,8 +150,8 @@
 		"devices": {
 			"maintitle": "设备管理",
 			"mount": "赤道仪",
-			"camera": "主镜",
-			"guidercamera": "导星镜",
+			"camera": "主镜及相机",
+			"guidercamera": "导星镜及相机",
 			"focuser": "调焦器",
 			"filterwheels": "滤镜轮",
 			"brand": "品牌 : ",

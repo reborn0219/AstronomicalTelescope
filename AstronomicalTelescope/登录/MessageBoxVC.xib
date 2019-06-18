@@ -13,6 +13,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessageBoxVC">
             <connections>
                 <outlet property="backView" destination="vOm-w8-IIm" id="P8e-nw-66q"/>
+                <outlet property="cancelBtn" destination="srs-J9-JW6" id="Xfg-8J-pPv"/>
+                <outlet property="confirmBtn" destination="deW-it-eB6" id="oKo-Z1-jkW"/>
                 <outlet property="contentMsg" destination="sic-6A-m1t" id="baE-Sw-fMq"/>
                 <outlet property="errorImageV" destination="SnC-vg-7PL" id="x5t-r9-tUi"/>
                 <outlet property="leftView" destination="l1m-ML-Ees" id="bt1-fs-whz"/>

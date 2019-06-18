@@ -1,0 +1,465 @@
+@charset "utf-8";
+/* 通用CSS文档 */
+
+:root{
+	--Color_White:#ABABAB;	/*白色前景*/
+	--Color_WhiteA:rgba(171,171,171,.7);;	/*白色背景*/
+	--Color_Black:#232323;	/*黑色背景*/
+	--Color_BlackA:rgba(35,35,35,.7);	/*黑色背景*/
+	
+	--Color_Green:#4C9D2F;	/*绿色前景*/
+	--Color_GreenA:rgba(76,157,47,0.7);	/*绿色前景*/
+	/*
+	--Color_Green:#0080ff;
+	--Color_GreenA:rgba(0,128,255,0.7);
+	*/
+	--Color_Blue:#2684ED;	/*蓝色前景*/
+	/*--Color_Red:#F32A2A;*/	/*红色前景*/
+	--Color_Red:#b70007;
+	--Color_Gray:#303030;	/*灰色背景*/
+	--Color_GrayA:rgba(48,48,48,0.7);
+}
+
+
+body{
+	overflow: hidden;
+	margin:0px;
+	padding: 0px;
+	background-color: var(--Color_Black);
+}
+.Hide{
+	display:none;
+}
+
+*{
+	font-family:微软雅黑;
+	font-size: 28px;
+	color: var(--Color_White);
+	
+	/*禁止选中代码*/
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Chrome/Safari/Opera */
+	-khtml-user-select: none; /* Konqueror */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently not supported by any browser */
+}
+
+*[display="false"]{
+	display:none;
+}
+
+/*窗口通用设置*/
+#LoadForm , .MainForm , .SettingForm , .GuiderForm , .MountForm , .TaskForm , .SearchForm , .PicturePreviewForm , .FocuserForm , .CalibrationForm{
+	position:absolute;
+	top:0px;
+	left:0px;
+	bottom:0px;
+	right:0px;
+	width:100%;
+	height:100%;
+	overflow: hidden;
+	background-color: var(--Color_Black);
+}
+
+#LoadForm{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-image:url(../images/icons/LoadingPage.png);
+	z-index: 100000;
+}
+/************************************主窗口部分*******************************************/
+.CloseButton{
+	z-index:10000;
+	font-weight: bold;
+}
+
+.ImageCollector{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	/*background-image:url(../images/testbackground.jpg);*/
+	background-color: var(--Color_Gray);
+	z-index: 0;		/*在最底部显示*/
+	background-size: 100%;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+/*顶部状态栏公共属性*/
+.TopStatusBar{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background-color:var(--Color_Black);
+	z-index: 10000;		/*状态栏在最顶部*/
+}
+/*设备状态列表*/
+.Devices div{
+	float:left;
+	background-repeat: no-repeat;
+	font-weight: bold;
+}
+.D_Camera{background-image: url(../images/flag/Camera.png);}
+.D_Guider{background-image: url(../images/flag/Guider.png);}
+.D_Mount{background-image: url(../images/flag/Mount.png);}
+.D_Focuser{background-image: url(../images/flag/Focuser.png);}
+.D_FilterWheels{background-image: url(../images/flag/FilterWheels.png);}
+.Status{
+	background-repeat: no-repeat;
+	font-weight: bold;
+	background-image: url(../images/flag/Idle.png);
+	background-color: var(--Color_Green);
+}
+
+.RPI{
+	float:right;
+}
+.RPI div{
+	float:right;
+	background-repeat: no-repeat;
+}
+.Undervoltage{background-image:url(../images/flag/Undervoltage.png);}
+.WIFI{background-image:url(../images/flag/WIFI.png);}
+.Capacity{background-image:url(../images/flag/Capacity.png);}
+.Temperature{background-image:url(../images/flag/Temperature.png);}
+
+/*右侧工具按钮组公共属性*/
+.RightControllerBar{
+	position:absolute;
+	right: 0px;
+	background-color:var(--Color_BlackA);
+	z-index: 10000;		/*在最顶部*/
+}
+.Exposure{
+	text-align: center;
+	
+}
+#ExposureButton{}
+/*任务按钮*/
+.Task{
+	background-image:url(../images/flag/Task.png);
+	background-repeat: no-repeat;
+	
+}
+
+/*参数设置按钮*/
+.ExposureSetting{
+	background-image:url(../images/flag/Setting.png);
+	background-repeat: no-repeat;
+	
+}
+
+/*左侧快捷工具栏公共属性*/
+.LeftControllerBar{
+	position:absolute;
+	left:0px;
+	z-index: 10000;		/*在最顶部*/
+}
+.M_Calibration{
+	background-image:url(../images/flag/GoGuider.png);
+	background-repeat: no-repeat;
+	
+}
+.M_Focuser{
+	background-image:url(../images/icons/Focuser.png);
+	background-repeat: no-repeat;
+	
+}
+
+/*导星部分公共属性*/
+.GuiderFrame{
+	position: absolute;
+	z-index: 10000;		/*在最顶部*/
+}
+/*导星散点图公共属性*/
+.GuiderScatter{
+	background-color:var(--Color_Black);
+	overflow: hidden;
+	z-index: 100;		/*应该在其他图层上面*/
+}
+#ScatterCanvas{
+}
+/*导星缩略图公共属性*/
+.GuiderThumbnail{
+	background-color:var(--Color_BlackA);
+	overflow: hidden;
+	z-index: 50;		/*应该在散点图下面*/
+}
+.GuiderThumbnail_Label{
+	width: 80%;
+	border-bottom:var(--Color_White) solid 2px;
+	font-size: 20px;
+}
+.GuiderThumbnail_RA{
+	float: left;
+}
+.GuiderThumbnail_DEC{
+	float: left;
+}
+.GuiderThumbnail_TOTAL{
+	float:right;
+}
+.GuiderThumbnail_TOTAL .GuiderThumbnail_Label{border-bottom:0px;}
+/*缩略图显示的数值*/
+.GuiderThumbnail_Value{
+	font-weight:bold;
+}
+.GuiderThumbnail_Value2{
+	color:var(--Color_Green);
+	font-weight: bold;
+	font-style: italic;
+}
+
+.GuiderLine{
+	background-color: var(--Color_BlackA);
+}
+.ClearButton
+{
+	background-color: var(--Color_Black);
+	background-image: url(../images/flag/Clear.png);
+	background-repeat: no-repeat;
+	text-decoration :underline;
+	
+}
+
+/*相机属性条*/
+.CameraParameters{
+	background-color:var(--Color_BlackA);
+	overflow: hidden;
+}
+/*曝光类型*/
+.ExposureType{
+	background-color:var(--Color_Green);
+	color:var(--Color_Black);
+	font-weight: bold;
+}
+.CameraParametersItem{
+	background-repeat: no-repeat;
+	overflow: hidden
+}
+#PI_Bin{background-image: url(../images/flag/Bin.png);}
+#PI_ExposureTime{background-image: url(../images/flag/Exp.png);}
+#PI_Gain{background-image: url(../images/flag/Gain.png);}
+#PI_Offset{background-image: url(../images/flag/Offset.png);}
+#PI_CameraTemperature{
+	background-image: url(../images/flag/Temperature.png);
+	color:var(--Color_Green);
+}
+#PI_CameraCooling{
+	background-image: url(../images/flag/Cooling.png);
+}
+
+.MountParameters{
+	background-color:var(--Color_BlackA);
+	overflow: hidden;
+}
+.MountParametersItem{
+	background-repeat: no-repeat;
+	overflow: hidden
+}
+#PI_Ra{
+	background-image: url(../images/flag/Ra.png);
+	color:var(--Color_Blue);
+}
+#PI_Dec{
+	background-image: url(../images/flag/Dec.png);
+	color:var(--Color_Red);
+}
+
+/*曝光参数设置*/
+.ExposureSettingForm{
+	background-color: var(--Color_BlackA);
+	z-index: 10001;
+}
+.MainForm{
+	z-index:10000;
+}
+/*赤道仪控制部分，可拖动*/
+.MountController{
+	z-index: 10000;
+	zoom:1.5;
+}
+.SearchForm{
+	z-index: 20000;
+}
+
+.DirectionButtonTrigger{
+	background-image:url(../images/flag/Direction.png);
+	background-repeat: no-repeat;
+}
+
+.DBF_UP , .DBF_Down , .DBF_Left , .DBF_Right{
+	background-color: var(--Color_White);
+}
+#DBF_UP , #DBF_Down , #DBF_Left , #DBF_Right{}
+.BDF_MenuButton{background-color: var(--Color_White); }
+
+
+
+
+/************************************设置窗口部分*******************************************/
+
+
+.TabCard{
+	background-repeat: no-repeat;
+}
+#DeviceManager{background-image: url(../images/icons/Connection.png);}
+#SystemManager{background-image: url(../images/icons/System.png);}
+#FileManager{background-image: url(../images/icons/Files.png);}
+#AboutManager{background-image: url(../images/icons/About.png);}
+#DsiplayManager{background-image: url(../images/icons/Display.png);}
+#Feedback{background-image: url(../images/icons/Feedback.png);}
+
+#DeviceManager[selected]{background-image: url(../images/icons/_Connection.png);background-color: var(--Color_Green);}
+#SystemManager[selected]{background-image: url(../images/icons/_System.png);background-color: var(--Color_Green);}
+#FileManager[selected]{background-image: url(../images/icons/_Files.png);background-color: var(--Color_Green);}
+#AboutManager[selected]{background-image: url(../images/icons/_About.png);background-color: var(--Color_Green);}
+#DsiplayManager[selected]{background-image: url(../images/icons/_Display.png);background-color: var(--Color_Green);}
+#Feedback[selected]{background-image: url(../images/icons/_Feedback.png);background-color: var(--Color_Green);}
+
+.DM_Mount{background-image:url(../images/flag/Mount.png);}
+.DM_Camera{background-image:url(../images/flag/Camera.png);}
+.DM_GuiderCamera{background-image:url(../images/flag/Guider.png);}
+.DM_Focuser{background-image:url(../images/flag/Focuser.png);}
+.DM_FilterWheels{background-image:url(../images/flag/FilterWheels.png);}
+
+.DM_Connection{
+	clear:both;
+}
+.DM_Connection div{
+	float:left;
+}
+.DisplayItem{
+	clear:both;
+}
+.DisplayItem div{
+}
+.DispalySwitch{background-image: url(../images/flag/Switch_Off.png);}
+.DispalySwitch[checked]{background-image: url(../images/flag/Switch_On.png);}
+
+.DisplayTitle_Device{background-image: url(../images/icons/I_Device.png);background-repeat: no-repeat;}
+.DisplayTitle_Guider{background-image: url(../images/icons/I_Guider.png);background-repeat: no-repeat;}
+.DisplayTitle_Camera{background-image: url(../images/icons/I_Camera.png);background-repeat: no-repeat;}
+.DisplayTitle_Telescope{background-image: url(../images/icons/I_Telescope.png);background-repeat: no-repeat;}
+.DisplayTitle_Mount{background-image: url(../images/icons/I_Mount.png);background-repeat: no-repeat;}
+.DisplayTitle_Exposure{background-image: url(../images/flag/Exposure.png);background-repeat: no-repeat;}
+.DisplayTitle_Calibration{background-image: url(../images/flag/Calibrationi.png);background-repeat: no-repeat;}
+
+.SystemTitle_Password{background-image: url(../images/icons/Password.png);background-repeat: no-repeat;}
+.SystemTitle_MountHome{background-image: url(../images/flag/Mount.png);background-repeat: no-repeat;}
+.SystemTitle_Guider{background-image: url(../images/flag/Guideri.png);background-repeat: no-repeat;}
+.SystemTitle_GetingImage{background-image: url(../images/icons/Image.png);background-repeat: no-repeat;}
+.SystemTitle_EditDevicename{background-image: url(../images/icons/Device.png);background-repeat: no-repeat;}
+/************************************任务窗口部分*******************************************/
+.TaskLeft{
+	background-color: var(--Color_Gray);
+	overflow-y: auto;
+}
+.TaskLeft::-webkit-scrollbar{
+	display: none;
+}
+.TaskRight{
+	background-color: var(--Color_Black);
+}
+.Task_Label{
+	font-weight: bold;
+}
+.Task_Target{
+	background-color: var(--Color_Green);
+	font-weight: bold;
+	color: var(--Color_Black);
+	background-image: url(../images/flag/search.png);
+	background-repeat: no-repeat;
+	
+}
+.Task_Target .SelectButton{
+	float: right;
+	background-color: var(--Color_Green);
+	font-weight: bold;
+	color: var(--Color_Black);
+	background-image: url(../images/flag/search.png);
+	background-repeat: no-repeat;
+	
+}
+
+
+.TaskLeft_Item_Title{
+	float: left;
+}
+.TaskLeft_Check{
+	float: right;
+}
+.TaskLeft_Check{
+	background-color: var(--Color_Black);
+	
+}
+
+.TaskLeft_Check[checked]{
+	background-image: url(../images/flag/selected_1.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+.Task_Target .SelectButton[enabled=false] , .TaskLeft_Check[enabled=false]{
+	opacity: 0.5;
+	-moz-opacity:0.5;
+	-webkit-filter: grayscale(100%); 
+	-moz-filter: grayscale(100%); 
+	-ms-filter: grayscale(100%); 
+	-o-filter: grayscale(100%); 
+	filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);  
+	_filter:none; 
+}
+
+.TaskLeft_Item input{
+	outline: none;
+	background-color: var(--Color_Black);
+	border: 0px;
+}
+.TaskLeft_Display{
+	float: left;
+}
+
+ .TableHead{
+	background-color: var(--Color_Gray);
+}
+.TableHead div , .Task_Event div{
+	float: left;
+	text-align: center;
+	
+}
+.Task_AddBtn{
+	background-color: var(--Color_Green);
+	color: var(--Color_Black);
+	font-weight: bold;
+	
+}
+.TaskButton{
+	font-weight: bold;
+	color: var(--Color_Black);
+	text-align: center;
+	
+	
+}
+.TaskButton_Start{
+	background-color:var(--Color_Green);
+}
+.TaskButton_Stop{
+	background-color:var(--Color_Red);
+}
+.TaskBox{
+	overflow-y:auto;
+}
+
+.TaskBox::-webkit-scrollbar{
+	display: none;
+}
+.Task_Event input{
+	outline:none;
+	background-color: var(--Color_Black);
+	border: 0px;
+	text-align: center;
+}

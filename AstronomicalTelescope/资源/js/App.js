@@ -1,4 +1,3 @@
-
 function AnythingToJson(v){
 	var r;
 	if(typeof(v)=="string" || typeof(v)=="object"){
@@ -14,7 +13,7 @@ var _MessageBoxList = {};//弹窗数组
 function MessageBox(){}
 MessageBox.FLAG_MESSAGE="MESSAGE";		//消息，无任何标志
 MessageBox.FLAG_WARNING="WARNING";		//警告标志
-MessageBox.FLAG_ERROR="ERROR";			//错误标志
+MessageBox.FLAG_ERROR="ERROR";		//错误标志
 MessageBox.FLAG_QUERY="QUERY";			//询问标志
 MessageBox.FLAG_INFORMATION="INFORMATION";//消息标志
 
@@ -79,12 +78,8 @@ function __ShowMessageBox(arg){
 }
 //回调函数
 function __MessageBox_Callback(data){
-    log("====-00009988887777"+ data);
-
 	if(data!=undefined){
 		var callid=data.callid;
-        log("====-00009988887777"+ callid);
-
 		if(callid!=undefined){
 			var m=_MessageBoxList[callid];		//取出
 			delete _MessageBoxList[callid];		//删除
@@ -100,9 +95,8 @@ function __MessageBox_Callback(data){
 }
 //设置Host参数
 function _SetHost(host){
-	//HOST = "http://"+host
+	HOST = "http://"+host
 	//HOST = "http://"+host+":8080";
-	log("被APP调用了_SetHost方法，host=" + host);
 }
 
 function GetLocalGPS(){
@@ -116,9 +110,9 @@ function DeviceClose(){
 
 //通知APP已经启动成功
 function NoticeAppReady(){
-	//alert("已经调用NoticeAppReady");
+    alert("已经调用NoticeAppReady");
 	PhoneInterface.ready();
-	//alert("调用NoticeAppReady完毕");
+    alert("调用NoticeAppReady完毕");
 }
 
 function ShowView(){

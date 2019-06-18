@@ -1,0 +1,2014 @@
+@charset "utf-8";
+/* 布局适配：手机屏适配，适配标准为1080*1920横屏 */
+
+
+.CloseButton{
+	position:absolute;
+	top:0px;
+	right:0px;
+	font-size: 80px;
+	width:120px;
+	height:80px;
+	line-height: 80px;
+	text-align: center;
+	color: var(--Color_White);
+}
+
+.TopStatusBar{
+	width: 100%;
+	height:100px;
+}
+.GoHome{
+	float: left;
+	height:100px;
+	line-height: 100px;
+	width: 150px;
+	text-align: center;
+	border-right:#000 solid 2px;
+	background-color: var(--Color_Black);
+	background-image: url(../images/flag/Home.png);
+	background-size: 70px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.Datetime{
+	float: left;
+	height:100px;
+	line-height: 100px;
+	width: 200px;
+	text-align: center;
+	border-right:#000 solid 2px;
+}
+
+.Devices div{
+	margin-top:25px; 
+	padding-left: 50px;
+	margin-left:20px;
+	width:60px;
+	height: 50px;
+	background-size: 50px;
+	line-height: 45px;
+}
+.Status{
+	position: absolute;
+	top: 0px;
+	left: 1030px;
+	width:340px;
+	height: 100px;
+	background-size: 50px;
+	line-height: 100px;
+	text-align: center;
+	background-position:30px center;
+	color: var(--Color_Black);
+}
+.Menus{
+	position: fixed;
+	right: 0px;
+	top: 0px;
+	z-index: 20000;
+	background-repeat: no-repeat;
+	font-weight: bold;
+	background-image: url(../images/flag/Menu.png);
+	background-position: center center;
+	background-size:50px;
+	width: 150px;
+	height: 100px;
+	/*border-left: #000 solid 2px;*/
+}
+.RPI{
+	height: 100px;
+	width:500px;
+	margin-right:150px;
+	border-right:#000 solid 2px;
+}
+
+.RPI div{
+	padding-right: 20px;
+	margin-top: 25px;
+	background-size:50px;
+	height: 50px;
+	
+}
+.Undervoltage , .WIFI{
+	width:50px;
+}
+.Temperature , .Capacity{
+	padding-left: 50px;
+	width:100px;
+	line-height: 50px;
+}
+
+.RightControllerBar{
+	top:calc(50% - 250px );/*180px*/
+	width:150px;
+	height:500px;
+	/*左边圆角*/
+	border-radius: 10px 0px 0px 10px;
+}
+.Task{
+	width: 100%;
+	height: 160px;
+	background-size:70px;
+	background-position: center;
+	border-bottom: #000 solid 2px;
+}
+.ExposureSetting{
+	width: 100%;
+	height: 160px;
+	background-size:70px;
+	background-position: center;
+	border-top: #000 solid 2px;
+}
+
+.Exposure{
+	width: 100%;
+	height: 150px;
+	padding-top: 25px;
+}
+.ExposureButton{
+	width: 120;
+	height: 120;
+}
+
+.LeftControllerBar{
+	top:230px;
+	width: 100px;
+	height: 600px;
+}
+.M_Calibration , .M_Focuser{
+	width: 100px;
+	height: 100px;
+	background-size:70px;
+	background-position: center;
+}
+
+.GuiderFrame{
+	height: 260px;
+	left: 30px;
+	bottom: 30px;
+}
+
+.Closed{
+	/*导星关闭的时候为820像素*/
+	width: 820;
+}
+.Opened{
+	/*导星关闭的时候为820像素*/
+	width: calc(100% - 60px);/*减去左右两侧各30,关闭的时候一个宽度，展开的时候为最宽宽度*/
+}
+
+/*导星的散点图，宽高为260，圆形，超出区域异常*/
+.GuiderScatter{
+	position: absolute;
+	top:0px;
+	left: 0px;
+	width: 260px;
+	height: 260px;
+	border-radius: 130px;
+}
+.GuiderThumbnail{
+	position: absolute;
+	left: 130px;
+	top:130px;
+	width: 690px;
+	height: 130px;
+	border-radius: 0px 65px 65px 0px;
+}
+
+.ScatterCanvas{
+	width:100%;
+	height: 100%;
+}
+.GuiderThumbnail_RA{
+	margin-left:150px;
+	margin-top:10px;
+	height: 100%;
+	width: 180px;
+}
+.GuiderThumbnail_DEC{
+	margin-top:10px;
+	height: 100%;
+	width: 180px;
+}
+.GuiderThumbnail_TOTAL{
+	margin-top:10px;
+	width: 150px;
+}
+.GuiderThumbnail_Value2{
+	margin-top: 10px;
+	font-size: 40px;
+}
+
+.GuiderLine{
+	position: absolute;
+	left:130px;
+	border-radius: 20px 0px 20px 20px;
+	height: 260px;
+	width: calc(100% - 130px);
+}
+.LineCanvas {
+	width:calc(100% - 130px);
+	height: 260px;
+	margin-left: 130px;
+}
+.GuiderControllerBar{
+	position: absolute;
+	width: 500px;
+	height: 100px;
+	border-radius: 10px 10px 0px 0px;
+	right: 0px;
+	top:-100px;
+	background-size: 36px;
+	background-position: 20px center;
+	line-height: 70px;
+	background-color: var(--Color_BlackA);
+	overflow: hidden;
+}
+
+.ClearButton{
+	float:left;
+	width: 120px;
+	height: 100px;
+	background-size: 70px;
+	background-position: 20px center;
+	padding-left: 100px;
+	line-height: 100px;
+	font-weight: bold;
+}
+.GuiderControllerButton{
+	float:right;
+	width: 140px;
+	height: 70px;
+	margin-top: 15px;
+	margin-right:20px;
+	border-radius: 10px;
+	background-image: url(../images/icons/_I_Guider.png);
+	background-repeat: no-repeat;
+	background-size: 60px;
+	background-position: 20px center;
+	padding-left: 100px;
+	line-height: 70px;
+	color: var(--Color_Black);
+	font-weight: bold;
+}
+.CameraParameters{
+	position: absolute;
+	top:110px;
+	right:550px;
+	width: 1000px;
+	height: 50px;
+	border-radius: 25px;
+}
+.ExposureType{
+	float: left;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	width: 160px;
+}
+.CameraParametersItem{
+	float: left;
+	width: 90px;
+	height: 50px;
+	line-height: 50px;
+	padding-left: 50px;
+	background-size: 50px;
+	background-position: 0px center;
+	overflow: hidden;
+}
+.MountParameters{
+	position: absolute;
+	top:110px;
+	width:500px;
+	right:20px;
+	height: 50px;
+	border-radius: 25px;
+}
+.MountParametersItem{
+	float: left;
+	width: 200px;
+	line-height: 50px;
+	padding-left: 50px;
+	background-size: 50px;
+	background-position: 0px center;
+}
+.ExposureSettingForm{
+	position: absolute;
+	padding: 20px;
+	right:170px;
+	top:180px;
+	width: 1000px;
+	height:700px;
+	border-radius: 10px 0px 0px 10px;
+}
+.ESF_Frame{
+	width: 100%;
+}
+#EXP_Type , #EXP_Bins , #EXP_Filters , .ConditionType {
+	margin-top:20px;
+}
+.Radio_Group{
+	width:100%;
+	height: 70px;
+	border-radius: 10px;
+	overflow: hidden;
+	display:flex;		/*平均布局*/
+	flex-direction:row;	/*平均布局*/
+}
+.Radio_Button{
+	float: left;
+	flex:1;				/*平均布局*/
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+	font-weight: bold;
+	color: var(--Color_Black);
+	background-color: var(--Color_White);
+	
+	border-right: var(--Color_Black) solid 1px;
+	overflow: hidden;
+}
+.Radio_Button[checked]{
+	background-color: var(--Color_Green);
+}
+
+.ESF_Title{
+	height: 50px;
+	line-height: 60px;
+	padding-bottom: 10px;
+	border-bottom: #000 solid 1px;
+	background-image: url(../images/icons/Exposure.png);
+	background-size: 50px;
+	background-repeat: no-repeat;
+	background-position: 0px center;
+	padding-left: 70px;
+}
+.ESF_Label{
+	font-size: 20px;
+	font-weight: bold;
+}
+.ESF_Range{
+	float: left;
+	padding-top:20px;
+	width:100%;
+	height: 50px;
+	line-height: 50px;
+}
+.ESF_Range input[type=range]{
+	-webkit-appearance: none;
+	border-radius: 10px;
+}
+.ESF_Range input[type=range]::-webkit-slider-thumb{
+	-webkit-appearance: none;
+}
+.ESF_Range input[type=range]::-webkit-slider-runnable-track{	/*滑轨*/
+	background-color: var(--Color_White);
+	background: -webkit-linear-gradient(var(--Color_Green), var(--Color_Green)) no-repeat;
+	background-size: 0% 100%;
+	height: 5px;
+    border-radius: 10px; /*将轨道设为圆角的*/
+}
+.ESF_Range input[type=range]:focus {
+    outline: none;
+}
+.ESF_Range input[type=range]::-webkit-slider-thumb {		/*滑块*/
+    -webkit-appearance: none;
+    height: 25px;
+    width: 25px;
+    margin-top: -10px; /*使滑块超出轨道部分的偏移量相等*/
+    background: var(--Color_Green); 
+    border-radius: 50%; /*外观设置为圆形*/
+	/*border: solid 3px rgba(205, 224, 230, 0.5);*/
+}
+
+
+.EXP_Times , .EXP_Gain , .EXP_Offset{
+	width:calc(100% - 200px);
+	float: left;
+}
+.EXP_Times .Radio_Button{font-size: 20px;}
+.ESF_Value{
+	float: left;
+	width:200px;
+	height: 70px;
+	line-height: 70px;
+	background-color:var(--Color_Black);
+	color: var(--Color_White);
+	overflow: hidden;
+	border-radius: 5px;
+	text-align: center;
+	
+}
+.ESF_ChBtn{
+	height:80px;
+	clear: both;
+}
+.ESF_Frame {
+	padding-top: 20px;
+	height: 80px;
+	clear: both;
+}
+.ESF_Bin{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	height: 80px;
+	clear: both;
+}
+.ESF_Time {
+	height: 70px;
+	margin-top: 20px;
+	clear: both;
+}
+.ESF_Filter{
+	height: 100px;
+	clear: both;
+}
+
+/*赤道仪控制部分，可拖动*/
+.MountController{
+	position: absolute;
+	width:280px;
+	height: 280px;
+	bottom: 50px;
+	right:150px;
+}
+
+.DirectionButtonTrigger{
+	position: absolute;
+	top:0px;
+	left: 0px;
+	width: 280px;
+	height: 280px;
+	background-size: 280px;
+}
+/*按键反馈层*/
+.DirectionButtonFeedback .DirectionButton{
+	position: absolute;
+	top:0px;
+	left: 0px;
+	width:100%;
+	height: 100%;
+}
+.DBF_UP , .DBF_Down , .DBF_Left , .DBF_Right{
+	position: absolute;
+	width: 50px;
+	height: 50px;
+}
+.DBF_UP{top:5px; left:115px;}
+.DBF_Down{bottom: 5px; left:115px;}
+.DBF_Left{top:115px; left:5px;}
+.DBF_Right{top:115px; right:5px;}
+
+
+#DBF_UP , #DBF_Down , #DBF_Left , #DBF_Right{
+	position: absolute;
+	width: 100px;
+	height: 100px;
+}
+#DBF_UP{top:0px; left:90px;}
+#DBF_Down{bottom: 0px; left:90px;}
+#DBF_Left{top:90px; left:0px;}
+#DBF_Right{top:90px; right:0px;}
+
+.BDF_MenuButton{
+	position: absolute;
+	left:90px;
+	top:90px;
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
+	color:var(--Color_Black);
+	line-height: 100px;
+	text-align: center;
+	font-weight: bold;
+}
+
+/************************************设置窗口部分*******************************************/
+
+/*左侧菜单窗口*/
+.TabCards{
+	position:absolute;
+	width: 250px;
+	height: 100%;
+	background-color: var(--Color_Gray);
+}
+.SettingTabs{
+	position:absolute;
+	top:0px;
+	right:0px;
+	height: 100%;
+	width:calc(100% - 250px);
+	overflow-y:auto;
+}
+.SettingTabs::-webkit-scrollbar{
+	width: 0px;
+}
+.TabCard{
+	width: 250px;
+	height:150px;
+	background-position: center center;
+	background-size: 70px;
+}
+
+
+/*窗口菜单*/
+.SettingTitle{
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	height: 100px;
+	line-height: 100px;
+	text-align: left;
+	padding-left: 50px;
+	font-size: 28px;
+	font-weight: bold;
+	color: var(--Color_White);
+}
+.DM_Item{
+	border-bottom: var(--Color_White) solid 1px;
+	margin:20px;
+	width: auto;
+	clear: both;
+}
+.DM_Label{
+	width: auto;
+	height: 70px;
+	line-height: 70px;
+	padding-left: 100px;
+	background-repeat: no-repeat;
+	background-size: 70px;
+	background-position: 0px center;
+	font-weight: bold;
+}
+
+.DM_Connection{
+	width:auto;
+	height:50px;
+}
+.DM_C_Lable{
+	height: 50px;
+	width: 150px;
+	text-align: right;
+}
+.DM_C_Value{
+	margin-right: 10px;
+	width: 220px;
+	text-align: left;
+	font-weight: bold;
+	border-radius: 5px;
+	padding-left:10px;
+	padding-right:10px;
+	color:var(--Color_White);
+	overflow: hidden;
+	white-space:nowrap;
+}
+.DM_C_Button{
+	float: right;
+	width: 70px;
+	height: 70px;
+	background-size: 70px;
+	margin-right: 30px;
+	background-image:url(../images/flag/Set_1.png);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.DM_FilterWheels_List{
+	width: auto;
+	height: 80px;
+}
+/*滤镜*/
+.DM_Filter{
+	float: left;
+	margin:20px;
+	height: 50px;
+	line-height: 50px;
+	width:150px;
+	border-radius: 5px;
+	text-align: center;
+	color:var(--Color_Black);
+	font-weight: bold;
+}
+
+.DisplayItem{
+	border-bottom: var(--Color_White) solid 1px;
+	margin: 20px;
+	width: calc(100% - 40px);
+	height: 100px;
+}
+
+.DisplayItem div{
+	height:100px;
+	line-height: 100px;
+}
+.DispalySwitch{
+	float: right;
+	width: 150px;
+	height: 150px;
+	background-repeat: no-repeat;
+	background-size: 150px;
+	background-position: center;
+}
+.DisplayTitle{
+	float: left;
+	padding-left: 100px;
+	background-position: 10px center;
+	background-size: 70px;
+	width: 300px;
+	font-weight: bold;
+}
+.DisplayDescribe{
+	float: left;
+	width: auto;
+	font-size: 18px;
+}
+
+/*任务列表文件相关*/
+.File_TaskList{
+	position:absolute;
+	top: 100px;
+	left: 0px;
+	bottom: 0px;
+	width: 400px;
+	background-color: var(--Color_Black);
+	overflow-y:auto; 
+	border-top: var(--Color_White) solid 1px;
+}
+.File_TaskList::-webkit-scrollbar{
+	width: 0px;
+}
+.File_TaskItem{
+	height: 100px;
+	line-height: 100px;
+	overflow: hidden;
+	padding-left: 20px;
+	border-left: var(--Color_Black) solid 20px;
+	
+}
+.File_TaskItem[selected]{
+	border-left: var(--Color_Green) solid 20px;
+	background-color: var(--Color_Gray);
+}
+.File_TaskItem_Del{
+	float: right;
+	right: 0px;
+	top: 0px;
+	height:100px;
+	width: 100px;
+	background-image: url(../images/flag/Clear.png);
+	background-size: 70px;
+	background-position: center;
+	background-repeat: no-repeat;
+	
+}
+.ImageList{
+	position:absolute;
+	top: 100px;
+	left: 400px;
+	bottom: 0px;
+	right:0px;
+	overflow-y:auto; 
+	background-color: var(--Color_White);
+}
+.ImageList::-webkit-scrollbar{
+	width: 0px;
+}
+.ImageItem{
+	float: left;
+	width: 375px;
+	height: 280px;
+	margin: 20px;
+	border: var(--Color_White) solid 1px;
+	background-repeat: no-repeat;
+	background-size: 375px 280px;
+	border-radius: 10px;
+	overflow: hidden;
+	background-color: var(--Color_Black);
+	
+}
+.ImageRemove{
+	border:0px;
+	left: 0px;
+	width: 100%;
+	height: 80px;
+	margin-top: 200px;
+	background-color: var(--Color_GrayA);
+	background-size: 100px;
+	background-image: url(../images/flag/Clear.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	
+}
+
+.Feedback_Text{
+	margin-left: 50px;
+	width:calc(100% - 100px);
+	height: 300px;
+	background-color: var(--Color_Gray);
+	border-radius: 10px;
+	overflow: hidden;
+}
+.Feedback_Text textarea{
+	width: calc(100% - 40px);
+	height: calc(100% - 40px);
+	background-color: var(--Color_Gray);
+	color:var(--Color_White);
+	border:0px;
+	margin:20px;
+	outline: none;
+}
+.Feedback_Submit{
+	float: right;
+	margin-top: 50px;
+	margin-right: 40px;
+	width: 200px;
+	height: 70px;
+	line-height: 70px;
+	background-color: var(--Color_Green);
+	border-radius: 10px;
+	color: var(--Color_Black);
+	font-weight: bold;
+	text-align: center;
+}
+.Feedback_ContactInformation{
+	position:absolute;
+	bottom: 100px;
+	left:50px;
+	line-height: 70px;
+	color: var(--Color_White);
+	font-weight: bold;
+}
+
+.StanLogo{
+	background-image:url(../images/icons/stan.png);
+	background-size: 100%;
+	background-position: left center;
+	background-repeat: no-repeat;
+	width: 60%;
+	height:200px;
+	margin-left: 20px;
+	margin-top: 100px;
+}
+.C14LogoBox{
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 20px;
+	border-top: var(--Color_White) solid 1px;
+	height: 100px;
+	width: calc(100% - 40px);
+}
+.C14Logo{
+	position: absolute;
+	width:240px;
+	height: 70px;
+	background-color: var(--Color_White);
+	background-size: 80%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url(../images/icons/C14Logo.png);
+	right: 100px;
+}
+.ProductIntroduction{
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 20px;
+	height: 300px;
+	width: calc(100% - 40px);
+}
+.About_Company{
+	background-image:url(../images/icons/c14.png);
+	background-size: 100%;
+	background-position: left center;
+	background-repeat: no-repeat;
+	width: 40%;
+	height:200px;
+	margin-left: 20px;
+	margin-top: 100px;
+}
+.ProductIntroduction_Title{
+	font-weight: bold;
+	height: 100px;
+	line-height: 100px;
+}
+.ProductIntroduction_Content{
+	line-height: 70px;
+	height: 230px;
+}
+
+.SystemItem{
+	border-bottom:var(--Color_White) solid 1px;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 20px;
+	height: auto;
+	padding-bottom: 20px;
+}
+.System_Line{
+	height: 70px;
+	width:calc(100% - 40px);
+}
+.SystemItem .SystemTitle{
+	padding-left: 100px;
+	background-position: 10px center;
+	background-size: 70px;
+	width: 200px;
+	font-weight: bold;
+	height: 70px;
+	line-height: 70px;
+	width: calc(100% - 80px);
+}
+.System_S1{
+	float:left;
+	padding-left: 100px;
+	width: 300px;
+	height: 70px;
+	line-height: 70px;
+}
+#System_Wifi_Password , #System_Password , .System_S2 , #System_Devicename{
+	float:left;
+	width: 600px;
+	height: 70px;
+	background-color: var(--Color_Gray);
+	padding-left: 20px;
+	padding-right: 20px;
+	border:0px;
+	outline: none;
+	border-radius: 10px;
+	line-height: 70px;
+}
+
+.System_S3{
+	float:left;
+	width: 100px;
+	height: 70px;
+	background-color: var(--Color_Gray);
+	margin-left:40px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border:0px;
+	outline: none;
+	border-radius: 10px;
+	line-height: 70px;
+	text-align: center;
+}
+.EditWifiPassword , .EditSystemPassword , .EditSystemDevicename{
+	float: left;
+	margin-left: 50px;
+	width:200px;
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+	background-color: var(--Color_Green);
+	border-radius: 10px;
+	font-weight: bold;
+	color: var(--Color_Black);
+}
+.SetMountHome , .GoMountHome{
+	float: left;
+	margin-left: 50px;
+	width:200px;
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+	background-color: var(--Color_Green);
+	border-radius: 10px;
+	font-weight: bold;
+	color: var(--Color_Black);
+}
+
+.ShutdonwButton{
+	float: left;
+	margin-left: 50px;
+	width:1000px;
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+	background-color: var(--Color_Red);
+	border-radius: 10px;
+	font-weight: bold;
+	color: var(--Color_Black);
+	margin-bottom: 50px;
+}
+
+.RebootButton{
+	float: left;
+	margin-left: 50px;
+	width:300px;
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+	background-color: var(--Color_Green);
+	border-radius: 10px;
+	font-weight: bold;
+	color: var(--Color_Black);
+	margin-bottom: 50px;
+}
+.ClearGuiderData{
+	float:left;
+	margin-left: 1090px;
+	width:200px;
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+	background-color: var(--Color_Green);
+	border-radius: 10px;
+	font-weight: bold;
+	color: var(--Color_Black);
+}
+
+.System_G1{
+	float: left;
+	width:800px;
+}
+/***********************************设备设置界面*************************************/
+.Device_Setting{
+	z-index: 15000;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right:0px;
+	bottom: 0px;
+	background-color: var(--Color_BlackA);
+}
+
+.Set_Device_Form{
+	margin: 100px auto;
+	background-color: var(--Color_Gray);
+	border-radius: 10px;
+	padding: 20px;
+}
+.Set_CloseButton{
+	float: right;
+	font-size: 80px;
+	width:120px;
+	height:120px;
+	line-height: 50px;
+	text-align: right;
+	color: var(--Color_White);
+	
+}
+
+.Set_Device_Form .SS_Label{
+	float: left;
+	width:150px;
+	padding-right:10px;
+	height: 70px;
+	line-height: 70px;
+	font-weight: bold;
+	text-align:right;
+	white-space:nowrap; overflow:hidden; text-overflow:ellipsis;		/*禁止换行*/
+}
+
+.Set_Device_Form .SS_Line{
+	clear: both;
+	height: 70px;
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+
+.Set_Device_Form .SS_Button{
+	width:100%;
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+	font-weight: bold;
+	background-color: var(--Color_Green);
+	color:var(--Color_Black);
+	border-radius: 10px;
+	
+}
+
+.Set_Device_Form .SS_Value{
+	float: left;
+	width:calc(100% - 180px);
+	height: 70px;
+	background-color: var(--Color_Black);
+	color: var(--Color_White);
+	text-align: left;
+	line-height: 70px;
+	overflow: hidden;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 10px;
+	white-space:nowrap; overflow:hidden; text-overflow:ellipsis;		/*禁止换行*/
+	border:0px;
+	outline: none;
+}
+
+.SS_Title{
+	padding-left: 70px;
+	height: 70px;
+	font-weight: bold;
+	line-height: 70px;
+	background-size:70px;
+	background-position: 0 center;
+	background-repeat: no-repeat;
+	border-bottom: var(--Color_Black) solid 1px;
+}
+
+
+.SS_Title_Mount{
+	background-image:url(../images/flag/Mount.png);
+}
+.SS_Title_Camera{
+	background-image:url(../images/flag/Camera.png);
+}
+.SS_Title_GuiderCamera{
+	background-image:url(../images/flag/Guider.png);
+}
+.SS_Title_Focuser{
+	background-image:url(../images/flag/Focuser.png);
+}
+.SS_Title_FilterWheels{
+	background-image:url(../images/flag/FilterWheels.png);
+}
+.SetMount_Form{
+	width: 600px;
+	height: 560px;
+}
+.SetCamera_Form {
+	width: 600px;
+	height: 830px;
+}
+
+.SetGuiderCamera_Form{
+	width: 600px;
+	height: 650px;
+}
+.SetFocuser_Form{
+	width: 600px;
+	height: 380px;
+}
+.SetFilterWheels_Form{
+	width: 500px;
+	height: 670px;
+}
+.SetFilterWheels_Color_Form{
+	width: 350px;
+	height: 670px;
+}
+.SS_Filters{
+	clear:both;
+	overflow-y: auto;
+	width: 100%;
+	height: 360px;
+}
+.SS_Filters::-webkit-scrollbar{
+	display: none;
+}
+
+.SS_Filter{
+	float: left;
+	margin-bottom: 20px;
+	width:240px;
+	height:70px;
+	
+}
+.SS_Filter_Number{
+	float: left;
+	height:70px;
+	width: 100px;
+	font-weight: bold;
+	line-height: 70px;
+	text-align: center;
+	color: var(--Color_White);
+}
+.SS_Filter_Tag{
+	float: left;
+	height:70px;
+	width: 140px;
+	line-height: 70px;
+	text-align: center;
+	color: var(--Color_Black);
+	font-weight: bold;
+	border-radius: 10px;
+	background-color:var(--Color_White);
+	
+}
+
+.SS_Filter_Colors{
+	clear:both;
+	overflow-y: auto;
+	width: 100%;
+	height: 420px;
+}
+.SS_Filter_Colors::-webkit-scrollbar{
+	display: none;
+}
+.SS_Filter_Color{
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+	width: 100%;
+	margin-bottom: 20px;
+	border-radius: 10px;
+	background-repeat: no-repeat;
+	background-size: 70px;
+	background-position: center;
+	
+}
+.SS_Filter_Color[selected]{
+	background-image: url(../images/flag/selected_2.png);
+}
+
+
+/************************************任务窗口部分*******************************************/
+.TaskLeft{
+	position:absolute;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	/*这里之前是650*/
+	width:650px;
+	padding-top: 50px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.Task_Target_Info{
+	height:420px;
+	width:calc(100% - 60px);
+	margin:30px;
+}
+.Task_Target_Image{
+	float:left;
+	width:200px;
+	height:200px;
+	background-color: var(--Color_Black);
+	background-position: center;
+	background-size: 200px;
+}
+.Task_Target_Item{
+	float:left;
+	height: 30px;
+	width:300px;
+	margin-left:30px;
+	margin-top:10px;
+	font-size: 20px;
+	color:var(--Color_White);
+	overflow: hidden;
+}
+
+.Task_Target_StarCanvas{
+	margin-top:30px;
+	margin-left: -30px;
+	width:600px;
+	height:200px;
+}
+
+.TaskRight{
+	position:absolute;
+	top: 0px;
+	left: 650px;
+	bottom: 0px;
+	right: 0px;
+	padding-top: 50px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.Task_Target .SelectButton{
+	height: 50px;
+	width: 150px;
+	background-size: 50px;
+	background-position: center center;
+	margin-top: 10px;
+	margin-right: 10px;
+	border-radius: 10px;
+}
+
+.Task_Target{
+	background-color: var(--Color_Black);
+	color:var(--Color_White);
+	height: 70px;
+	border-radius: 10px;
+	width: calc(100% - 90px);
+	margin-top: 40px;
+	line-height: 70px;
+	padding-left: 50px;
+}
+.TaskLeft_Item{
+	margin-top: 30px;
+	height: 50px;
+	width:calc(100% - 40px);
+}
+.Task_Dividing{
+	margin-top: 40px;
+	height: 1px;
+	width:calc(100% - 40px);
+	border-bottom:1px solid var(--Color_White);
+}
+.TaskLeft_Item input{
+	width:100px;
+	text-align: center;
+}
+.TaskLeft_Check{
+	width: 50px;
+	height: 50px;
+	border-radius: 10px;
+}
+.TaskLeft_Display{
+	margin-top: 20px;
+	width: 300px;
+	height: 50px;
+	font-size: 25px;
+}
+.Task_Event{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	height: 70px;
+	width: 100%;
+	border-bottom:1px solid var(--Color_White);
+}
+.TableHead{
+	font-weight: bold;
+	margin-top: 40px;
+	height: 70px;
+	width: 100%;
+}
+.TableHead .fdiv , .Task_Event .fdiv{
+	width: 140px;
+	line-height: 70px;
+}
+.TableHead .LastDiv,.Task_Event .LastDiv{
+	line-height: 70px;
+	width: calc(100% - 6 * 140px);
+}
+.Task_AddBtn{
+	margin-top: 40px;
+	margin-bottom: 40px;
+	height: 70px;
+	line-height: 70px;
+	border-radius: 10px;
+	text-align: center;
+}
+.TaskList_Bottom{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	height: 100px;
+	padding-right: 20px;
+}
+/*任务执行状态*/
+.Task_Message{
+	float:left;
+	height: 70px;
+	line-height: 70px;
+	color: var(--Color_White);
+	padding-left:20px;
+}
+.TaskButton{
+	float: right;
+	height: 70px;
+	line-height: 70px;
+	width: 200px;
+	border-radius: 10px;
+}
+.TaskBox{
+	height: calc(100% - 300px);
+}
+.Task_Event input{
+	width: 100%;
+}
+.DeleteTesk{
+	width: 100%;
+	font-size: 50px;
+	font-weight: bold;
+	
+}
+/*任务进度条*/
+.Task_Event_ProgressBar{
+	width: 90%;
+	margin-left: 5%;
+	margin-top: 25px;
+	border-radius: 10px;
+	height: 20px;
+	background-color: var(--Color_Gray);
+	overflow: hidden;
+}
+.Task_Event_Progress{
+	height: 20px;
+	background-color: var(--Color_Green);
+	border-radius: 10px;
+}
+
+/***************************************拍摄目标检索***************************************/
+.Target_Serach{
+	
+	height: 100%;
+	padding: 20px;	
+	overflow: hidden;
+}
+.Search_Title{
+	height: 70px;
+	font-weight: bold;
+	line-height: 70px;
+}
+.SearchBar{
+	float:left;
+	width: calc(100% - 200px);
+	height:70px;
+	line-height: 70px;
+	border-radius: 10px;
+	padding-left: 20px;
+	background-color: var(--Color_Gray);
+	overflow: hidden;
+}
+.SearchBar input[type="text"]{
+	background-color: var(--Color_Gray);
+	height: 70px;
+	width:calc(100% - 220px);
+	line-height: 70px;
+	color:var(--Color_White);
+	border:0px;
+	outline: none;
+}
+.SearchButton{
+	float: right;
+	width: 200px;
+	height: 60px;
+	margin-top:5px;
+	margin-right:10px;
+	border-radius: 10px;
+	background-color: var(--Color_Green);
+	background-image: url(../images/flag/search.png);
+	background-repeat: no-repeat;
+	background-size: 50px;
+	background-position: center center;
+	
+}
+.BoutiqueButton{
+	float: right;
+	width: 100px;
+	height: 70px;
+	line-height: 70px;
+	background-image: url(../images/flag/SearchFilter.png);
+	background-repeat: no-repeat;
+	background-size: 50px;
+	background-position: 0px center;
+	font-weight: bold;
+	padding-left:60px;
+	
+}
+
+.Targets_List{
+	clear: both;
+	width: calc(100% - 30px);
+	margin-top: 90px;
+	height:calc(100% - 190px);
+	overflow-y: auto;
+}
+.Targets_List::-webkit-scrollbar{
+	width: 0px;
+}
+.TargetItem{
+	height: 200px;
+	width: 100%;
+	background-color: var(--Color_Gray);
+	
+	clear: both;
+}
+.StarCanvas{
+	float:right;
+}
+.TargetItem .TargetPicture{
+	float:left;
+	height: 200px;
+	width: 200px;
+	/*background-image: url(../images/ext/IC405-1.jpg)*/;
+	background-color:#000;
+	background-size: 200px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	overflow: hidden;
+}
+.TargetItem .TargetInfo{
+	float:left;
+	width:calc(100% - 840px);
+	height: 200px;
+	margin:20px;
+	overflow: hidden;
+}
+.TargetItem canvas{
+	float: right;
+	height:200px;
+	width:600px;
+	overflow: hidden;
+}
+.TargetInfo_Title{
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.Info_Line{
+	width:100%;
+	height: 40px;
+	line-height: 40px;
+	display:flex;		/*平均布局*/
+	flex-direction:row;	/*平均布局*/
+}
+.Info_Text{
+	float: left;
+	flex: 1px;
+	font-size: 20px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.Search_Condition{
+	padding: 20px;
+	position: fixed;
+	top:0px;
+	right: 0px;
+	width:1000px;
+	bottom:0px;
+	z-index: 20001;
+	background-color: var(--Color_Gray);
+	overflow-y: auto;
+}
+
+.Search_Condition::-webkit-scrollbar{
+	width: 0px;
+}
+.ConditionSize_Number_NR{
+	float: left;
+	width: 150px;
+	border-radius: 10px;
+	margin-bottom: 20px;
+}
+.ConditionSize_Number_Range{
+	float: left;
+	width: 150px;
+	height: 70px;
+	line-height: 70px;
+	border-radius: 10px;
+	margin-left: 20px;
+	background-color:var(--Color_Black);
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.ConditionSize_Number_S{
+	float: left;
+	width: 50px;
+	height: 70px;
+	line-height: 70px;
+	margin-left: 20px;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.ConditionSize_Range_Box{
+	margin-top:100px;
+	width: 100%;
+	height: 70px;
+	clear: both;
+	padding-left: 20px;
+}
+.Search_SearchButton{
+	clear: both;
+	margin-bottom: 20px;
+	width: 100%;
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+	background-color: var(--Color_Green);
+	border-radius: 10px;
+	color: var(--Color_Black);
+	background-image: url(../images/flag/search.png);
+	background-repeat: no-repeat;
+	background-position: 280px center;
+	background-size: 50px;
+	font-weight: bold;
+	
+}
+
+/*倍速调整*/
+.Mount_Speed{
+	position: absolute;
+	top:0px;
+	left: 0px;
+	width: 250px;
+	bottom: 0px;
+	background-color: var(--Color_Gray);
+	overflow-y: auto;
+}
+.Mount_Speed::-webkit-scrollbar{
+	width: 0px;
+}
+
+.MountSpeedItem{
+	width: 100%;
+	height: 150px;
+	line-height: 150px;
+	text-align: center;
+	font-size: 50px;
+	font-weight: bold;
+	background-color: var(--Color_Gray);
+	color: var(--Color_White);
+}
+.MountSpeedItem[checked]{
+	color:var(--Color_Black);
+}
+.Mount_Speed_Title{
+	padding: 20px;
+	text-align: center;
+}
+
+/*****************************************图片预览*********************************************/
+.PicturePreviewForm{
+	z-index: 30000;
+	overflow-x: auto;
+	overflow-y: auto;
+}
+.PicturePreviewForm::-webkit-scrollbar{
+	width: 0px;
+	height: 0px;
+}
+.Preview_Picture{
+	position: absolute;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	overflow: hidden;
+}
+
+.Preview_PictureLoading{
+	position: absolute;
+	left: calc(50% - 150px);
+	top: calc(50% - 40px);
+	width: 300px;
+	height: 80px;
+	line-height: 80px;
+	color: var(--Color_White);
+	background-color: var(--Color_Gray);
+	border-radius: 10px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.Preview_Histogram{
+	position:fixed;
+	left: 0px;
+	bottom: 200px;
+	width: 100px;
+	height: 100px;
+	background-image:url(../images/flag/Histogram.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 70px;
+	
+}
+
+.Preview_Calibration{
+	position:fixed;
+	left: 0px;
+	bottom: 100px;
+	width: 100px;
+	height: 100px;
+	background-image:url(../images/flag/GoGuider.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 70px;
+	
+}
+
+.Preview_Remove{
+	position: fixed;
+	right: 30px;
+	bottom: 40px;
+	width: 100px;
+	height: 100px;
+	background-image:url(../images/flag/Clear.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100px;
+	
+}
+.Preview_SaveToPhone{
+	position: fixed;
+	right: 160px;
+	bottom: 55px;
+	width: 200px;
+	height: 70px;
+	line-height: 70px;
+	background-image:url(../images/icons/_Files.png);
+	background-repeat: no-repeat;
+	background-position: 20px center;
+	background-size: 70px;
+	background-color: var(--Color_Green);
+	border-radius: 10px;
+	padding-left: 100px;
+	font-weight: bold;
+	color: var(--Color_Black);
+	
+}
+.Preview_Enlarge , .Preview_Narrow{
+	position: fixed;
+	right: 20px;
+	width: 100px;
+	height: 100px;
+	line-height: 85px;
+	text-align: center;
+	font-weight: bold;
+	border:var(--Color_WhiteA) solid 5px;
+	background-color: var(--Color_White);
+	color: var(--Color_Black);
+	font-size:100px;
+	border-radius: 100px;
+}
+.Preview_Enlarge{
+	top :200px;
+}
+.Preview_Narrow{
+	top :350px;
+}
+.HistogramBlock{
+	position: fixed;
+	left:50px;
+	right:50px;
+	bottom:50px;
+	height:360px;
+	background-color: var(--Color_GrayA);
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.Picture_Test{
+	position: fixed;
+	left:0px;
+	top：0px;
+	width:500px;
+	height:500px;
+	background-color: #FFF;
+	overflow-y: auto;
+}
+
+/*********************************自动对焦设置**********************************/
+.FocuserForm{
+	z-index: 25000;
+}
+.Focuser_Image{
+	position: absolute;
+	left: 0px;
+	height: 0px;
+	width: 100%;
+	height: 100%;
+	/*background-image: url(../images/testbackground.jpg);*/
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.Focuser_Right{
+	position:absolute;
+	right: 0px;
+	background-color:var(--Color_BlackA);
+	z-index: 10000;		/*在最顶部*/
+	top:calc(50% - 420px );/*180px*/
+	width:150px;
+	height:840px;
+	/*左边圆角*/
+	border-radius: 10px 0px 0px 10px;
+	overflow: hidden;
+}
+.Focuser_Camera{
+	background-position: center 10px;
+	background-repeat: no-repeat;
+	width: 100%;
+	padding-top: 140px;
+	padding-bottom: 10px;
+	border-bottom: var(--Color_Black) solid 1px;
+	
+	text-align: center;
+	font-weight: bold;
+}
+.Focuser_Camera[type="0"]{
+	background-image: url(../images/flag/F_Major.png);
+}
+.Focuser_Camera[type="1"]{
+	background-image: url(../images/flag/F_Secondary.png);
+}
+.Focuser_Timeset{
+	background-position: center 10px;
+	background-repeat: no-repeat;
+	width: 100%;
+	padding-top: 120px;
+	padding-bottom: 10px;
+	border-bottom: var(--Color_Black) solid 1px;
+	text-align: center;
+	font-weight: bold;
+	background-image: url(../images/flag/F_Exptime.png);
+}
+.Focuser_Auto{
+	background-position: center 10px;
+	background-repeat: no-repeat;
+	width: 100%;
+	padding-top: 120px;
+	padding-bottom: 10px;
+	border-bottom: var(--Color_Black) solid 1px;
+	text-align: center;
+	font-weight: bold;
+	background-image: url(../images/flag/F_Auto.png);
+}
+.Focuser_Auto[status="run"]{background-image: url(../images/flag/F_Auto.gif);}
+
+.Focuser_Out , .Focuser_In{
+	background-position: center 10px;
+	background-repeat: no-repeat;
+	width: 100%;
+	height:150px;
+	border-bottom: var(--Color_Black) solid 1px;
+	text-align: center;
+	font-weight: bold;	
+}
+
+.Focuser_Out{background-image: url(../images/flag/F_Out.png);}
+.Focuser_In{background-image: url(../images/flag/F_In.png);}
+
+.Focuser_Datas{
+	position: absolute;
+	bottom:50px;
+	left:50px;
+	width: 600px;
+	height: 50px;
+	border-radius: 25px;
+	background-color:var(--Color_BlackA);
+	overflow: hidden;
+	color:var(--Color_Green);
+	z-index: 10000;
+	padding-left: 50px;
+}
+.Focuser_Value , .Focuser_HFR{
+	float: left;
+	height: 50px;
+	line-height: 50px;
+	width: 300px;
+	overflow: hidden;
+}
+.Focuser_Value{color:var(--Color_Red);}
+.Focuser_HFR{color:var(--Color_Blue);}
+
+.Focuser_Status{
+	float: left;
+	height: 50px;
+	line-height: 50px;
+	width: 300px;
+	background-image: url(../images/flag/F_Auto.gif);
+	background-position: 10px center;
+	background-repeat: no-repeat;
+	background-size: 80px;
+	padding-left: 100px;
+	overflow: hidden;
+}
+.Focuser_Datas[status="auto"]{
+	width: 1000px;
+}
+
+.Focuser_Exposures{
+	position: absolute;
+	width: 1000px;
+	height: 450px;
+	border-radius: 10px;
+	background-color: var(--Color_Gray);
+	right:180px;
+	top:calc(50% - 420px + 180px);
+	overflow: hidden;
+}
+.Focuser_Exposures_Title{
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	background-image: url(../images/flag/F_Time.png);
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	padding-left: 120px;
+	font-weight: bold;
+}
+.Focuser_Params_Item{
+	margin-left: 25px;
+	width:calc(100% - 50px);
+	clear: both;
+}
+.Focuser_Exposures_Group{
+	width: 950px;
+	margin-left: 25px;
+}
+.Focuser_Exposures_AUD , #AUD_Gain_T,#AUD_Offset_T{
+	float:left;
+	margin-top: 0px;
+	width: 100px;
+	height: 70px;
+	background-color: var(--Color_Black);
+	margin-left:40px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border:0px;
+	outline: none;
+	border-radius: 10px;
+	line-height: 70px;
+	text-align: center;
+}
+
+/**********************************赤道仪校准***********************************/
+.CalibrationForm{
+	z-index: 30000;
+	background-color: var(--Color_BlackA);
+	overflow: hidden;
+}
+.CalibrationBlock{
+	position: absolute;
+	height:800px;
+	width:880px;
+	right:calc(50% - 440px);
+	top:calc(50% - 400px);
+	border-radius: 10px;
+	background-color: var(--Color_Gray);
+	overflow: hidden;
+}
+.Calibration_Title{
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	background-image: url(../images/flag/Calibrationi.png);
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	background-size: 90px;
+	border-bottom: var(--Color_Black) solid 1px;
+	padding-left: 120px;
+	font-weight: bold;
+}
+.Calibration_Process_Item{
+	padding-top: 30px;
+	padding-left:50px;
+}
+.Calibration_Process_Item[status="complete"] .Calibration_Process_Item_Title{
+	background-image: url(../images/flag/Complete.png);
+}
+.Calibration_Process_Item[status="error"] .Calibration_Process_Item_Title{
+	background-image: url(../images/flag/Error.png);
+}
+.Calibration_Process_Item[status="exec"] .Calibration_Process_Item_Title{
+	background-image: url(../images/flag/Implement.gif);
+}
+
+.Calibration_Process_Item_Title{
+	font-weight: bold;
+	height: 50px;
+	line-height: 50px;
+	background-repeat: no-repeat;
+	background-position: 0px center;
+	background-size: 50px;
+	padding-left: 80px;
+}
+.Calibration_Process_Item_Message{
+	line-height: 50px;
+	padding-left: 80px;
+}
+.Calibration_ControlBar{
+	margin-top:40px;
+	border-top: var(--Color_Black) solid 1px;
+}
+.Calibration_Button{
+	margin-top: 20px;
+	margin-right: 20px;
+	float:right;
+	width: 200px;
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+	font-weight: bold;
+	color:var(--Color_Black);
+	border-radius: 10px;
+}
+#Calibration_Cancel{
+	background-color: var(--Color_White);
+}
+#Calibration_OK{	
+	background-color: var(--Color_Green);
+}
+
+/******************************************主界面中的按钮*********************************************/
+.Box_Goto{
+	position: absolute;
+	left: calc(50% - 150px);
+	top: calc(50% - 100px);
+	width:300px;
+	height: 200px;
+	background-color: var(--Color_blackA);
+	border-radius: 10px;
+}
+.Box_Goto_Info{
+	height: 100px;
+	line-height: 100px;
+	color:var(--Color_Green);
+	text-align: center;
+}
+.Box_Goto_Button{
+	height: 70px;
+	line-height: 70px;
+	background-color: var(--Color_Red);
+	color: var(--Color_Black);
+	text-align: center;
+	border-radius: 10px;
+	margin-top: 20px;
+	font-weight: bold;
+}
+
+/******************************************设备初始化界面*********************************************/
+
+.DeviceInit_Setting{
+	z-index: 30000;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right:0px;
+	bottom: 0px;
+	background-color: var(--Color_Black);
+	padding: 50px;
+	width: calc(100% - 100px);
+}
+
+.Init_Title{
+	width: 100%;
+	height: 120px;
+	line-height: 70px;
+	font-weight: bold;
+	background-image: url("../images/icons/Init.png");
+	background-repeat: no-repeat;
+	background-size: 70px;
+	padding-left: 100px;
+}
+
+.Init_Item{
+	width: 100%;
+	height: 200px;
+	border-bottom: var(--Color_White) solid 1px;
+	margin-bottom: 50px;
+}
+
+.Init_Item_Title{
+	width: clac(100% - 100px);
+	height: 70px;
+	line-height: 70px;
+	font-weight: bold;
+	background-repeat: no-repeat;
+	background-size: 70px;
+	padding-left: 100px;
+}
+
+.Init_Item_Mount{background-image:url("../images/flag/Mount.png");}
+.Init_Item_Camera{background-image:url("../images/flag/Camera.png");}
+.Init_Item_Guilder{background-image:url("../images/flag/Guider.png");}
+.Init_Params{
+	width: 100%;
+	display:flex;		/*平均布局*/
+	flex-direction:row;	/*平均布局*/
+	overflow: hidden;
+}
+
+.Init_Param{
+	float: left;
+	flex:1;				/*平均布局*/
+	height: 120px;
+	line-height: 120px;
+	display:flex;		/*平均布局*/
+	flex-direction:row;	/*平均布局*/
+}
+.Init_Param_Title{
+	font-weight: bold;
+	flex:1;				/*平均布局*/
+	text-align: center;
+}
+.Init_Param_Value{
+	margin-top: 25px;
+	float:left;
+	flex:3;				/*平均布局*/
+	height: 70px;
+	line-height: 70px;
+	background-color: var(--Color_Gray);
+	color: var(--Color_White);
+	text-align: left;
+	overflow: hidden;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 10px;
+	white-space:nowrap; overflow:hidden; text-overflow:ellipsis;		/*禁止换行*/
+	border:0px;
+	outline: none;
+}
+
+.Init_Button{
+	margin-left: 50px;
+	width: 400px;
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+	background-color: var(--Color_Green);
+	border-radius: 10px;
+	font-weight: bold;
+	color: var(--Color_Black);
+	float: right;
+}
+
+.Init_Buttons{
+	height: 70px;
+}

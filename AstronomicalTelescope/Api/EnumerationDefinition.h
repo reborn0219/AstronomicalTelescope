@@ -56,4 +56,11 @@ typedef NS_ENUM(NSInteger, OrderCycle)
     OrderCycleYear = 4,//年
     
 };
+
+typedef NS_ENUM(NSInteger, MessageBoxFalg)
+{
+    MessageBoxFalg_MESSAGE = 1,
+   
+    
+};
 #endif /* EnumerationDefinition_h */

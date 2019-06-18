@@ -11,7 +11,8 @@
 #import "WebViewVC.h"
 
 @protocol  JSPortocol <JSExport>
-
+-(NSDictionary *)getGPS;
+-(void)gohome;
 -(void)scan;
 -(void)ready;
 -(void)showview;
@@ -22,7 +23,8 @@
 @interface PhoneInterface : NSObject<JSPortocol>
 
 @property(nonatomic,retain)WebViewVC *webVC;
-
+-(void)gohome;
+-(NSDictionary *)getGPS;
 -(void)scan;
 -(void)ready;
 -(void)showview;

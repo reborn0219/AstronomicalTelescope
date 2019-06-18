@@ -8,7 +8,18 @@
 
 #import "MessageBoxVC.h"
 
-@interface MessageBoxVC ()
+@interface MessageBoxVC (){
+    NSString *_title;
+    NSString *_content;
+    NSString *_flag;
+    NSString *_buttons;
+    NSString *_callid;
+    
+}
+@property (nonatomic,assign) NSInteger type;
+@property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
+@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
+
 @property (weak, nonatomic) IBOutlet UIView *backView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftView_W;
@@ -25,8 +36,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _backView.layer.cornerRadius = 5;
-    // Do any additional setup after loading the view from its nib.
+    _confirmBtn.layer.cornerRadius = 5;
+    _cancelBtn.layer.cornerRadius = 5;
+
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    _titleMsg.text = _title;
+    _contentMsg.text = _content;
+    
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+}
+
 - (IBAction)confirmBtnAction:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -34,15 +57,43 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)showInVC:(UIViewController *)VC Type:(NSInteger)type{
+   
+    _type = type;
+    if (self.isBeingPresented) {
+        return;
+    }
+    self.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
+    /**
+     *  根据系统版本设置显示样式
+     */
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        self.modalPresentationStyle=UIModalPresentationOverFullScreen;
+    }else {
+        self.modalPresentationStyle=UIModalPresentationCustom;
+    }
+    [VC presentViewController:self animated:YES completion:nil];
 }
-*/
+
+-(void)showInVC:(UIViewController *)VC dialog:(NSString*)title :(NSString*)content :(NSString*)flag :(NSString*)buttons :(NSString*)callid{
+    _title = title;
+    _content = content;
+    _flag = flag;
+    _buttons = buttons;
+    _callid = callid;
+    if (self.isBeingPresented) {
+        return;
+    }
+    self.modalTransitionStyle=UIModalTransitionStyleCrossDissolve;
+    /**
+     *  根据系统版本设置显示样式
+     */
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        self.modalPresentationStyle=UIModalPresentationOverFullScreen;
+    }else {
+        self.modalPresentationStyle=UIModalPresentationCustom;
+    }
+    [VC presentViewController:self animated:YES completion:nil];
+}
 
 @end

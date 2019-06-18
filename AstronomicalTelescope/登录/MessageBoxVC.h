@@ -11,6 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MessageBoxVC : UIViewController
+-(void)showInVC:(UIViewController *)VC Type:(NSInteger)type;
+
+-(void)showInVC:(UIViewController *)VC dialog:(NSString*)title :(NSString*)content :(NSString*)flag :(NSString*)buttons :(NSString*)callid;
 
 @end
 
