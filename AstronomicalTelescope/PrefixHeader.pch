@@ -19,12 +19,15 @@
 #import "BlockDefinition.h"
 #import "PPConst.h"
 #import "MJExtension.h"
+#import "MJRefresh.h"
+
 #define NTES_USE_CLEAR_BAR - (BOOL)useClearBar{return YES;}
 
 #define NTES_FORBID_INTERACTIVE_POP - (BOOL)forbidInteractivePop{return YES;}
 
 #define SLog(format, ...) printf("class: <%p %s:(%d) > method: %s \n%s\n", self, [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, __PRETTY_FUNCTION__, [[NSString stringWithFormat:(format), ##__VA_ARGS__] UTF8String] )
 
+#define HexRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 #define URL_LOCAL @"http://xiaoqu.meidyy.com/api/"
 #define DEFAULT_FONT(s)     [UIFont fontWithName:@"ArialMT" size:s]

@@ -15,6 +15,7 @@
 @interface WebViewVC : UIViewController<UIWebViewDelegate>
 
 @property(nonatomic,strong) JSContext *context;
+@property(nonatomic,copy)NSString *ipName;
 -(NSDictionary *)getGPS;
 -(void)gohome;
 

@@ -35,13 +35,14 @@
     appDelegate.allowRotation = YES;//(以上2行代码,可以理解为打开横屏开关)
     
     [self setNewOrientation:YES];
-    
+    self.view.backgroundColor = [UIColor blackColor];
     self.webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [self.view addSubview:self.webView];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.webView.delegate = self;
     ustimes=[[PhoneInterface alloc]init];
     ustimes.webVC = self;
+    self.webView.backgroundColor = [UIColor blackColor];
     self.webView.dataDetectorTypes = UIDataDetectorTypeNone;//禁止自动检测网页上的电话号码，单机可以拨打
     
     self.webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
@@ -123,8 +124,10 @@
 //    
     _context=[webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
     
-    _context[@"PhoneInterface"] = ustimes;
-    
+//    _context[@"PhoneInterface"] = ustimes;
+//    //同样我们也用刚才的方式模拟一下js调用方法
+//    NSString *jsStr1=@"PhoneInterface.ready()";
+//    [_context evaluateScript:jsStr1];
     _context[@"test1"] = ^() {
         NSArray *args = [JSContext currentArguments];
         for (id obj in args) {
@@ -184,7 +187,7 @@
 
 -(void)ready{
     NSLog(@"ready被调用");
-    [self setHost:@"192.168.0.1"];
+    [self setHost:_ipName];
     
 }
 -(void)setHost:(NSString *)host{
@@ -201,14 +204,19 @@
 -(void)showview{
     NSLog(@"showview被调用");
     
+    
 }
 -(NSDictionary *)getGPS{
     NSLog(@"getGPS被调用");
-
+   NSString *lat = [[NSUserDefaults standardUserDefaults] objectForKey:@"latitude"];
+    NSString *lng = [[NSUserDefaults standardUserDefaults] objectForKey:@"longitude"];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    formatter.dateFormat = @"YYYY-MM-dd HH:mm:ss";
+    NSString *dateStr = [formatter stringFromDate:[NSDate date]];
     return @{
-        @"longitude":@"39",
-        @"latitude":@"114",
-        @"datetime":@"2019-06-18 09:22:31"
+        @"longitude":lng,
+        @"latitude":lat,
+        @"datetime":dateStr
     };
 }
 -(void)gohome{

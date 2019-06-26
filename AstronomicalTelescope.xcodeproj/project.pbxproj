@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,11 +20,6 @@
 		2F439F01229BCAA600DD430B /* AstronomicalTelescopeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F439F00229BCAA600DD430B /* AstronomicalTelescopeUITests.m */; };
 		2F439F13229BCB3900DD430B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F439F11229BCB3900DD430B /* LoginViewController.m */; };
 		2F439F14229BCB3900DD430B /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F439F12229BCB3900DD430B /* LoginViewController.xib */; };
-		2F8CF56422B8818C00A79DF5 /* js in Resources */ = {isa = PBXBuildFile; fileRef = 2F8CF55F22B8818C00A79DF5 /* js */; };
-		2F8CF56522B8818C00A79DF5 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 2F8CF56022B8818C00A79DF5 /* images */; };
-		2F8CF56622B8818C00A79DF5 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 2F8CF56122B8818C00A79DF5 /* Main.html */; };
-		2F8CF56722B8818C00A79DF5 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 2F8CF56222B8818C00A79DF5 /* fonts */; };
-		2F8CF56822B8818C00A79DF5 /* css in Resources */ = {isa = PBXBuildFile; fileRef = 2F8CF56322B8818C00A79DF5 /* css */; };
 		2F9883CB22A67C890023326F /* WebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9883C822A67C890023326F /* WebViewVC.m */; };
 		2F9883CC22A67C890023326F /* PhoneInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9883C922A67C890023326F /* PhoneInterface.m */; };
 		2F9883D222A68A3D0023326F /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9883D022A68A3D0023326F /* WebViewController.m */; };
@@ -32,6 +27,12 @@
 		2FA5E82722A0C482001BC56E /* PatrolHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA5E82322A0C482001BC56E /* PatrolHttpRequest.m */; };
 		2FA5E82822A0C482001BC56E /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA5E82522A0C482001BC56E /* BaseRequest.m */; };
 		2FA5E82C22A0C4EF001BC56E /* PPConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA5E82A22A0C4EF001BC56E /* PPConst.m */; };
+		4B186EC122BE0761003BCB74 /* XSDLocationTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B186EC022BE0761003BCB74 /* XSDLocationTools.m */; };
+		4B186EC722BE20FF003BCB74 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 4B186EC222BE20FF003BCB74 /* fonts */; };
+		4B186EC822BE20FF003BCB74 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 4B186EC322BE20FF003BCB74 /* images */; };
+		4B186EC922BE20FF003BCB74 /* css in Resources */ = {isa = PBXBuildFile; fileRef = 4B186EC422BE20FF003BCB74 /* css */; };
+		4B186ECA22BE20FF003BCB74 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 4B186EC522BE20FF003BCB74 /* Main.html */; };
+		4B186ECB22BE20FF003BCB74 /* js in Resources */ = {isa = PBXBuildFile; fileRef = 4B186EC622BE20FF003BCB74 /* js */; };
 		4BACEF7322B7F09400C5D5DB /* MessageBoxVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BACEF7122B7F09400C5D5DB /* MessageBoxVC.m */; };
 		4BACEF7422B7F09400C5D5DB /* MessageBoxVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BACEF7222B7F09400C5D5DB /* MessageBoxVC.xib */; };
 		779A0ED2B0142A1B624AC710 /* libPods-AstronomicalTelescope.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3E8DB55388669AFCD0ACA29 /* libPods-AstronomicalTelescope.a */; };
@@ -79,11 +80,6 @@
 		2F439F10229BCB3900DD430B /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		2F439F11229BCB3900DD430B /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		2F439F12229BCB3900DD430B /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		2F8CF55F22B8818C00A79DF5 /* js */ = {isa = PBXFileReference; lastKnownFileType = folder; path = js; sourceTree = "<group>"; };
-		2F8CF56022B8818C00A79DF5 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
-		2F8CF56122B8818C00A79DF5 /* Main.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Main.html; sourceTree = "<group>"; };
-		2F8CF56222B8818C00A79DF5 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
-		2F8CF56322B8818C00A79DF5 /* css */ = {isa = PBXFileReference; lastKnownFileType = folder; path = css; sourceTree = "<group>"; };
 		2F9883C722A67C890023326F /* PhoneInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneInterface.h; sourceTree = "<group>"; };
 		2F9883C822A67C890023326F /* WebViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewVC.m; sourceTree = "<group>"; };
 		2F9883C922A67C890023326F /* PhoneInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneInterface.m; sourceTree = "<group>"; };
@@ -101,6 +97,13 @@
 		2FA5E82A22A0C4EF001BC56E /* PPConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPConst.m; sourceTree = "<group>"; };
 		2FA5E82B22A0C4EF001BC56E /* BlockDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockDefinition.h; sourceTree = "<group>"; };
 		2FA5E82D22A0C54D001BC56E /* EnumerationDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationDefinition.h; sourceTree = "<group>"; };
+		4B186EBF22BE0761003BCB74 /* XSDLocationTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSDLocationTools.h; sourceTree = "<group>"; };
+		4B186EC022BE0761003BCB74 /* XSDLocationTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSDLocationTools.m; sourceTree = "<group>"; };
+		4B186EC222BE20FF003BCB74 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
+		4B186EC322BE20FF003BCB74 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		4B186EC422BE20FF003BCB74 /* css */ = {isa = PBXFileReference; lastKnownFileType = folder; path = css; sourceTree = "<group>"; };
+		4B186EC522BE20FF003BCB74 /* Main.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Main.html; sourceTree = "<group>"; };
+		4B186EC622BE20FF003BCB74 /* js */ = {isa = PBXFileReference; lastKnownFileType = folder; path = js; sourceTree = "<group>"; };
 		4BACEF7022B7F09400C5D5DB /* MessageBoxVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageBoxVC.h; sourceTree = "<group>"; };
 		4BACEF7122B7F09400C5D5DB /* MessageBoxVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageBoxVC.m; sourceTree = "<group>"; };
 		4BACEF7222B7F09400C5D5DB /* MessageBoxVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageBoxVC.xib; sourceTree = "<group>"; };
@@ -160,6 +163,7 @@
 		2F439EDB229BCAA100DD430B /* AstronomicalTelescope */ = {
 			isa = PBXGroup;
 			children = (
+				4B186EBE22BE0756003BCB74 /* Manager */,
 				2F9883B722A6612A0023326F /* 资源 */,
 				2FA5E82222A0C43A001BC56E /* Api */,
 				2F439F0F229BCB1100DD430B /* 登录 */,
@@ -226,11 +230,11 @@
 		2F9883B722A6612A0023326F /* 资源 */ = {
 			isa = PBXGroup;
 			children = (
-				2F8CF56322B8818C00A79DF5 /* css */,
-				2F8CF56222B8818C00A79DF5 /* fonts */,
-				2F8CF56022B8818C00A79DF5 /* images */,
-				2F8CF55F22B8818C00A79DF5 /* js */,
-				2F8CF56122B8818C00A79DF5 /* Main.html */,
+				4B186EC422BE20FF003BCB74 /* css */,
+				4B186EC222BE20FF003BCB74 /* fonts */,
+				4B186EC322BE20FF003BCB74 /* images */,
+				4B186EC622BE20FF003BCB74 /* js */,
+				4B186EC522BE20FF003BCB74 /* Main.html */,
 			);
 			path = "资源";
 			sourceTree = "<group>";
@@ -272,6 +276,15 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
+		4B186EBE22BE0756003BCB74 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				4B186EBF22BE0761003BCB74 /* XSDLocationTools.h */,
+				4B186EC022BE0761003BCB74 /* XSDLocationTools.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		A7A632068A2594A8B04A6BB7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +313,7 @@
 				2F439ED5229BCAA100DD430B /* Sources */,
 				2F439ED6229BCAA100DD430B /* Frameworks */,
 				2F439ED7229BCAA100DD430B /* Resources */,
+				5DE741B492757BB4A86F3598 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -393,16 +407,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F8CF56822B8818C00A79DF5 /* css in Resources */,
+				4B186EC922BE20FF003BCB74 /* css in Resources */,
 				4BACEF7422B7F09400C5D5DB /* MessageBoxVC.xib in Resources */,
-				2F8CF56622B8818C00A79DF5 /* Main.html in Resources */,
-				2F8CF56422B8818C00A79DF5 /* js in Resources */,
 				2F140EBA22B891CC00B241B9 /* PopListCell.xib in Resources */,
+				4B186ECA22BE20FF003BCB74 /* Main.html in Resources */,
 				2F439F14229BCB3900DD430B /* LoginViewController.xib in Resources */,
+				4B186EC722BE20FF003BCB74 /* fonts in Resources */,
+				4B186ECB22BE20FF003BCB74 /* js in Resources */,
+				4B186EC822BE20FF003BCB74 /* images in Resources */,
 				2F439EE9229BCAA600DD430B /* LaunchScreen.storyboard in Resources */,
 				2F439EE6229BCAA600DD430B /* Assets.xcassets in Resources */,
-				2F8CF56722B8818C00A79DF5 /* fonts in Resources */,
-				2F8CF56522B8818C00A79DF5 /* images in Resources */,
 				2F439EE4229BCAA100DD430B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,6 +438,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5DE741B492757BB4A86F3598 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AstronomicalTelescope/Pods-AstronomicalTelescope-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AstronomicalTelescope/Pods-AstronomicalTelescope-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AstronomicalTelescope/Pods-AstronomicalTelescope-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8EED3AB088B7438516E4A740 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -467,6 +498,7 @@
 				2F439EDE229BCAA100DD430B /* AppDelegate.m in Sources */,
 				2FA5E82722A0C482001BC56E /* PatrolHttpRequest.m in Sources */,
 				1883313F22A27F140023378D /* UDPManage.m in Sources */,
+				4B186EC122BE0761003BCB74 /* XSDLocationTools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

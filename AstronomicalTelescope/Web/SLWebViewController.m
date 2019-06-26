@@ -2,6 +2,8 @@
 #import "SLWebViewController.h"
 #import <WebKit/WebKit.h>
 #import "AppDelegate.h"
+#import "MessageBoxVC.h"
+
 // WKWebView 内存不释放的问题解决
 @interface WeakWebViewScriptMessageDelegate : NSObject<WKScriptMessageHandler>
 
@@ -248,6 +250,8 @@
         [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"DeviceClose"];
         [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"MessageBox"];
         [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"ready"];
+        [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"showview"];
+        [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"getJSON"];
 
         
         
@@ -345,16 +349,15 @@
     NSDictionary * parameter = message.body;
     //JS调用OC
     if([message.name isEqualToString:@"ready"]){
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"js调用到了oc" message:@"不带参数" preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:([UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        }])];
-        [self presentViewController:alertController animated:YES completion:nil];
+        [self ready];
         
-    }else if([message.name isEqualToString:@"jsToOcWithPrams"]){
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"js调用到了oc" message:parameter[@"params"] preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:([UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        }])];
-        [self presentViewController:alertController animated:YES completion:nil];
+    }else if([message.name isEqualToString:@"getGPS"]){
+        [self getGPS];
+
+    }else if ([message.name isEqualToString:@"getJSON"]){
+        
+        [self getJSON:parameter];
+
     }
     
 }
@@ -465,6 +468,7 @@
     }])];
     [self presentViewController:alertController animated:YES completion:nil];
 }
+
 // 确认框
 //JavaScript调用confirm方法后回调的方法 confirm是js中的确定框，需要在block中把用户选择的情况传递进去
 - (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL))completionHandler{
@@ -480,14 +484,7 @@
 // 输入框
 //JavaScript调用prompt方法后回调的方法 prompt是js中的输入框 需要在block中把用户输入的信息传入
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * _Nullable))completionHandler{
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:prompt message:@"" preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.text = defaultText;
-    }];
-    [alertController addAction:([UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        completionHandler(alertController.textFields[0].text?:@"");
-    }])];
-    [self presentViewController:alertController animated:YES completion:nil];
+       completionHandler(prompt);
 }
 // 页面是弹出窗口 _blank 处理
 - (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures {
@@ -513,5 +510,78 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void)ready{
+    NSLog(@"ready被调用");
+//    192.168.31
+    [self setHost:_ipName];
+    
+}
+-(void)setHost:(NSString *)host{
+//    JSValue *add = self.context[@"_SetHost"];
+//    NSLog(@"Func==add: %@", add);
+//    [add callWithArguments:@[host]];
+    NSString * param = [NSString stringWithFormat:@"_SetHost('%@')",host];
+    [self.webView evaluateJavaScript:param completionHandler:^(id _Nullable item, NSError * _Nullable error) {
+        NSLog(@"alert%@",error);
+    }];
+    [self browserReady];
+}
+-(void)browserReady{
+  
+    [self.webView evaluateJavaScript:@"_BrowserReady('OC调用JS警告窗方法')" completionHandler:^(id _Nullable item, NSError * _Nullable error) {
+        NSLog(@"alert");
+    }];
+}
+-(void)showview{
+    NSLog(@"showview被调用");
+}
+-(NSString *)getJSON:(NSString *)parameter{
+    
+    NSLog(@"getJSON被调用");
+    return @"111111";
+}
+-(NSDictionary *)getGPS{
+    NSLog(@"getGPS被调用");
+    NSString *lat = [[NSUserDefaults standardUserDefaults] objectForKey:@"latitude"];
+    NSString *lng = [[NSUserDefaults standardUserDefaults] objectForKey:@"longitude"];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    formatter.dateFormat = @"YYYY-MM-dd HH:mm:ss";
+    NSString *dateStr = [formatter stringFromDate:[NSDate date]];
+    return @{
+             @"longitude":lng,
+             @"latitude":lat,
+             @"datetime":dateStr
+             };
+}
+-(void)gohome{
+    NSLog(@"gohome被调用");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        appDelegate.allowRotation = NO;//关闭横屏仅允许竖屏
+        
+        [self setNewOrientation:NO];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
+    
+    
+}
+-(void)dialog:(NSString*)title :(NSString*)content :(NSString*)flag :(NSString*)buttons :(NSString*)callid{
+    
+    //    JSValue *add = self.context[@"__MessageBox_Callback"];
+    //    NSLog(@"Func==add: %@", add);
+    //    NSDictionary *dic = @{@"callid":callid,@"result":@"0"};
+    //    [add callWithArguments:@[[dic mj_JSONString]]];
+    
+    
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        MessageBoxVC * messageVC = [[MessageBoxVC alloc]init];
+        [messageVC showInVC:self Type:1];
+    });
+    
+}
 
 @end

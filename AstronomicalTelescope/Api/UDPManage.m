@@ -10,7 +10,7 @@
 
 #import "GCDAsyncUdpSocket.h"
 
-#define udpPort 5999
+#define udpPort 59999
 
 @interface UDPManage () <GCDAsyncUdpSocketDelegate>
 @end
@@ -30,7 +30,25 @@ static UDPManage *myUDPManage = nil;
     [udpSocket bindToPort:udpPort error:&error];
     // 接受一次消息（启动一个等待接受，且只接收一次）
     [udpSocket receiveOnce:nil];
-//    [asyncUdpSocket receiveWithTimeout:-1 tag:0];
+//    [udpSocket receiveWithTimeout:-1 tag:0];
+    if (error) {//监听错误打印错误信息
+        NSLog(@"error:%@",error);
+    }else {//监听成功则开始接收信息
+        [self.udpSocket beginReceiving:&error];
+    }
+    
+    if (![udpSocket bindToPort:udpPort error:&error])
+    {
+        NSLog(@"Error starting server (bind): %@", error);
+        return;
+    }
+    if (![udpSocket beginReceiving:&error])
+    {
+        [udpSocket close];
+        
+        NSLog(@"Error starting server (recv): %@", error);
+        return;
+    }
 
 }
 

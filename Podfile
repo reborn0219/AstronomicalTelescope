@@ -9,4 +9,6 @@ target 'AstronomicalTelescope' do
     pod 'AFNetworking'
     pod 'CocoaAsyncSocket'
     pod 'MJExtension'
+    pod 'MJRefresh'
+
 end

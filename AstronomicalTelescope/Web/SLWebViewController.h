@@ -10,6 +10,7 @@
 
 @interface  SLWebViewController: UIViewController
 
+@property(nonatomic,copy)NSString *ipName;
 
 @end
 

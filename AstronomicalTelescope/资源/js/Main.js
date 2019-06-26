@@ -67,11 +67,16 @@ function BrowserReady(){
 	
 	//刷新页面时间
 	
-	
+
 	CloseThumbnail();					//关闭导星图
+    alert("11");
+
 	InitializationSystem();				//初始化系统参数
+    alert("13");
+
 	InitWinInit();						//系统初始化窗口
-	
+    alert("2");
+
 	//到此为止可以正常使用软件，打开屏幕（这里还没有写）
 	
 	//支持长按出菜单
@@ -83,6 +88,8 @@ function BrowserReady(){
 	setTimeout(function(){ShowView();},100); //隐藏APP的界面
 	_StartDeviceStatusGetterLine();		//启动状态监控线程
 	//设置绘图大小
+    alert("3");
+
 }
 
 /*
@@ -102,10 +109,15 @@ function InitParameters(){
 	3. 判断是否处于任务中，如果处于任务中，则修改所有任务处理相关
  */
 function InitializationSystem(){
+    alert("InitializationSystem");
 	__SetLanguage(language);
+    alert("InitializationSystem1");
+
 	//获得所有的系统默认参数
 	//alert("准备调用初始化");
 	SystemParameters = __GetInitializationSystemParameters();
+    alert("InitializationSystem2");
+
 	//同步赤道仪GPS信息
 	if(SystemParameters.devices.mount!=undefined && SystemParameters.devices.mount.initlocation==false){
 		//初始化赤道仪信息
@@ -412,8 +424,8 @@ function UpdateExposureDisplayData(){
 		$("#PI_Gain").html(SystemParameters.devices.camera.gain);
 		$("#PI_Offset").html(SystemParameters.devices.camera.offset);
 		if(SystemParameters.devices.camera.cool==true){
-			$("#PI_CameraTemperature").html(SystemParameters.devices.camera.temperature+"°C");
-			$("#PI_CameraCooling").html(parseInt(SystemParameters.devices.camera.refrigeration)+"%");
+			$("#PI_CameraTemperature").html(SystemParameters.devices.camera.temperature.toFixed(2)+"°C");
+			$("#PI_CameraCooling").html(parseInt(SystemParameters.devices.camera.refrigeration.toFixed(0))+"%");
 		}else{
 			$("#PI_CameraTemperature").html("--");
 			$("#PI_CameraCooling").html("--");

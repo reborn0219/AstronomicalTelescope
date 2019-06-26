@@ -74,7 +74,9 @@ function __ShowMessageBox(arg){
 	var flag = arg.flag!=undefined?arg.flag:MessageBox.FLAG_MESSAGE;
 	var buttons=arg.buttons!=undefined?arg.buttons:MessageBox.BUTTONS_OK_ONLY;
 	var callid = arg.callid;
-	PhoneInterface.dialog(title,content,flag,buttons,callid);
+//    PhoneInterface.dialog(title,content,flag,buttons,callid);
+    window.webkit.messageHandlers.gohome.postMessage(title,content,flag,buttons,callid);
+
 }
 //回调函数
 function __MessageBox_Callback(data){
@@ -95,35 +97,47 @@ function __MessageBox_Callback(data){
 }
 //设置Host参数
 function _SetHost(host){
+    alert("_SetHost"+host);
 	HOST = "http://"+host
 	//HOST = "http://"+host+":8080";
 }
 
 function GetLocalGPS(){
-	var _r = PhoneInterface.getGPS();
+//    var _r = PhoneInterface.getGPS();
+    alert("gps");
+    var _r = window.webkit.messageHandlers.getGPS.postMessage("调用NoticeAppReady完毕");
+
 	return eval('(' + _r + ')');
 }
 
 function DeviceClose(){
-	PhoneInterface.close();
+//    PhoneInterface.close();
+    window.webkit.messageHandlers.close.postMessage("调用NoticeAppReady完毕");
+
 }
 
 //通知APP已经启动成功
 function NoticeAppReady(){
     alert("已经调用NoticeAppReady");
-	PhoneInterface.ready();
+//    window.webkit.messageHandlers.PhoneInterface.ready();
+    window.webkit.messageHandlers.ready.postMessage("");
     alert("调用NoticeAppReady完毕");
 }
 
 function ShowView(){
-	PhoneInterface.showview();
+//    PhoneInterface.showview();
+    window.webkit.messageHandlers.showview.postMessage("调用NoticeAppReady完毕");
+
 }
 
 function GoHome(){
-	PhoneInterface.gohome();
+//    PhoneInterface.gohome();
+    window.webkit.messageHandlers.gohome.postMessage("调用NoticeAppReady完毕");
+
 }
 //浏览器准备完毕后回调
 function _BrowserReady(){
+    alert("_BrowserReady");
 	BrowserReady();
 }
 //var HOST="http://192.168.31.92";
@@ -173,8 +187,11 @@ function SendCommandA(cmd,params,callback,important){
 
 function _GetJSON(path , callback){
 	//$.getJSON(path,"",callback);
-	var json = PhoneInterface.getJSON(path);
+//    var json = PhoneInterface.getJSON(path);
+    var json = window.webkit.messageHandlers.getJSON.postMessage(path);
+
 	callback(eval('(' + json + ')'));
+    alert("_GetJSON====="+json);
 }
 
 

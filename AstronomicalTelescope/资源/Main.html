@@ -1,308 +1,879 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>APP测试页面</title>
-		<script language="javascript" src="js/jquery-3.3.1.min.js"></script>
-		<script language="javascript" src="js/App.js"></script>
-		<style>
-			body{
-				overflow: hidden;
-				margin:0px;
-				padding: 0px;
-				color:#ABABAB;
-				background-color: #232323;
-			}
-			.Hide{
-				display:none;
-			}
-
-			*{
-				font-family:微软雅黑;
-				font-size: 28px;
-			}
-			.LogContent{
-				overflow-y:scroll;
-				width: calc(100% - 40px);
-				height:800px;
-				line-height: 50px;
-				padding: 20px;
-				border-bottom:#ABABAB solid 2px;
-				background-color: #232323;
-			}
-			.buttons{
-				height:100px;
-				padding:20px;
-			}
-			.buttons button{
-				width:200px;
-				height: 80px;
-				border-radius: 5px;
-				border:#4cae4c solid 2px;
-				background-color:#5cb85c;
-				color:#FFF;
-				font-weight: bold;
-				margin-right: 20px;
-				margin-bottom: 20px;
-				outline: none;
-			}
-		</style>
-	</head>
-
-	<body>
-		<div class="LogContent"></div>
-		<div class="buttons">
-			<button id="sync">同步请求</button>
-			<button id="aync1">重要异步请求</button>
-			<button id="aync2">10次异步请求</button>
-			<button id="goback">回到首页</button>
-			<button id="close">关闭APP</button>
-			<button id="show">隐藏引导页</button>
-			<button id="gps">获得GPS</button>
-			<button id="read">读取JSON</button>
-			<br/>
-			<button id="alert_1">提示弹窗</button>
-			<button id="alert_2">确认弹窗</button>
-			<button id="alert_3">警告弹窗</button>
-			<button id="alert_4">错误弹窗</button>
-			<button id="alert_5">信息弹窗</button>
+<head>
+<meta charset="utf-8">
+<META HTTP-EQUIV="pragma" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-store, must-revalidate"> 
+<META HTTP-EQUIV="expires" CONTENT="Wed, 26 Feb 1997 08:21:57 GMT"> 
+<META HTTP-EQUIV="expires" CONTENT="0"> 
+<title>Main</title>
+<link href="css/General.css" rel="stylesheet" type="text/css">
+<link href="css/M.css" rel="stylesheet" typed:\="text/css">
+<link href="css/NumberCard.css" rel="stylesheet" type="text/css">
+<script language="javascript" src="js/jquery-3.3.1.min.js"></script>
+<script language="javascript" src="js/Callback.js"></script>		<!--回调函数，需要后台重写-->
+<script language="javascript" src="js/AsynchronousCallback.js"></script>		<!--异步回调函数，需要后台重写-->
+<script language="javascript" src="js/App.js"></script>				<!--App函数-->
+<script language="javascript" src="js/Internationalization.js"></script>	<!--国际化-->
+<script language="javascript" src="js/Parameters.js"></script>		<!--系统参数-->
+<script language="javascript" src="js/Setting.js"></script>			<!--导星插件-->
+<script language="javascript" src="js/Guider.js"></script>			<!--导星插件-->
+<script language="javascript" src="js/Exposure.js"></script>		<!--曝光插件-->
+<script language="javascript" src="js/Tools.js"></script>			<!--组件-->
+<script language="javascript" src="js/Task.js"></script>			<!--组件-->
+<script language="javascript" src="js/NumberCard.js"></script>		<!--键盘-->
+<script language="javascript" src="js/PicturePreview.js"></script>	<!--照片回显-->
+<script language="javascript" src="js/Focuser.js"></script>			<!--对焦-->
+<script language="javascript" src="js/TargetSearch.js"></script>	<!--目标检索-->
+<script language="javascript" src="js/Calibration.js"></script>		<!--校准-->
+<script language="javascript" src="js/Main.js"></script> 
+<script language="javascript" src="js/jquery.imgpreload.min.js"></script>
+<script language="javascript" src="js/jcanvas.min.js"></script>
+</head>
+<body>
+<div id="LoadForm" class=""></div>
+<div id="MainForm" class="">
+	<!--主窗口-->
+	<div id="ImageCollector" class="ImageCollector">
+		<!--影像采集器，用于显示摄像头采集的影响信息-->
+		<canvas id="ImageCollector_Video"></canvas>
+		<canvas id="DEV_Video" class="Hide"></canvas>
+		<div class="Box_Goto Hide">
+			<!--设备正在GOTO的时候，可以单击这个按钮停止GOTO-->
+			<div class="Box_Goto_Info" lang_data="main.labels.mount_goto"></div>
+			<div class="Box_Goto_Button" lang_data="main.labels.mount_stop"></div>
 		</div>
-	</body>
-	<script>
-		var ii=0;
-		$(document).ready(function(){
-			testFunction();
-			log("测试程序启动，进入Ready 方法");
-			log("准备调用 PhoneInterface.ready()");
-			try{
-				NoticeAppReady();
-				log("调用完毕 PhoneInterface.ready()");
-			}catch(err){
-				error(err);
-			}
-		});
-		function log(msg){
-			$(".LogContent").html($(".LogContent").html()+"<label style='color:#4C9D2F'>"+dateFormat(new Date())+"</label>&emsp;"+msg+"<br />");
-			$(".LogContent").scrollTop($(".LogContent").prop("scrollHeight"));
-		}
-		function error(msg){
-			$(".LogContent").html($(".LogContent").html()+"<label style='color:#4C9D2F'>"+dateFormat(new Date())+"</label>&emsp;<label style='color:#b70007'>"+msg+"</label><br />");
-			$(".LogContent").scrollTop($(".LogContent").prop("scrollHeight"));
-		}
+	</div>
+	
+	<div class="TopStatusBar" display="true">
+		<!--页面顶部状态栏，显示设备信息-->
+		<div class="GoHome"></div>
+		<div class="Datetime"></div>
+		<div class="Devices">
+			<div class="D_Camera" lang_data="main.devices.idle"></div>
+			<div class="D_Guider" lang_data="main.devices.idle"></div>
+			<div class="D_Mount" lang_data="main.devices.idle"></div>
+			<div class="D_Focuser" lang_data="main.devices.idle"></div>
+			<div class="D_FilterWheels" lang_data="main.devices.empty"></div>
+		</div>
+		<div class="Status" lang_data="main.status.idle"></div>
 		
-		function BrowserReady(){
-			log("被APP调用了_BrowserReady方法");
-			zoomPage();
-			log("准备调用 PhoneInterface.showview()");
-			try{
-				ShowView();
-				log("调用完毕 PhoneInterface.showview()");
-			}catch(err){
-				error(err);
-			}
-			log("测试页面启动完毕");
-			log("");
-		}
-		
-		function dateFormat(time)   
-		{ //author: meizz   
-			var datetime = new Date();
-			datetime.setTime(time);
-			var hour = datetime.getHours()< 10 ? "0" + datetime.getHours() : datetime.getHours();
-			var minute = datetime.getMinutes()< 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
-			var second = datetime.getSeconds()< 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
-			return hour+":"+minute+":"+second; 
-		}
-		
-		function testFunction(){
-			$("#sync").click(function(){
-				//同步请求
-				log("发送同步请求");
-				try{
-					var req={type:"devices"}
-					var _r = SendCommand("GetInfo",req);
-					log("发送同步请求完毕，结果 : " + JSON.stringify(_r));
-				}catch(err){
-					error(err);
-				}
-			})
+		<div class="RPI">
+			<!--树莓派设备状态-->
+			<!--
+			<div class="Undervoltage"></div>
+			<div class="WIFI"></div>
+			-->
+			<div class="Temperature">0°C</div>
+			<div class="Capacity">0M</div>
+		</div>
+	</div>
+	<div class="Menus" id="MenuButton"></div>
+	<div class="RightControllerBar" display="true">
+		<!--右侧工具按钮-->
+		<div class="Task"></div>
+		<div class="Exposure">
+			<!--曝光按钮-->
+			<canvas id="ExposureButton" class="ExposureButton"></canvas>
+		</div>
+		<div class="ExposureSetting"></div>
+	</div>
+	
+	<div class="LeftControllerBar" display="true">
+		<!--左侧工具按钮-->
+		<div class="M_Focuser"></div>
+		<!--<div class="M_Calibration"></div>-->
+	</div>
+	
+	<div class="MountController" display="true">
+		<!--赤道仪方向控制器-->
+		<div class="DirectionButtonFeedback">
+			<!--颜色触发层-->
+			<div class="DBF_UP"></div>
+			<div class="DBF_Down"></div>
+			<div class="DBF_Left"></div>
+			<div class="DBF_Right"></div>
+		</div>
+		<div class="DirectionButtonTrigger">
+			<!--表层按键-->
+		</div>
+		<div class="DirectionButton">
+			<!--按键层-->
+			<div id="DBF_UP" axis="dec" direction="-1"></div>
+			<div id="DBF_Down" axis="dec" direction="1"></div>
+			<div id="DBF_Left" axis="ra" direction="-1"></div>
+			<div id="DBF_Right" axis="ra" direction="1"></div>
+		</div>
+		<div class="BDF_MenuButton">
+			<!--中心按键-->
+			× 1
+		</div>
+	</div>
+	
+	<div class="GuiderFrame Opened" display="true">
+		<div class="GuiderThumbnail Hide">
+			<!--数据缩略图-->
+			<div class="GuiderThumbnail_RA">
+				<div class="GuiderThumbnail_Label" lang_data="guider.labels.ra_rms"></div>
+				<div id="GT_RA_Angle" class="GuiderThumbnail_Value">0.00"</div>
+				<div id="GT_RA_Pixel" class="GuiderThumbnail_Value">0.00 PX</div>
+			</div>
+			<div class="GuiderThumbnail_DEC">
+				<div class="GuiderThumbnail_Label" lang_data="guider.labels.dec_rms"></div>
+				<div id="GT_DEC_Angle" class="GuiderThumbnail_Value">0.00"</div>
+				<div id="GT_DEC_Pixel" class="GuiderThumbnail_Value">0.00 PX</div>
+			</div>
+			<div class="GuiderThumbnail_TOTAL">
+				<div class="GuiderThumbnail_Label" lang_data="guider.labels.count_rms"></div>
+				<div id="GT_Total_Angle" class="GuiderThumbnail_Value2">0.00"</div>
+			</div>
+		</div>
+		<div class="GuiderLine">
+			<!--折线图-->
+			<canvas id="LineCanvas" class="LineCanvas"></canvas>
+			<div class="GuiderControllerBar">
+				<div class="ClearButton" lang_data="guider.labels.clear"></div>
+				<div class="GuiderControllerButton" status="stop" lang_data="guider.labels.start"></div>
+			</div>
 			
-			$("#aync1").click(function(){
-				//同步请求
-				log("发送重要的异步请求");
-				try{
-					var req={type:"main"}
-					SendCommandA("GetInfo",req,callback1,true);
-					log("发送重要的异步请求完毕");
-				}catch(err){
-					error(err);
-				}
-			})
-			$("#aync2").click(function(){
-				//同步请求
-				log("准备开始发送10次非重要异步请求");
-				for(var i=1 ; i<=10 ; i++){
-					try{
-						log("&emsp;非重要异步请求：" + i);
-						var req={type:"main",index:i}
-						SendCommandA("GetInfo",req,callback2,false);
-					}catch(err){
-						error(err);
-					}
-					
-				}
-				
-				log("10次非重要异步请求发送完毕");
-			});
-			$("#goback").click(function(){
-				log("准备调用 PhoneInterface.gohome()");
-				try{
-					GoHome();
-				log("调用完毕 PhoneInterface.gohome()");
-				}catch(err){
-					error(err);
-				}
-			});
-			
-			$("#close").click(function(){
-				log("准备调用 PhoneInterface.close()");
-				try{
-					DeviceClose();
-					log("调用完毕 PhoneInterface.close()");
-				}catch(err){
-					error(err);
-				}
-			});
-			
-			$("#show").click(function(){
-				log("准备调用 PhoneInterface.showview()");
-				try{
-					ShowView();
-					log("调用完毕 PhoneInterface.showview()");
-				}catch(err){
-					error(err);
-				}
-			});
-			$("#gps").click(function(){
-                
+		</div>
+		<!--导星显示，用于显示散点图、缩略图和折线图等-->
+		<div class="GuiderScatter">
+			<!--散点图-->
+			<canvas id="ScatterCanvas" class="ScatterCanvas"></canvas>
+		</div>
+	</div>
+	
+	<div class="CameraParameters" display="true">
+		<!--相机参数-->
+		<div class="ExposureType" id="PI_Type"></div>	<!--曝光类型，如果是导星相机则写导星-->
+		<div class="CameraParametersItem" id="PI_Bin"></div>
+		<div class="CameraParametersItem" id="PI_ExposureTime"></div>
+		<div class="CameraParametersItem" id="PI_Gain"></div>
+		<div class="CameraParametersItem" id="PI_Offset"></div>
+		<div class="CameraParametersItem" id="PI_CameraTemperature"></div>
+		<div class="CameraParametersItem" id="PI_CameraCooling"></div>
+	</div>
+	
+	<div class="MountParameters" display="true">
+		<div class="MountParametersItem" id="PI_Ra">&nbsp;</div>
+		<div class="MountParametersItem" id="PI_Dec">&nbsp;</div>
+	</div>
 
-				log("准备调用 PhoneInterface.getGPS()");
-				try{
-					var _r= GetLocalGPS();
-					log("调用完毕 PhoneInterface.getGPS() ， 结果 : " + JSON.stringify(_r));
-				}catch(err){
-					error(err);
-				}
-			});
-			$("#read").click(function(){
-				log("准备调用 PhoneInterface.getJSON('js/lang/zh-cn.json')");
-				try{
-					_GetJSON('js/lang/zh-cn.json',callback3);
-					log("调用完毕 PhoneInterface.getJSON('js/lang/zh-cn.json')");
-				}catch(err){
-					error(err);
-				}
-			});
-			$("#alert_1").click(function(){
-				log("准备调用弹窗函数（提示），没有任何回调");
-				try{
-					MessageBox.Show({
-						title:"提示弹窗"
-						,content:"单击这个按钮会弹出一个提示弹窗界面"
-					});
-				}catch(err){
-					error(err);
-				}
-			});
-			$("#alert_2").click(function(){
-				log("准备调用弹窗函数（确认），有回调");
-				try{
-					MessageBox.Show({
-						title:"确认弹窗"
-						,flag:MessageBox.FLAG_QUERY
-						,buttons:MessageBox.BUTTONS_YES_NO
-						,content:"这是一个确认窗口，有是否按钮和问号标志，请问你选择哪个按钮？"
-						,callback:function(data){
-							log("弹窗返回结果：" + JSON.stringify(data));
-						}
-					});
-				}catch(err){
-					error(err);
-				}
-			});
+	<div class="ExposureSettingForm Hide" id="ExposureSettingForm" display="true">
+		<!--曝光参数设置-->
+		<div class="ESF_Title" lang_data="exposure.setting.title"></div>
+		<div class="Radio_Group" id="EXP_Type">
+			<div class="Radio_Button" type="light" id="Type_Light" lang_data="frametype.light" checked></div>
+			<div class="Radio_Button" type="dark" id="Type_Dark" lang_data="frametype.dark"></div>
+			<div class="Radio_Button" type="flat" id="Type_Flat" lang_data="frametype.flat"></div>
+			<div class="Radio_Button" type="bias" id="Type_Bias" lang_data="frametype.bias"></div>
+			<div class="Radio_Button" type="flat-dark" id="Type_FlatDark" lang_data="frametype.flatdark"></div>
+		</div>
+		<div class="Radio_Group" id="EXP_Bins">
+			<!--动态添加Bin列表-->
+		</div>
+		<div class="ESF_Time">
+			<div class="ESF_Label" lang_data="exposure.setting.timetitle"></div>
+			<div class="Radio_Group EXP_Times" id="EXP_Times" style="clear:none;">
+				<!--
+				<div class="Radio_Button" value="0.001">1 ms</div>
+				<div class="Radio_Button" value="0.01">10 ms</div>
+				<div class="Radio_Button" value="0.05">50 ms</div>
+				<div class="Radio_Button" value="0.1">0.1 S</div>
+				<div class="Radio_Button" value="0.2">0.2 S</div>
+				<div class="Radio_Button" value="0.5">0.5 S</div>
+				-->
+				<div class="Radio_Button" value="1">1 S</div>
+				<div class="Radio_Button" value="5">5 S</div>
+				<div class="Radio_Button" value="10">10 S</div>
+				<div class="Radio_Button" value="30">30 S</div>
+				<div class="Radio_Button" value="60">1 M</div>
+				<div class="Radio_Button" value="120">2 M</div>
+				<div class="Radio_Button" value="180">3 M</div>
+				<div class="Radio_Button" value="240">4 M</div>
+				<div class="Radio_Button" value="300">5 M</div>
+				<div class="Radio_Button" value="600">10 M</div>
+				<div class="Radio_Button" value="900">15 M</div>
+				<!--
+				<div class="Radio_Button" value="1800">30 M</div>
+				-->
+				<div class="Radio_Button" value="0" id="EXP_Time_DEF" checked="checked">自定义</div>
+			</div>
+			<div class="ESF_Value" id="EXP_Time_T">1S</div>
+		</div>
+		<div class="ESF_Filter">
+			<div class="ESF_Label" lang_data="exposure.setting.gain"></div>
+			<div class="Radio_Group EXP_Gain" id="EXP_Gains">
+				<div class="Radio_Button" value="0">低</div>
+				<div class="Radio_Button" value="0">中</div>
+				<div class="Radio_Button" value="0">高</div>
+				<div class="Radio_Button" value="0" checked="checked">自定义</div>
+			</div>
+			<div class="ESF_Value" id="EXP_Gain_T">0</div>
+		</div>
+		<div class="ESF_Filter">
+			<div class="ESF_Label" lang_data="exposure.setting.offset"></div>
+			<div class="Radio_Group EXP_Offset" id="EXP_Offsets">
+				<div class="Radio_Button" value="0">低</div>
+				<div class="Radio_Button" value="0">中</div>
+				<div class="Radio_Button" value="0">高</div>
+				<div class="Radio_Button" value="0" checked="checked">自定义</div>
+			</div>
+			<div class="ESF_Value" id="EXP_Offset_T">0</div>
+		</div>
+		<div class="ESF_Filter">
+			<div class="ESF_Label" lang_data="exposure.setting.filtertitle"></div>
+			<div class="Radio_Group" id="EXP_Filters">
+			<!--动态添加Bin列表-->
+			</div>
+		</div>
+	</div>
+</div>
+<div id="SettingForm" class="Hide">
+	<!--属性设置窗口-->
+	<!--快捷菜单、设备连接、赤道仪、电调焦、滤镜轮、系统设置、文件管理、关于-->
+	<div class="TabCards">
+		<!--菜单列表-->	
+		<div class="TabCard" id="DeviceManager" selected></div>
+		<div class="TabCard" id="DsiplayManager"></div>
+		<div class="TabCard" id="SystemManager"></div>
+		<div class="TabCard" id="FileManager"></div>
+		<div class="TabCard" id="AboutManager"></div>
+		<div class="TabCard" id="Feedback"></div>
+	</div>
+	<div class="CloseButton" id="SettingFormCloseButton">×</div>
+	<div class="SettingTabs">
+		<div class="DeviceManager">
+			<!--设备管理-->
+			<div class="SettingTitle" lang_data="settings.devices.maintitle"></div>
+			<div class="DM_Item">
+				<!--单个设备-->
+				<div class="DM_Label DM_Mount"><span lang_data="settings.devices.mount"></span><div class="DM_C_Button DM_Set" id="SetMount"></div></div>
+				<div class="DM_Connection">
+					<div class="DM_C_Lable" lang_data="settings.devices.brand"></div><div class="DM_C_Value" id="DM_Mount_Brand"></div>
+					<div class="DM_C_Lable" lang_data="settings.devices.model"></div><div class="DM_C_Value" id="DM_Mount_Model"></div>
+				</div>
+				<div class="DM_Connection">
+					<div class="DM_C_Lable" lang_data="settings.devices.longitude"></div><div class="DM_C_Value" id="DM_Mount_Longitude"></div>
+					<div class="DM_C_Lable" lang_data="settings.devices.latitude"></div><div class="DM_C_Value" id="DM_Mount_Latitude"></div>
+					<div class="DM_C_Lable" lang_data="settings.devices.time"></div><div class="DM_C_Value" id="DM_Mount_Datetime"></div>
+					
+				</div>
+			</div>
+			<div class="DM_Item">
+				<!--单个设备-->
+				<div class="DM_Label DM_Camera"><span lang_data="settings.devices.camera"></span><div class="DM_C_Button DM_Set" id="SetCamera"></div></div>
+				<div class="DM_Connection">
+					<div class="DM_C_Lable" lang_data="settings.devices.brand"></div><div class="DM_C_Value" id="DM_Camera_Brand"></div>
+					<div class="DM_C_Lable" lang_data="settings.devices.model"></div><div class="DM_C_Value" id="DM_Camera_Model"></div>
+					<div class="DM_C_Lable" lang_data="settings.devices.size"></div><div class="DM_C_Value" id="DM_Camera_Size"></div>
+					<div class="DM_C_Lable" lang_data="settings.devices.color"></div><div class="DM_C_Value" id="DM_Camera_Color"></div>
+				</div>
+				<div class="DM_Connection">
+					<div class="DM_C_Lable" lang_data="settings.devices.caliber"></div><div class="DM_C_Value" id="DM_Camera_Caliber"></div>
+					<div class="DM_C_Lable" lang_data="settings.devices.focal"></div><div class="DM_C_Value" id="DM_Camera_Focal"></div>
+					<div class="DM_C_Lable" lang_data="settings.devices.ff"></div><div class="DM_C_Value" id="DM_Camera_F"></div>
+				</div>
+			</div>
+			<div class="DM_Item">
+				<!--单个设备-->
+				<div class="DM_Label DM_GuiderCamera"><span lang_data="settings.devices.guidercamera"></span><div class="DM_C_Button DM_Set" id="SetGuiderCamera"></div></div>
+				<div class="DM_Connection">
+					<div class="DM_C_Lable" lang_data="settings.devices.brand"></div><div class="DM_C_Value" id="DM_GuiderCamera_Brand"></div>
+					<div class="DM_C_Lable" lang_data="settings.devices.brand"></div><div class="DM_C_Value" id="DM_GuiderCamera_Model"></div>
+					<div class="DM_C_Lable" lang_data="settings.devices.size"></div><div class="DM_C_Value" id="DM_GuiderCamera_Size"></div>
+					<div class="DM_C_Lable" lang_data="settings.devices.color"></div><div class="DM_C_Value" id="DM_GuiderCamera_Color"></div>
+				</div>
+				<div class="DM_Connection">
+					<div class="DM_C_Lable" lang_data="settings.devices.caliber"></div><div class="DM_C_Value" id="DM_GuiderCamera_Caliber"></div>
+					<div class="DM_C_Lable" lang_data="settings.devices.focal"></div><div class="DM_C_Value" id="DM_GuiderCamera_Focal"></div>
+					<div class="DM_C_Lable" lang_data="settings.devices.ff"></div><div class="DM_C_Value" id="DM_GuiderCamera_F"></div>
+				</div>
+			</div>
+			<div class="DM_Item">
+				<!--单个设备-->
+				<div class="DM_Label DM_Focuser"><span lang_data="settings.devices.focuser"></span><div class="DM_C_Button DM_Set" id="SetFocuser"></div></div>
+				<div class="DM_Connection">
+					<div class="DM_C_Lable" lang_data="settings.devices.brand"></div><div class="DM_C_Value" id="DM_Focuser_Brand"></div>
+					<div class="DM_C_Lable" lang_data="settings.devices.model"></div><div class="DM_C_Value" id="DM_Focuser_Model"></div>
+				</div>
+			</div>
+			<div class="DM_Item">
+				<!--单个设备-->
+				<div class="DM_Label DM_FilterWheels"><span lang_data="settings.devices.filterwheels"></span><div class="DM_C_Button DM_Set" id="SetFilterWheels"></div></div>
+				<div class="DM_Connection">
+					<div class="DM_C_Lable" lang_data="settings.devices.brand"></div><div class="DM_C_Value" id="DM_FilterWheels_Brand"></div>
+					<div class="DM_C_Lable" lang_data="settings.devices.model"></div><div class="DM_C_Value" id="DM_FilterWheels_Model"></div>
+					<div class="DM_C_Lable" lang_data="settings.devices.hole"></div><div class="DM_C_Value" id="DM_FilterWheels_Hole"></div>
+				</div>
+				<div class="DM_FilterWheels_List">
+					<!--滤镜列表-->
+				</div>
+			</div>
+		</div>
+		<div class="MountManager Hide">
+			<!--赤道仪设置-->
+		</div>
+		<div class="SystemManager Hide">
+			<!--系统设置-->
+			<div class="SettingTitle" lang_data="settings.system.maintitle"></div>
+			<div class="SystemItem">
+				<div class="SystemTitle SystemTitle_EditDevicename" lang_data="settings.system.devicename"></div>
+				<div class="System_Line">
+					<div class="System_S1" lang_data="settings.system.inputdevicename"></div>
+					<input type="text" id="System_Devicename">
+					<div class="EditSystemDevicename" lang_data="settings.system.okbtn"></div>					
+				</div>
+			</div>
+			<div class="SystemItem">
+				<div class="SystemTitle SystemTitle_Password" lang_data="settings.system.editwifipassword"></div>
+				<div class="System_Line">
+					<div class="System_S1" lang_data="settings.system.inputnewpassword"></div>
+					<input type="text" id="System_Wifi_Password">
+					<div class="EditWifiPassword" lang_data="settings.system.okbtn"></div>					
+				</div>
+			</div>
+			<!--
+			<div class="SystemItem">
+				<div class="SystemTitle SystemTitle_Password" lang_data="settings.system.editpassword"></div>
+				<div class="System_Line">
+					<div class="System_S1" lang_data="settings.system.inputnewpassword"></div>
+					<input type="text" id="System_Password">
+					<div class="EditSystemPassword" lang_data="settings.system.okbtn"></div>					
+				</div>
+			</div>
+			-->
+			<div class="SystemItem">
+				<div class="SystemTitle SystemTitle_MountHome" lang_data="settings.system.homesetting"></div>
+				<div class="System_Line">
+					<div class="System_S1" lang_data="settings.system.local"></div>
+					<div class="System_S2" id="NowLoc">RA : 123:50:33.333 &nbsp;&nbsp;&nbsp;&nbsp; DEC : +123°33′33.333″</div>	
+					<div class="SetMountHome" lang_data="settings.system.sethome"></div>
+					<div class="GoMountHome" lang_data="settings.system.gohome" style="margin-left:20px;"></div>
+				</div>
+			</div>
+			<div class="SystemItem">
+				<div class="SystemTitle SystemTitle_Guider" lang_data="settings.system.clearguiderdata"></div>
+				<div class="System_Line">
+					<div class="ClearGuiderData"  lang_data="settings.system.clearbtn"></div>
+				</div>
+			</div>
+			<div class="SystemItem">
+				<div class="SystemTitle SystemTitle_GetingImage" lang_data="settings.system.video"></div>
+				<div class="System_Line">
+					<div class="System_S1" lang_data="settings.system.openvideo"></div><div class="TaskLeft_Check" style="background-color:var(--Color_Gray);float: left;" id="RuntimeVideo" checked></div>
+				</div>
+				<div class="System_Line">
+					<div class="System_S1" lang_data="settings.system.videotime"></div>
+					<div class="Radio_Group System_G1" id="RuntimeVideo_Times" style="clear:none;">
+						<div class="Radio_Button" value="0.01">10 ms</div>
+						<div class="Radio_Button" value="0.05">50 ms</div>
+						<div class="Radio_Button" value="0.1">0.1 S</div>
+						<div class="Radio_Button" value="0.2">0.2 S</div>
+						<div class="Radio_Button" value="0.5">0.5 S</div>
+						<div class="Radio_Button" value="1">1 S</div>
+						<div class="Radio_Button" value="2">2 S</div>
+						<div class="Radio_Button UDT0" value="0">自定义</div>
+					</div>
+					<div class="System_S3" id="UD_Video_Time">0.01 S</div>	
+				</div>
+			</div>
+			<div class="SystemItem" style="height:100px">
+				<div class="ShutdonwButton" lang_data="settings.system.shutdown"></div><div class="RebootButton" lang_data="settings.system.reboot"></div>
+			</div>
+		</div>
+		<div class="DsiplayManager Hide">
+			<!--显示设置-->
+			<div class="SettingTitle" lang_data="settings.display.maintitle"></div>
 			
-			$("#alert_3").click(function(){
-				log("准备调用弹窗函数（警告），有回调");
-				try{
-					MessageBox.Show({
-						title:"警告弹窗"
-						,flag:MessageBox.FLAG_WARNING
-						,content:"这是一个警告窗口，有个黄色叹号标志，并且有回调。"
-						,callback:function(data){
-							log("弹窗返回结果：" + JSON.stringify(data));
-						}
-					});
-				}catch(err){
-					error(err);
-				}
-			});
+			<div class="DisplayItem">
+				<div class="DisplayTitle DisplayTitle_Device" lang_data="settings.display.ds"></div>
+				<div class="DisplayDescribe" lang_data="settings.display.ds_label"></div>
+				<div class="DispalySwitch" id="disp_status"></div>
+			</div>
+			<div class="DisplayItem">
+				<div class="DisplayTitle DisplayTitle_Guider" lang_data="settings.display.guider"></div>
+				<div class="DisplayDescribe" lang_data="settings.display.guider_label"></div>
+				<div class="DispalySwitch" id="disp_guider"></div>
+			</div>
+			<div class="DisplayItem">
+				<div class="DisplayTitle DisplayTitle_Camera" lang_data="settings.display.cd"></div>
+				<div class="DisplayDescribe" lang_data="settings.display.cd_label"></div>
+				<div class="DispalySwitch" id="disp_camera"></div>
+			</div>
+			<div class="DisplayItem">
+				<div class="DisplayTitle DisplayTitle_Telescope" lang_data="settings.display.ml"></div>
+				<div class="DisplayDescribe" lang_data="settings.display.ml_label"></div>
+				<div class="DispalySwitch" id="disp_telescope"></div>
+			</div>
+			<div class="DisplayItem">
+				<div class="DisplayTitle DisplayTitle_Mount" lang_data="settings.display.mc"></div>
+				<div class="DisplayDescribe" lang_data="settings.display.mc_label"></div>
+				<div class="DispalySwitch" id="disp_mount"></div>
+			</div>
+			<div class="DisplayItem">
+				<div class="DisplayTitle DisplayTitle_Exposure" lang_data="settings.display.ec"></div>
+				<div class="DisplayDescribe" lang_data="settings.display.ec_label"></div>
+				<div class="DispalySwitch" id="disp_exp"></div>
+			</div>
+			<div class="DisplayItem">
+				<div class="DisplayTitle DisplayTitle_Calibration" lang_data="settings.display.calibration"></div>
+				<div class="DisplayDescribe" lang_data="settings.display.calibration_label"></div>
+				<div class="DispalySwitch" id="disp_cali"></div>
+			</div>
+		</div>
+		<div class="FileManager Hide">
+			<!--文件管理-->
+			<div class="SettingTitle" lang_data="settings.file.maintitle"></div>
+			<!--任务、文件预览列表、文件图片预览-->
+			<div class="File_TaskList">
+				<!--任务列表-->
+			</div>
+			<div class="ImageList">
+				<!--文件列表-->
+			</div>
+		</div>
+		<div class="AboutManager Hide">
+			<!--关于-->
+			<div class="StanLogo"></div>
+			<div class="C14LogoBox">
+				<div class="C14Logo"></div>
+			</div>
+			<div class="ProductIntroduction">
+				<div class="ProductIntroduction_Title" id="version" lang_data="settings.about.name"></div>
+				<div class="ProductIntroduction_Content" lang_data="settings.about.info"></div>
+			</div>
+			<div class="About_Company"></div>
+		</div>
+		<div class="Feedback Hide">
+			<!--意见反馈-->
+			<div class="SettingTitle" lang_data="settings.feedback.maintitle"></div>
+			<div class="Feedback_Text"><textarea></textarea></div>
+			<div class="Feedback_Submit" lang_data="settings.feedback.submit"></div>
+			<div class="Feedback_ContactInformation" lang_data="settings.feedback.contact">
+				
+			</div>
+		</div>
+	</div>
+</div>
+<div id="GuiderForm">
+	<!--导星设置窗口-->
+</div>
+<div id="MountForm Hide">
+	<!--GOTO窗口-->
+	<!--赤道仪倍速设置，可拍摄目标筛选-->
+</div>
+<div id="TaskForm" class="Hide">
+	<div class="CloseButton" id="TaskFormCloseButton">×</div>
+	<div class="TaskLeft">
+		<div class="TaslLeft_ItemList">
+			<div class="Task_Label" lang_data="task.targettitle"></div>
+			<div class="Task_Target"><span lang_data="task.select_target"></span><div class="SelectButton"></div></div>
+			<div class="Task_Target_Info">
+				<div class="Task_Target_Image"></div>
+				<div class="Task_Target_Item">名称</div>
+				<div class="Task_Target_Item">赤经 : </div>
+				<div class="Task_Target_Item">赤纬 : </div>
+				<div class="Task_Target_Item">高度角 : </div>
+				<div class="Task_Target_Item">方位角 : </div>
+				<canvas class="Task_Target_StarCanvas"></canvas>
+			</div>
+			<!--该版本不更新此内容，下一版本迭代-->
+			<!--
+			<div class="TaskLeft_Item"><div class="TaskLeft_Item_Title" lang_data="task.options.start_guider"></div><div class="TaskLeft_Check" checked id="task_autoGuider"></div></div>
+			<div class="TaskLeft_Item"><div class="TaskLeft_Item_Title" lang_data="task.options.cfw_f"></div><div class="TaskLeft_Check" checked id="task_changeFW_F"></div></div>
+			<div class="TaskLeft_Item"><div class="TaskLeft_Item_Title" lang_data="task.options.es_f"></div><div class="TaskLeft_Check" id="task_eventStart_F"></div></div>
+			<div class="TaskLeft_Item"><div class="TaskLeft_Item_Title"><span lang_data="task.options.time_f_a"></span><input readonly type="number" value="300" id="task_time_F_T"><span lang_data="task.options.time_f_b"></span></div><div class="TaskLeft_Check" id="task_time_F"></div></div>
+			<div class="TaskLeft_Item"><div class="TaskLeft_Item_Title" lang_data="task.options.eb_c"></div><div class="TaskLeft_Check" checked id="task_eventBegin_C"></div></div>
+			<div class="TaskLeft_Item"><div class="TaskLeft_Item_Title"><span lang_data="task.options.time_ct_a"></span><input readonly type="number" value="300" id="task_time_C_T"><span lang_data="task.options.time_ct_b"></span></div><div class="TaskLeft_Check" id="task_time_C"></div></div>
+			-->
+			<div class="Task_Dividing"></div>
+			<div class="TaskLeft_Item"><div class="TaskLeft_Item_Title" lang_data="task.options.te_home"></div><div class="TaskLeft_Check" checked id="task_over_GoHome"></div></div>
+			<div class="TaskLeft_Item"><div class="TaskLeft_Item_Title" lang_data="task.options.te_shutdown"></div><div class="TaskLeft_Check" id="task_over_Shutdown"></div></div>
+			<div class="Task_Dividing"></div>
+			<div class="TaskLeft_Display">&nbsp;</div>
+			<div class="TaskLeft_Display">&nbsp;</div>
+			<div class="TaskLeft_Display">&nbsp;</div>
+			<div class="TaskLeft_Display">&nbsp;</div>
+		</div>
+	</div>
+	<div class="TaskRight">
+		<div class="Task_Label" lang_data="task.event.maintitle"></div>
+		<div class="TableHead">
+			<div class="fdiv" lang_data="task.event.snumber"></div>
+			<div class="fdiv" lang_data="task.event.frametype"></div>
+			<div class="fdiv" lang_data="task.event.filter"></div>
+			<div class="fdiv" lang_data="task.event.times"></div>
+			<div class="fdiv" lang_data="task.event.bin"></div>
+			<div class="fdiv" lang_data="task.event.count"></div>
+			<div class="LastDiv" lang_data="task.event.controller"></div>
+		</div>
+		<div class="TaskBox">
+			<div class="TaslRight_ItemList">
+			<!--
+				<div class="Task_Event">
+					<div>1</div><div>亮场</div><div>Hα</div><div><input type="text" value="300S"></div><div>1×1</div><div><input type="text" value="10"></div><div class="LastDiv"></div>
+				</div>
+			-->
+				<div class="Task_AddBtn" lang_data="task.event.addnewevent"></div>
+			</div>
+		</div>
+		
+		<div class="TaskList_Bottom">
+			<!--任务执行底部工具条-->
+			<div class="Task_Message">&nbsp;</div>
+			<div class="TaskButton TaskButton_Start" lang_data="task.start"></div>
+			<div class="TaskButton TaskButton_Stop Hide" lang_data="task.stop"></div>
+		</div>
+	</div>
+</div>
+<div class="DeviceInit_Setting Hide">
+	<div class="Init_Title">设备初始化</div>
+	<div class="Init_Item">
+		<div class="Init_Item_Title Init_Item_Mount"><label>赤道仪</label><div class="Init_Button Init_GPS">与手机GPS同步</div></div>
+		<div class="Init_Params">
+			<div class="Init_Param">
+				<div class="Init_Param_Title">端口</div>
+				<div class="Init_Param_Value" id="i_mp"></div>
+			</div>
+			<div class="Init_Param">
+				<div class="Init_Param_Title">经度</div>
+				<div class="Init_Param_Value" id="i_log"></div>
+			</div>
+			<div class="Init_Param">
+				<div class="Init_Param_Title">纬度</div>
+				<div class="Init_Param_Value" id="i_lat"></div>
+			</div>
+			<div class="Init_Param">
+				<div class="Init_Param_Title">时间</div>
+				<div class="Init_Param_Value" id="i_t"></div>
+			</div>
+		</div>
+	</div>
+	<div class="Init_Item">
+		<div class="Init_Item_Title Init_Item_Camera"><label>主镜及相机</label></div>
+		<div class="Init_Params">
+			<div class="Init_Param">
+				<div class="Init_Param_Title">端口</div>
+				<div class="Init_Param_Value" id="i_cp"></div>
+			</div>
+			<div class="Init_Param">
+				<div class="Init_Param_Title">口径</div>
+				<div class="Init_Param_Value" id="i_cc"></div>
+			</div>
+			<div class="Init_Param">
+				<div class="Init_Param_Title">焦距</div>
+				<div class="Init_Param_Value" id="i_cfl"></div>
+			</div>
+			<div class="Init_Param">
+				<div class="Init_Param_Title">焦比</div>
+				<div class="Init_Param_Value" id="i_cf"></div>
+			</div>
+		</div>
+	</div>
+	<div class="Init_Item">
+		<div class="Init_Item_Title Init_Item_Guilder"><label>导星镜及相机</label></div>
+		<div class="Init_Params">
+			<div class="Init_Param">
+				<div class="Init_Param_Title">端口</div>
+				<div class="Init_Param_Value" id="i_gp"></div>
+			</div>
+			<div class="Init_Param">
+				<div class="Init_Param_Title">口径</div>
+				<div class="Init_Param_Value" id="i_gc"></div>
+			</div>
+			<div class="Init_Param">
+				<div class="Init_Param_Title">焦距</div>
+				<div class="Init_Param_Value" id="i_gfl"></div>
+			</div>
+			<div class="Init_Param">
+				<div class="Init_Param_Title">焦比</div>
+				<div class="Init_Param_Value" id="i_gf"></div>
+			</div>
+		</div>
+	</div>
+	<div class="Init_Buttons">
+		<div class="Init_Button" id="i_ok">确&nbsp;&nbsp;&nbsp;&nbsp;定</div>
+	</div>
+</div>
+<div class="Device_Setting Hide">
+	<!--设备的设置页面-->
+	<div class="Set_Device_Form SetMount_Form">
+		<div class="SS_Title SS_Title_Mount">
+			<span lang_data="settings.devices.mount"></span>
+			<div class="Set_CloseButton" onClick="$('.Device_Setting').addClass('Hide');">×</div>
+		</div>
+		
+		<!--赤道仪设置界面-->
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.port"></div><div class="SS_Value" id="SS_Mount_Port"></div></div>
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.longitude"></div><div class="SS_Value" id="SS_Mount_Longitude"></div></div>
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.latitude"></div><div class="SS_Value" id="SS_Mount_Latitude"></div></div>
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.time"></div><div class="SS_Value" id="SS_Mount_Date"></div></div>
+		<div class="SS_Line"><div class="SS_Button" lang_data="settings.devices.syncgps" id="SyncGPS"></div></div>
+	</div>
+	
+	<div class="Set_Device_Form SetCamera_Form">
+		<div class="SS_Title SS_Title_Camera">
+			<span lang_data="settings.devices.camera"></span>
+			<div class="Set_CloseButton" onClick="$('.Device_Setting').addClass('Hide');">×</div>
+		</div>
+		<!--主镜设置界面-->
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.port"></div><div class="SS_Value" id="SS_Camera_Port"></div></div>
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.caliber"></div><div class="SS_Value" id="SS_Camera_Caliber"></div></div>
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.focal"></div><div class="SS_Value" id="SS_Camera_Focal"></div></div>
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.ff"></div><div class="SS_Value" id="SS_Camera_F"></div></div>
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.gain"></div><div class="SS_Value" id="SS_Camera_Gain"></div></div>
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.offset"></div><div class="SS_Value" id="SS_Camera_Offset"></div></div>
+		<div class="SS_Line"><span lang_data="settings.devices.opencool"></span><div class="TaskLeft_Check" id="SS_Camera_Cool"></div></div>
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.temperature"></div><div class="SS_Value" id="SS_Camera_PTemp"></div></div>
+	</div>
+	
+	<div class="Set_Device_Form SetGuiderCamera_Form">
+		<div class="SS_Title SS_Title_GuiderCamera">
+			<span lang_data="settings.devices.guidercamera"></span>
+			<div class="Set_CloseButton" onClick="$('.Device_Setting').addClass('Hide');">×</div>
+		</div>
+		<!--主镜设置界面-->
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.port"></div><div class="SS_Value" id="SS_GuiderCamera_Port"></div></div>
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.caliber"></div><div class="SS_Value" id="SS_GuiderCamera_Caliber"></div></div>
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.focal"></div><div class="SS_Value" id="SS_GuiderCamera_Focal"></div></div>
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.ff"></div><div class="SS_Value" id="SS_GuiderCamera_F"></div></div>
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.gain"></div><div class="SS_Value" id="SS_GuiderCamera_Gain"></div></div>
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.offset"></div><div class="SS_Value" id="SS_GuiderCamera_Offset"></div></div>
+	</div>
+	
+	<div class="Set_Device_Form SetFocuser_Form">
+		<div class="SS_Title SS_Title_Focuser">
+			<span lang_data="settings.devices.focuser"></span>
+			<div class="Set_CloseButton" onClick="$('.Device_Setting').addClass('Hide');">×</div>
+		</div>
+		<!--主镜设置界面-->
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.port"></div><div class="SS_Value" id="SS_Focuser_Port"></div></div>
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.now_position"></div><div class="SS_Value" id="SS_Focuser_Position"></div></div>
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.max_position"></div><div class="SS_Value" id="SS_Focuser_Max"></div></div>
+	</div>
+	
+	
+	<div class="Set_Device_Form SetFilterWheels_Form">
+		<div class="SS_Title SS_Title_FilterWheels">
+			<span lang_data="settings.devices.filterwheels"></span>
+			<div class="Set_CloseButton" onClick="$('.Device_Setting').addClass('Hide');">×</div>
+		</div>
+		<!--主镜设置界面-->
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.port"></div><div class="SS_Value" id="SS_FilterWheels_Port"></div></div>
+		<div class="SS_Line"><div class="SS_Label" lang_data="settings.devices.hole"></div><div class="SS_Value" id="SS_FilterWheels_Hole"></div></div>
+		<div class="SS_Filters">
+			<div class="SS_Filters_List">
+			</div>
+		</div>
+	</div>
+	
+	<div class="Set_Device_Form SetFilterWheels_Color_Form">
+		<div class="SS_Line"><div class="SS_Label" style="width: 100px" lang_data="settings.devices.tag"></div><input type="text
+		" class="SS_Value" style="width: calc(100% - 150px)" id="SS_Filter_Tag"></div>
+		<div class="SS_Line"><div class="SS_Label"  lang_data="settings.devices.markcolor"></div></div>
+		<div class="SS_Filter_Colors">
+			<!--<div class="SS_Filter_Color">√</div>-->
+		</div>
+	</div>
+</div>
+<div class="NumberCard Hide">
+	<div class="NumberCard_Back">
+		<!--数字输入卡-->
+		<div class="ReturnContent"></div>
+		<div class="ContentRemove">←</div>
+		<div class="NC_Additional Hide"></div>
+		<div class="NC_Numbers"></div>
+		<div class="NC_Buttons">
+			<div class="NCB_OK" lang_data="numbercard.ok"></div>
+			<div class="NCB_Cancel" lang_data="numbercard.cancel"></div>
+		</div>
+	</div>
+</div>
+<div class="SearchForm Hide">
+	<!--目标检索-->
+	<div class="Mount_Speed">
+		<!--赤道仪速率
+		这个部分可以隐藏，如果隐藏后搜索部分为全屏-->
+		<div class="Search_Title Mount_Speed_Title" lang_data="targetserach.speed"></div>
+		<div class="Radio_Button MountSpeedItem" checked>×64</div>
+		<div class="Radio_Button MountSpeedItem">×32</div>
+		<div class="Radio_Button MountSpeedItem">×16</div>
+	</div>
+	<div class="Target_Serach">
+		<!--目标检索-->
+		<div class="Search_Title" lang_data="targetserach.maintitle">
 			
-			$("#alert_4").click(function(){
-				log("准备调用弹窗函数（错误），没有任何回调");
-				try{
-					MessageBox.Show({
-						title:"错误弹窗"
-						,flag:MessageBox.FLAG_ERROR
-						,content:"这是一个警告窗口，有个叹号标志，并且有回调。"
-						,callback:function(data){
-							log("弹窗返回结果：" +JSON.stringify(data));
-						}
-					});
-				}catch(err){
-					error(err);
-				}
-			});
+		</div>
+		<div class="CloseButton" id="SearchFormCloseButton" onClick="$('.SearchForm').addClass('Hide')">×</div>
+		<div class="SearchBar">
+			<input type="text">
+			<div class="SearchButton"></div>
+		</div>
+		<div class="BoutiqueButton" lang_data="targetserach.boutique_btn"></div>
+		<div class="Targets_List">
 			
-			$("#alert_5").click(function(){
-                                
-				log("准备调用弹窗函数（信息），没有任何回调");
-				try{
-					MessageBox.Show({
-						title:"信息弹窗"
-						,flag:MessageBox.FLAG_INFORMATION
-						,content:"这是一个警告窗口，有个白色叹号标志，并且有回调。"
-						,callback:function(data){
-							log("弹窗返回结果：" + JSON.stringify(data));
-						}
-					});
-				}catch(err){
-					error(err);
-				}
-			});
-		}
-		
-		function callback1(_r){
-			log("重要的异步请求收到回调，结果 = " +JSON.stringify(_r));
-		}
-		
-		function callback2(_r){
-			log("非重要的异步请求收到回调，结果 = " +JSON.stringify(_r));
-		}
-		
-		function callback3(_r){
-			log("调用json文件结果返回，结果 = " +JSON.stringify(_r));
-		}
-		
-		function zoomPage(){
-			/*
-			获得浏览器宽度，zoom=浏览器宽度/1920，得出缩放比
-			设置body的zoom属性
-			*/
-			var bodyWidth = document.body.clientWidth;
-			var zoom = bodyWidth/1920;
-			APPZoom=zoom;
-			$("body").css("zoom",zoom);
-			log("获得页面大小：" + bodyWidth +"缩放比：" + zoom);
-		}
-	</script>
+		</div>
+	</div>
+	<div class="Search_Condition Hide">
+		<!--精选天体搜索条件-->
+		<div class="Search_Title" lang_data="targetserach.boutique_title">
+			
+		</div>
+		<div class="CloseButton" onClick="$('.Search_Condition').addClass('Hide')">×</div>
+		<div class="Search_Title" lang_data="targetserach.targetstype"></div>
+		<div class="Radio_Group ConditionType">
+			<div class="Radio_Button" checked lang_data="targetserach.iscb"></div>
+			<div class="Radio_Button" checked lang_data="targetserach.cluster"></div>
+			<div class="Radio_Button" checked lang_data="targetserach.en"></div>
+			<div class="Radio_Button" checked lang_data="targetserach.rn"></div>
+			
+		</div>
+		<div class="Radio_Group ConditionType">
+			<div class="Radio_Button" checked lang_data="targetserach.galaxy"></div>
+			<div class="Radio_Button" checked lang_data="targetserach.dn"></div>
+			<div class="Radio_Button" checked lang_data="targetserach.pn"></div>
+			<div class="Radio_Button" checked lang_data="targetserach.comet"></div>
+		</div>
+		<div class="Search_Title" lang_data="targetserach.min_angle"></div>
+		<div class="Radio_Group ConditionAltitude">
+			<div class="Radio_Button" checked lang_data="targetserach.unlimited"></div>
+			<div class="Radio_Button">20°</div>
+			<div class="Radio_Button">30°</div>
+			<div class="Radio_Button">40°</div>
+			<div class="Radio_Button">50°</div>
+			<div class="Radio_Button">60°</div>
+		</div>
+		<div class="Search_Title" lang_data="targetserach.max_time"></div>
+		<div class="Radio_Group ConditionTime">
+			<div class="Radio_Button" checked lang_data="targetserach.unlimited"></div>
+			<div class="Radio_Button">1H</div>
+			<div class="Radio_Button">2H</div>
+			<div class="Radio_Button">3H</div>
+			<div class="Radio_Button">4H</div>
+			<div class="Radio_Button">5H</div>
+			<div class="Radio_Button">6H</div>
+		</div>
+		<div class="Search_Title" lang_data="targetserach.size"></div>
+		<div class="ConditionSize_Number">
+			<div class="ConditionSize_Number_NR Radio_Button" checked lang_data="targetserach.unlimited"></div>
+			<div class="__CNS Hide ConditionSize_Number_Range" id="ConditionSize_Duration_Min">0</div> <div class="__CNS Hide ConditionSize_Number_S">-</div> <div class="__CNS Hide ConditionSize_Number_Range" id="ConditionSize_Duration_Max">120</div>
+		</div>
+		<div class="Search_SearchButton" checked lang_data="targetserach.search_btn"></div>
+	</div>
+</div>
+<div class="PicturePreviewForm Hide">
+	<!--图片预览窗口-->
+	<div class="CloseButton" id="PicturePreviewFormCloseButton" style="position: fixed">×</div>
+	<div class="Preview_Picture">
+		<div class="Preview_PictureLoading Hide" lang_data="picturepreview.loading_title"></div>
+		<canvas id="Preview_Canvas"></canvas>
+	</div>
+	<div class="Preview_Histogram"></div><!--直方图按钮-->
+	<div class="Preview_Calibration"></div><!--校准按钮-->
+	<!--<div class="Preview_SaveToPhone" lang_data="picturepreview.save"></div>-->
+	<div class="Preview_Remove"></div>
+	<!--
+	<div class="Preview_Enlarge">+</div>
+	<div class="Preview_Narrow">-</div>
+	-->
+	<div class="HistogramBlock Hide"><canvas></canvas><div class="CloseButton" id="HistogramBlockCloseButton" style="">×</div></div>
+	<!--
+	<div class="Picture_Test"></div>
+	-->
+</div>
+<div class="FocuserForm Hide">
+	<!--对焦窗口-->
+	<div class="CloseButton" id="FocuserFormCloseButton">×</div>
+	<div class="Focuser_Image"><canvas id="Focuser_Image_Video"></canvas></div>
+	<div class="Focuser_Right">
+		<div class="Focuser_Camera" type="0" lang_data="focuser.camera"></div>
+		<div class="Focuser_Timeset" lang_data="focuser.params"></div>
+		<div class="Focuser_Auto" enabled="true" lang_data="focuser.start_auto"></div>
+		<div class="Focuser_Out"></div>
+		<div class="Focuser_In"></div>
+	</div>
+	<!--status="auto"-->
+	<div class="Focuser_Datas">
+		<div class="Focuser_Data">
+			<div class="Focuser_Value" lang_data="focuser.focus"></div>
+			<div class="Focuser_HFR" lang_data="focuser.hfr"></div>
+		</div>
+		<div class="Focuser_Status" lang_data="focuser.autoing"></div>
+	</div>
+	<div class="Focuser_Exposures Hide">
+		<div class="Set_CloseButton" onClick="$('.Focuser_Exposures').addClass('Hide');">×</div>
+		<div class="Focuser_Exposures_Title" lang_data="focuser.paramstitle"></div>
+		<div class="ESF_Label Focuser_Params_Item" lang_data="exposure.setting.timetitle"></div>
+		<div class="Radio_Group Focuser_Exposures_Group Focuser_Params_Item" style="width:750px;float:left">
+			<div class="Radio_Button" value="0.01">10 ms</div>
+			<div class="Radio_Button" value="0.05">50 ms</div>
+			<div class="Radio_Button" value="0.1">0.1 S</div>
+			<div class="Radio_Button" value="0.2">0.2 S</div>
+			<div class="Radio_Button" value="0.5">0.5 S</div>
+			<div class="Radio_Button" value="1">1 S</div>
+			<div class="Radio_Button" value="2">2 S</div>
+			<div class="Radio_Button" value="0" checked="checked">自定义</div>
+		</div>
+		<div class="Focuser_Exposures_AUD " id="AUD_Video_Time">0.01 S</div>
+		<div class="Focuser_Params_Item">
+			<div class="ESF_Label" lang_data="exposure.setting.gain"></div>
+			<div class="Radio_Group EXP_Gain" id="AUD_Gains">
+				<div class="Radio_Button" value="0">低</div>
+				<div class="Radio_Button" value="0">中</div>
+				<div class="Radio_Button" value="0">高</div>
+				<div class="Radio_Button" value="0" checked="checked">自定义</div>
+			</div>
+			<div class="ESF_Value" id="AUD_Gain_T">0</div>
+		</div>
+		<div class="Focuser_Params_Item">
+			<div class="ESF_Label" lang_data="exposure.setting.offset"></div>
+			<div class="Radio_Group EXP_Offset" id="AUD_Offsets">
+				<div class="Radio_Button" value="0">低</div>
+				<div class="Radio_Button" value="0">中</div>
+				<div class="Radio_Button" value="0">高</div>
+				<div class="Radio_Button" value="0" checked="checked">自定义</div>
+			</div>
+			<div class="ESF_Value" id="AUD_Offset_T">0</div>
+		</div>
+	</div>
+</div>
+<div class="CalibrationForm Hide">
+	<div class="CalibrationBlock">
+		<div class="Calibration_Title" lang_data="calibration.maintitle"></div>
+		<div class="Calibration_Process">
+			<div class="Calibration_Process_Item" status="wait">
+				<!--wait  , implement-->
+				<div class="Calibration_Process_Item_Title" lang_data="calibration.targetposition"></div>
+				<div class="Calibration_Process_Item_Message">&nbsp;</div>
+			</div>
+			<!--
+			<div class="Calibration_Process_Item" status="implement">
+				<div class="Calibration_Process_Item_Title" >解析图像</div>
+			</div>
+			-->
+			<div class="Calibration_Process_Item" status="wait">
+				<!--wait  , implement-->
+				<div class="Calibration_Process_Item_Title" lang_data="calibration.ci"></div>
+				<div class="Calibration_Process_Item_Message">&nbsp;</div>
+			</div>
+			<div class="Calibration_Process_Item" status="wait">
+				<div class="Calibration_Process_Item_Title" lang_data="calibration.sync"></div>
+				<div class="Calibration_Process_Item_Message">&nbsp;</div>
+			</div>
+			<div class="Calibration_Process_Item" status="wait">
+				<div class="Calibration_Process_Item_Title" lang_data="calibration.goto"></div>
+				<div class="Calibration_Process_Item_Message">&nbsp;</div>
+			</div>
+		</div>
+		<div class="Calibration_ControlBar">
+			<div class="Calibration_Button" id="Calibration_Cancel" lang_data="calibration.cancel_btn"></div>
+			<div class="Calibration_Button Hide" id="Calibration_OK" lang_data="calibration.ok_btn"></div>
+		</div>
+	</div>
+</div>
+</body>
+<script >
+</script>
 </html>
