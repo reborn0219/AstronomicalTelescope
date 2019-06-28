@@ -188,10 +188,12 @@ function SendCommandA(cmd,params,callback,important){
 function _GetJSON(path , callback){
 	//$.getJSON(path,"",callback);
 //    var json = PhoneInterface.getJSON(path);
-    var json = window.webkit.messageHandlers.getJSON.postMessage(path);
+//    var json = window.webkit.messageHandlers.getJSON.postMessage(path);
+    var json = window.prompt(path);
+    alert("1111====="+json);
 
 	callback(eval('(' + json + ')'));
-    alert("_GetJSON====="+json);
+    alert("2222===="+json);
 }
 
 
