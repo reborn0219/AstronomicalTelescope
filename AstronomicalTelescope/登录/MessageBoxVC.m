@@ -44,6 +44,59 @@
     [super viewWillAppear:animated];
     _titleMsg.text = _title;
     _contentMsg.text = _content;
+    [self assignmentWithJS];
+    
+}
+-(void)assignmentWithJS{
+    
+//    按键返回值：
+//    MessageBox.BUTTON_CLOSE=0;                //直接关闭
+//    MessageBox.BUTTON_OK=1;                    //确定
+//    MessageBox.BUTTON_CANCLE=2;                //取消
+//    MessageBox.BUTTON_YES=3;                //是
+//    MessageBox.BUTTON_NO=4;                    //否
+//    MessageBox.BUTTON_RETRY=5;                //重试
+//    MessageBox.BUTTON_ABORT=6;                //终止
+//    MessageBox.BUTTON_IGNORE=7;                //忽略
+    if(_buttons.integerValue == 0){
+        //确定
+    }else if(_buttons.integerValue == 1){
+        //确定  取消
+    }else if(_buttons.integerValue == 2){
+        //停止、重试、忽略
+
+    }else if(_buttons.integerValue == 3){
+        //是 否 取消
+
+    }else if(_buttons.integerValue == 4){
+        //是 否
+
+    }else if(_buttons.integerValue == 5){
+        //重试、取消
+    }
+    
+    if([_flag isEqualToString:@"MESSAGE"]){
+        //消息，无任何标志
+        [self.errorImageV setImage:[UIImage imageNamed:@""]];
+
+    }else if([_flag isEqualToString:@"WARNING"]){
+        //警告标志
+        [self.errorImageV setImage:[UIImage imageNamed:@"停止警告"]];
+    }else if([_flag isEqualToString:@"ERROR"]){
+        //错误标志
+        [self.errorImageV setImage:[UIImage imageNamed:@"失败"]];
+
+    }else if([_flag isEqualToString:@"QUERY"]){
+        //询问标志
+        [self.errorImageV setImage:[UIImage imageNamed:@"query_icon"]];
+
+    }else if([_flag isEqualToString:@"INFORMATION"]){
+        //消息标志
+        [self.errorImageV setImage:[UIImage imageNamed:@"information_icon"]];
+
+    }
+    
+    
     
 }
 -(void)viewWillDisappear:(BOOL)animated{
