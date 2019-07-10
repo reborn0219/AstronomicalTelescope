@@ -52,8 +52,14 @@
 
 - (IBAction)confirmBtnAction:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+    if (_block) {
+        _block(1);
+    }
 }
 - (IBAction)cancelBtnAction:(id)sender {
+    if (_block) {
+        _block(0);
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 
 }

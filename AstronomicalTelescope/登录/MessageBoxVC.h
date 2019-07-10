@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MessageBoxVC : UIViewController
+@property(nonatomic,strong)AlertBlock block;
 -(void)showInVC:(UIViewController *)VC Type:(NSInteger)type;
-
 -(void)showInVC:(UIViewController *)VC dialog:(NSString*)title :(NSString*)content :(NSString*)flag :(NSString*)buttons :(NSString*)callid;
 
 @end

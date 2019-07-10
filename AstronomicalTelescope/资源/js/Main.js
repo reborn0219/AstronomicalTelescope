@@ -69,7 +69,7 @@ function BrowserReady(){
 	
 
 	CloseThumbnail();					//关闭导星图
-    alert("11");
+    alert("888888");
 
 	InitializationSystem();				//初始化系统参数
     alert("13");

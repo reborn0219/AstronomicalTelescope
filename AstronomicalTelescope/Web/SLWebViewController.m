@@ -53,7 +53,6 @@
     
     [self setNewOrientation:YES];
     
-    [self setupNavigationItem];
     
     [self.view addSubview:self.webView];
     [self.view addSubview:self.progressView];
@@ -140,28 +139,6 @@
     [self.navigationController popViewControllerAnimated:YES];
     
 }
-- (void)setupNavigationItem{
-    // 后退按钮
-    UIButton * goBackButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [goBackButton setImage:[UIImage imageNamed:@"backbutton"] forState:UIControlStateNormal];
-    [goBackButton addTarget:self action:@selector(goBackAction:) forControlEvents:UIControlEventTouchUpInside];
-    goBackButton.frame = CGRectMake(0, 0, 30, NavBar_Height);
-    UIBarButtonItem * goBackButtonItem = [[UIBarButtonItem alloc] initWithCustomView:goBackButton];
-    
-    UIBarButtonItem * jstoOc = [[UIBarButtonItem alloc] initWithTitle:@"首页" style:UIBarButtonItemStyleDone target:self action:@selector(localHtmlClicked)];
-    self.navigationItem.leftBarButtonItems = @[goBackButtonItem,jstoOc];
-    
-    // 刷新按钮
-    UIButton * refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [refreshButton setImage:[UIImage imageNamed:@"webRefreshButton"] forState:UIControlStateNormal];
-    [refreshButton addTarget:self action:@selector(refreshAction:) forControlEvents:UIControlEventTouchUpInside];
-    refreshButton.frame = CGRectMake(0, 0, 30, NavBar_Height);
-    UIBarButtonItem * refreshButtonItem = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
-    
-    UIBarButtonItem * ocToJs = [[UIBarButtonItem alloc] initWithTitle:@"OC调用JS" style:UIBarButtonItemStyleDone target:self action:@selector(ocToJs)];
-    self.navigationItem.rightBarButtonItems = @[refreshButtonItem, ocToJs];
-    
-}
 
 #pragma mark -- Event Handle
 
@@ -179,30 +156,7 @@
     [_webView reload];
 }
 
-- (void)ocToJs{
-    
-    //OC调用JS
-    
-    //changeColor()是JS方法名，completionHandler是异步回调block
-    NSString *jsString = [NSString stringWithFormat:@"changeColor('%@')", @"Js参数"];
-    [_webView evaluateJavaScript:jsString completionHandler:^(id _Nullable data, NSError * _Nullable error) {
-        NSLog(@"改变HTML的背景色");
-    }];
-    
-    //改变字体大小 调用原生JS方法
-    NSString *jsFont = [NSString stringWithFormat:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '%d%%'", arc4random()%99 + 100];
-    [_webView evaluateJavaScript:jsFont completionHandler:nil];
-    
-    NSString * path =  [[NSBundle mainBundle] pathForResource:@"girl" ofType:@"png"];
-    NSString *jsPicture = [NSString stringWithFormat:@"changePicture('%@','%@')", @"pictureId",path];
-    [_webView evaluateJavaScript:jsPicture completionHandler:^(id _Nullable data, NSError * _Nullable error) {
-        NSLog(@"切换本地头像");
-    }];
-    
-}
-
 #pragma mark -- Getter
-
 - (UIProgressView *)progressView
 {
     if (!_progressView){
@@ -253,7 +207,11 @@
         [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"showview"];
         [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"getJSON"];
 
-        
+        [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"loadUrlA"];
+        [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"loadUrl"];
+//        [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"getJSON"];
+//        [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"getJSON"];
+
         
         config.userContentController = wkUController;
         
@@ -354,10 +312,14 @@
     }else if([message.name isEqualToString:@"getGPS"]){
         [self getGPS];
 
-    }else if ([message.name isEqualToString:@"getJSON"]){
+    }else if ([message.name isEqualToString:@"loadUrl"]){
         
-        [self getJSON:parameter];
-
+        [self loadUrl:parameter];
+        
+    }else if ([message.name isEqualToString:@"loadUrlA"]){
+        
+        [self loadUrlA:parameter];
+        
     }
     
 }
@@ -462,29 +424,78 @@
  *  @param completionHandler 警告框消失调用
  */
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"HTML的弹出框" message:message?:@"" preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:([UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    
+    MessageBoxVC * messageVC = [[MessageBoxVC alloc]init];
+    [messageVC showInVC:self dialog:@"JSalert" :message :message :@"1" :@"1"];
+    messageVC.block = ^(NSInteger index) {
         completionHandler();
-    }])];
-    [self presentViewController:alertController animated:YES completion:nil];
+
+    };
+//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"HTML的弹出框" message:message?:@"" preferredStyle:UIAlertControllerStyleAlert];
+//    [alertController addAction:([UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        completionHandler();
+//    }])];
+//    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 // 确认框
 //JavaScript调用confirm方法后回调的方法 confirm是js中的确定框，需要在block中把用户选择的情况传递进去
 - (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL))completionHandler{
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:message?:@"" preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:([UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        completionHandler(NO);
-    }])];
-    [alertController addAction:([UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        completionHandler(YES);
-    }])];
-    [self presentViewController:alertController animated:YES completion:nil];
+    
+    MessageBoxVC * messageVC = [[MessageBoxVC alloc]init];
+    [messageVC showInVC:self dialog:@"JSalert" :message :message :@"1" :@"1"];
+    messageVC.block = ^(NSInteger index) {
+        if (index==1) {
+            completionHandler(YES);
+        }else{
+            completionHandler(NO);
+        }
+    };
+//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:message?:@"" preferredStyle:UIAlertControllerStyleAlert];
+//    [alertController addAction:([UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//        completionHandler(NO);
+//    }])];
+//    [alertController addAction:([UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        completionHandler(YES);
+//    }])];
+//    [self presentViewController:alertController animated:YES completion:nil];
 }
 // 输入框
 //JavaScript调用prompt方法后回调的方法 prompt是js中的输入框 需要在block中把用户输入的信息传入
+-(NSDictionary *)readLocalFileWithName:(NSString *)name {
+    // 获取文件路径
+    
+    NSString *strUrl = [name stringByReplacingOccurrencesOfString:@".json" withString:@""];
+    NSString *path = [[NSBundle mainBundle] pathForResource:strUrl ofType:@"json"];
+    // 将文件数据化
+    NSData *data = [[NSData alloc] initWithContentsOfFile:path];
+    // 对数据进行JSON格式化并返回字典形式
+    return [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+}
++(NSString *)jsonStringWithDict:(NSDictionary *)dict {
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *jsonString;
+    if (!jsonData) {
+        NSLog(@"%@",error);
+    }else{
+        jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    return jsonString;
+}
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * _Nullable))completionHandler{
-       completionHandler(prompt);
+    if ([prompt containsString:@"http"]) {
+        NSArray  *array = [prompt componentsSeparatedByString:@","];
+        completionHandler([self loadUrl:array]);
+        
+    }else if ([prompt containsString:@"getGPS"]) {
+        completionHandler([[self getGPS] mj_JSONString]);
+
+    }else{
+        NSArray  *array = [prompt componentsSeparatedByString:@"/"];
+        NSString * langStr = [array lastObject];
+        completionHandler([[self readLocalFileWithName:langStr] mj_JSONString]);
+    }
     
 }
 // 页面是弹出窗口 _blank 处理
@@ -501,20 +512,19 @@
     [[_webView configuration].userContentController removeScriptMessageHandlerForName:@"jsToOcWithPrams"];
     //移除观察者
     [_webView removeObserver:self
-                  forKeyPath:NSStringFromSelector(@selector(estimatedProgress))];
+                forKeyPath:NSStringFromSelector(@selector(estimatedProgress))];
     [_webView removeObserver:self
                   forKeyPath:NSStringFromSelector(@selector(title))];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
 -(void)ready{
     NSLog(@"ready被调用");
-//    192.168.31
     [self setHost:_ipName];
     
 }
@@ -536,6 +546,23 @@
 }
 -(void)showview{
     NSLog(@"showview被调用");
+}
+-(NSString *)loadUrl:(NSArray *)params{
+    NSLog(@"loadUrl被调用--%@---",params);
+    NSString * firstStr = params.firstObject;
+    NSString * secondStr = params.lastObject;
+    NSString *returnData = [self SynchronousRequestUserBaseFromRemoteWith:firstStr :secondStr];
+    NSLog(@"loadUrl被调用--%@---",returnData);
+    return returnData;
+//    [self.webView evaluateJavaScript:@"_BrowserReady('OC调用JS警告窗方法')" completionHandler:^(id _Nullable item, NSError * _Nullable error) {
+//        NSLog(@"alert");
+//    }];
+}
+-(void)loadUrlA:(NSDictionary *)params{
+    NSLog(@"loadUrlA被调用--%@---",params);
+//    [self.webView evaluateJavaScript:@"_BrowserReady('OC调用JS警告窗方法')" completionHandler:^(id _Nullable item, NSError * _Nullable error) {
+//        NSLog(@"alert");
+//    }];
 }
 -(NSString *)getJSON:(NSString *)parameter{
     
@@ -568,15 +595,14 @@
     
     
 }
+
 -(void)dialog:(NSString*)title :(NSString*)content :(NSString*)flag :(NSString*)buttons :(NSString*)callid{
     
     //    JSValue *add = self.context[@"__MessageBox_Callback"];
     //    NSLog(@"Func==add: %@", add);
     //    NSDictionary *dic = @{@"callid":callid,@"result":@"0"};
     //    [add callWithArguments:@[[dic mj_JSONString]]];
-    
-    
-    
+
     dispatch_async(dispatch_get_main_queue(), ^{
         
         MessageBoxVC * messageVC = [[MessageBoxVC alloc]init];
@@ -584,5 +610,38 @@
     });
     
 }
-
+-(NSString * )SynchronousRequestUserBaseFromRemoteWith:(NSString *)urlstr :(NSString *)patamer{
+    
+    //第一步，创建URL
+    
+    NSURL *url = [NSURL URLWithString:urlstr];
+    //第二步，通过URL创建网络请求
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    [request setHTTPMethod:@"POST"];//设置请求方式为POST，默认为GET
+    NSData *data = [patamer dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPBody:data];
+    
+    
+    NSError __block * err = NULL;
+    NSString __block  * returndata;
+    BOOL __block reqProcessed = false;
+    NSURLResponse __block *resp;
+   
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        resp = response;
+        err = error;
+        returndata = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        reqProcessed = true;
+        NSLog(@"http请求返回：%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+//        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        
+    }] resume];
+    while (!reqProcessed) {
+        
+        [NSThread sleepForTimeInterval:0];
+        
+    }
+    return returndata;
+    
+}
 @end

@@ -33,6 +33,9 @@
 		4B186EC922BE20FF003BCB74 /* css in Resources */ = {isa = PBXBuildFile; fileRef = 4B186EC422BE20FF003BCB74 /* css */; };
 		4B186ECA22BE20FF003BCB74 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 4B186EC522BE20FF003BCB74 /* Main.html */; };
 		4B186ECB22BE20FF003BCB74 /* js in Resources */ = {isa = PBXBuildFile; fileRef = 4B186EC622BE20FF003BCB74 /* js */; };
+		4B8D461522C74B1F00BF5C60 /* zh-cn.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B8D461222C74B1F00BF5C60 /* zh-cn.json */; };
+		4B8D461622C74B1F00BF5C60 /* jp-wk.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B8D461322C74B1F00BF5C60 /* jp-wk.json */; };
+		4B8D461722C74B1F00BF5C60 /* en-us.json in Resources */ = {isa = PBXBuildFile; fileRef = 4B8D461422C74B1F00BF5C60 /* en-us.json */; };
 		4BACEF7322B7F09400C5D5DB /* MessageBoxVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BACEF7122B7F09400C5D5DB /* MessageBoxVC.m */; };
 		4BACEF7422B7F09400C5D5DB /* MessageBoxVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BACEF7222B7F09400C5D5DB /* MessageBoxVC.xib */; };
 		779A0ED2B0142A1B624AC710 /* libPods-AstronomicalTelescope.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3E8DB55388669AFCD0ACA29 /* libPods-AstronomicalTelescope.a */; };
@@ -104,6 +107,9 @@
 		4B186EC422BE20FF003BCB74 /* css */ = {isa = PBXFileReference; lastKnownFileType = folder; path = css; sourceTree = "<group>"; };
 		4B186EC522BE20FF003BCB74 /* Main.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Main.html; sourceTree = "<group>"; };
 		4B186EC622BE20FF003BCB74 /* js */ = {isa = PBXFileReference; lastKnownFileType = folder; path = js; sourceTree = "<group>"; };
+		4B8D461222C74B1F00BF5C60 /* zh-cn.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "zh-cn.json"; sourceTree = "<group>"; };
+		4B8D461322C74B1F00BF5C60 /* jp-wk.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jp-wk.json"; sourceTree = "<group>"; };
+		4B8D461422C74B1F00BF5C60 /* en-us.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "en-us.json"; sourceTree = "<group>"; };
 		4BACEF7022B7F09400C5D5DB /* MessageBoxVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageBoxVC.h; sourceTree = "<group>"; };
 		4BACEF7122B7F09400C5D5DB /* MessageBoxVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageBoxVC.m; sourceTree = "<group>"; };
 		4BACEF7222B7F09400C5D5DB /* MessageBoxVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageBoxVC.xib; sourceTree = "<group>"; };
@@ -230,6 +236,7 @@
 		2F9883B722A6612A0023326F /* 资源 */ = {
 			isa = PBXGroup;
 			children = (
+				4B8D461122C74B1F00BF5C60 /* lang */,
 				4B186EC422BE20FF003BCB74 /* css */,
 				4B186EC222BE20FF003BCB74 /* fonts */,
 				4B186EC322BE20FF003BCB74 /* images */,
@@ -283,6 +290,16 @@
 				4B186EC022BE0761003BCB74 /* XSDLocationTools.m */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		4B8D461122C74B1F00BF5C60 /* lang */ = {
+			isa = PBXGroup;
+			children = (
+				4B8D461222C74B1F00BF5C60 /* zh-cn.json */,
+				4B8D461322C74B1F00BF5C60 /* jp-wk.json */,
+				4B8D461422C74B1F00BF5C60 /* en-us.json */,
+			);
+			path = lang;
 			sourceTree = "<group>";
 		};
 		A7A632068A2594A8B04A6BB7 /* Frameworks */ = {
@@ -409,6 +426,8 @@
 			files = (
 				4B186EC922BE20FF003BCB74 /* css in Resources */,
 				4BACEF7422B7F09400C5D5DB /* MessageBoxVC.xib in Resources */,
+				4B8D461722C74B1F00BF5C60 /* en-us.json in Resources */,
+				4B8D461522C74B1F00BF5C60 /* zh-cn.json in Resources */,
 				2F140EBA22B891CC00B241B9 /* PopListCell.xib in Resources */,
 				4B186ECA22BE20FF003BCB74 /* Main.html in Resources */,
 				2F439F14229BCB3900DD430B /* LoginViewController.xib in Resources */,
@@ -416,6 +435,7 @@
 				4B186ECB22BE20FF003BCB74 /* js in Resources */,
 				4B186EC822BE20FF003BCB74 /* images in Resources */,
 				2F439EE9229BCAA600DD430B /* LaunchScreen.storyboard in Resources */,
+				4B8D461622C74B1F00BF5C60 /* jp-wk.json in Resources */,
 				2F439EE6229BCAA600DD430B /* Assets.xcassets in Resources */,
 				2F439EE4229BCAA100DD430B /* Main.storyboard in Resources */,
 			);
@@ -671,7 +691,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V3RQ7D6UN4;
+				DEVELOPMENT_TEAM = NA9D8AVPCL;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/AstronomicalTelescope/PrefixHeader.pch";
 				INFOPLIST_FILE = AstronomicalTelescope/Info.plist;
@@ -692,7 +712,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V3RQ7D6UN4;
+				DEVELOPMENT_TEAM = NA9D8AVPCL;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/AstronomicalTelescope/PrefixHeader.pch";
 				INFOPLIST_FILE = AstronomicalTelescope/Info.plist;

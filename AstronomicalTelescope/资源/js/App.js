@@ -104,9 +104,9 @@ function _SetHost(host){
 
 function GetLocalGPS(){
 //    var _r = PhoneInterface.getGPS();
-    alert("gps");
-    var _r = window.webkit.messageHandlers.getGPS.postMessage("调用NoticeAppReady完毕");
-
+//    var _r = window.webkit.messageHandlers.getGPS.postMessage("getGPS");
+    var _r = window.prompt("getGPS");
+    
 	return eval('(' + _r + ')');
 }
 
@@ -118,10 +118,8 @@ function DeviceClose(){
 
 //通知APP已经启动成功
 function NoticeAppReady(){
-    alert("已经调用NoticeAppReady");
 //    window.webkit.messageHandlers.PhoneInterface.ready();
     window.webkit.messageHandlers.ready.postMessage("");
-    alert("调用NoticeAppReady完毕");
 }
 
 function ShowView(){
@@ -137,7 +135,6 @@ function GoHome(){
 }
 //浏览器准备完毕后回调
 function _BrowserReady(){
-    alert("_BrowserReady");
 	BrowserReady();
 }
 //var HOST="http://192.168.31.92";
@@ -146,13 +143,22 @@ var Host_Page = "/stargazer-web/stargazer.aspx";
 var Video_Page = "";
 
 function SendCommand(cmd, params, sync){
+
 //	if(cmd=="InitSystem"){
 //		alert(HOST+Host_Page+"?cmd="+cmd, "params=" + JSON.stringify(jsonData));
 //	}
+    
 	var requstData={};
 	var jsonData = (params && params!=undefined && params!=null)?params: {};
 	var requstData = "";
-	var _r= PhoneInterface.loadUrl(HOST+Host_Page+"?cmd="+cmd, "params=" + JSON.stringify(jsonData));
+//    var _r= PhoneInterface.loadUrl(HOST+Host_Page+"?cmd="+cmd, "params=" + JSON.stringify(jsonData));
+  
+//   var _r = window.webkit.messageHandlers.loadUrl.postMessage([HOST+Host_Page+"?cmd="+cmd,"params=" + JSON.stringify(jsonData)]);
+    var _r = window.prompt(HOST+Host_Page+"?cmd="+cmd+","+"params=" + JSON.stringify(jsonData));
+
+//    window.webkit.messageHandlers.loadUrl.postMessage("");
+//    window.webkit.messageHandlers.loadUrl.postMessage("00000");
+
 	var r =  eval('(' + _r + ')');
 	if(r.result == 1){
 		requstData=r.data;
@@ -181,7 +187,9 @@ function SendCommandA(cmd,params,callback,important){
 		if(cbFun==""){cbFun=callback.toString();}
 	}
 	//alert(HOST+Host_Page+"?cmd="+cmd+ ",params=" + JSON.stringify(jsonData)+","+cbFun+","+important);
-	PhoneInterface.loadUrlA(HOST+Host_Page+"?cmd="+cmd, "params=" + JSON.stringify(jsonData),cbFun,important);
+//    PhoneInterface.loadUrlA(HOST+Host_Page+"?cmd="+cmd, "params=" + JSON.stringify(jsonData),cbFun,important);
+    window.webkit.messageHandlers.loadUrlA.postMessage(HOST+Host_Page+"?cmd="+cmd, "params=" + JSON.stringify(jsonData),cbFun,important);
+
 	//alert("调用完毕，等待回调");
 }
 
@@ -190,10 +198,12 @@ function _GetJSON(path , callback){
 //    var json = PhoneInterface.getJSON(path);
 //    var json = window.webkit.messageHandlers.getJSON.postMessage(path);
     var json = window.prompt(path);
-    alert("1111====="+json);
+//    alert("1111====="+json);
+//    alert(JSON.parse(json));
+//    alert(jquery.parseJSON(json));
 
-	callback(eval('(' + json + ')'));
-    alert("2222===="+json);
+    callback(eval('(' + json + ')'));
+//    callback(JSON.parse(json));
 }
 
 
