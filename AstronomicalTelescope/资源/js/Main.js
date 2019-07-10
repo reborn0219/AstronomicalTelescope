@@ -69,13 +69,13 @@ function BrowserReady(){
 	
 
 	CloseThumbnail();					//关闭导星图
-    alert("888888");
+//    alert("关闭导星图");
 
 	InitializationSystem();				//初始化系统参数
-    alert("13");
+//    alert("初始化系统参数");
 
 	InitWinInit();						//系统初始化窗口
-    alert("2");
+//    alert("系统初始化窗口");
 
 	//到此为止可以正常使用软件，打开屏幕（这里还没有写）
 	
@@ -88,7 +88,7 @@ function BrowserReady(){
 	setTimeout(function(){ShowView();},100); //隐藏APP的界面
 	_StartDeviceStatusGetterLine();		//启动状态监控线程
 	//设置绘图大小
-    alert("3");
+//    alert("启动状态监控线程");
 
 }
 
@@ -109,15 +109,11 @@ function InitParameters(){
 	3. 判断是否处于任务中，如果处于任务中，则修改所有任务处理相关
  */
 function InitializationSystem(){
-    alert("InitializationSystem");
+  
 	__SetLanguage(language);
-    alert("InitializationSystem1");
-
 	//获得所有的系统默认参数
 	//alert("准备调用初始化");
 	SystemParameters = __GetInitializationSystemParameters();
-    alert("InitializationSystem2");
-
 	//同步赤道仪GPS信息
 	if(SystemParameters.devices.mount!=undefined && SystemParameters.devices.mount.initlocation==false){
 		//初始化赤道仪信息
@@ -556,7 +552,7 @@ function MoveTime(){
 }
 
 function SetDisplayStatus(_r){
-	//alert(_r);
+	alert(_r);
 	var r =  AnythingToJson(_r);
 	var requstData;
 	if(r.result == 1){
@@ -668,6 +664,7 @@ var __Guider_Status_Counter=0;//导星状态改变计数器，等2的时候才�
 //所有状态的刷新
 var _DeviceStatusGetterLine=0;
 function _DeviceStatusGetterFunction(){
+    Alert("请输入正确的赤道仪时间，格式为：年-月-日 时:分:秒\n\n如：2019-03-14 22:03:14");
 	RefreshDatetime();//刷新时间显示
 	//*20190521异步修改*/
 	__A__GetStatus(SetDisplayStatus);

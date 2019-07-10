@@ -63,6 +63,7 @@
 }
 
 - (IBAction)connectDeviceAction:(id)sender {
+    [_UDPmg stopListen];
     SLWebViewController *webVC = [[SLWebViewController alloc]init];
     webVC.ipName = self.currentIP;
 

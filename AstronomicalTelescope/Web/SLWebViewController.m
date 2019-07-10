@@ -558,11 +558,15 @@
 //        NSLog(@"alert");
 //    }];
 }
--(void)loadUrlA:(NSDictionary *)params{
+-(void)loadUrlA:(NSArray *)params{
     NSLog(@"loadUrlA被调用--%@---",params);
 //    [self.webView evaluateJavaScript:@"_BrowserReady('OC调用JS警告窗方法')" completionHandler:^(id _Nullable item, NSError * _Nullable error) {
 //        NSLog(@"alert");
 //    }];
+    NSArray *jsonArr = params;
+    
+    [self AsynchronousRequestWith:jsonArr.firstObject :jsonArr[1] :jsonArr[2]];
+    
 }
 -(NSString *)getJSON:(NSString *)parameter{
     
@@ -610,6 +614,47 @@
     });
     
 }
+-(void)AsynchronousRequestWith:(NSString *)urlstr :(NSString *)patamer :(NSString *)jsFunction{
+    
+    //第一步，创建URL
+    MJWeakSelf
+    NSURL *url = [NSURL URLWithString:urlstr];
+    //第二步，通过URL创建网络请求
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    [request setHTTPMethod:@"POST"];//设置请求方式为POST，默认为GET
+    NSData *data = [patamer dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPBody:data];
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+      
+        NSLog(@"http请求返回：%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        NSString * jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSDictionary *jsonDic = [jsonStr mj_JSONObject];
+        NSString *dataDic = [jsonDic objectForKey:@"data"];
+        NSLog(@"：%@",jsonDic);
+        NSLog(@"======：%@",[self getRandomStr]);
+        NSString * randomStr = [self getRandomStr];
+        NSString * ocJS = [NSString stringWithFormat:@"'var _callback_%@=%@;_callback_%@(%@);_callback_%@=undefined;'",randomStr,jsFunction,randomStr,[dataDic mj_JSONString],randomStr];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.webView evaluateJavaScript:ocJS completionHandler:^(id _Nullable item, NSError * _Nullable error) {
+                NSLog(@"%@",error);
+            }];
+        });
+      
+        
+    }] resume];
+
+    
+}
+
+-(NSString *)getRandomStr{
+    char data[8];
+    for (int x=0;x < 8;data[x++] = (char)('a' + (arc4random_uniform(26))));
+    NSString *randomStr = [[NSString alloc] initWithBytes:data length:8 encoding:NSUTF8StringEncoding];
+    NSString *string = [NSString stringWithFormat:@"%@",randomStr];
+    NSLog(@"获取随机字符串 %@",string);
+    return string;
+}
+
 -(NSString * )SynchronousRequestUserBaseFromRemoteWith:(NSString *)urlstr :(NSString *)patamer{
     
     //第一步，创建URL

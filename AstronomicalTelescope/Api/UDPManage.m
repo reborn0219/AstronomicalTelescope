@@ -13,14 +13,20 @@
 #define udpPort 59999
 
 @interface UDPManage () <GCDAsyncUdpSocketDelegate>
+{
+    GCDAsyncUdpSocket * udpSocket;
+}
 @end
 
 static UDPManage *myUDPManage = nil;
 
 @implementation UDPManage
+-(void)stopListen{
+    [udpSocket close];
+}
 - (void)startListenClientSocketMessage{
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    GCDAsyncUdpSocket * udpSocket = [[GCDAsyncUdpSocket alloc]initWithDelegate:self delegateQueue:queue];
+    udpSocket = [[GCDAsyncUdpSocket alloc]initWithDelegate:self delegateQueue:queue];
     self.udpSocket = udpSocket;
     self.isSending = NO;
     // 关联端口,监听端口

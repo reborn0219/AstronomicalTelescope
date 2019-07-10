@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign)NSInteger resendTimes;
 
 - (void)startListenClientSocketMessage;
-
+- (void)stopListen;
 - (void)sendMessage:(NSString *)message;
 @end
 

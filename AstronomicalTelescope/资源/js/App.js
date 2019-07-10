@@ -97,7 +97,7 @@ function __MessageBox_Callback(data){
 }
 //设置Host参数
 function _SetHost(host){
-    alert("_SetHost"+host);
+//    alert("_SetHost"+host);
 	HOST = "http://"+host
 	//HOST = "http://"+host+":8080";
 }
@@ -188,7 +188,7 @@ function SendCommandA(cmd,params,callback,important){
 	}
 	//alert(HOST+Host_Page+"?cmd="+cmd+ ",params=" + JSON.stringify(jsonData)+","+cbFun+","+important);
 //    PhoneInterface.loadUrlA(HOST+Host_Page+"?cmd="+cmd, "params=" + JSON.stringify(jsonData),cbFun,important);
-    window.webkit.messageHandlers.loadUrlA.postMessage(HOST+Host_Page+"?cmd="+cmd, "params=" + JSON.stringify(jsonData),cbFun,important);
+    window.webkit.messageHandlers.loadUrlA.postMessage([HOST+Host_Page+"?cmd="+cmd, "params=" + JSON.stringify(jsonData),cbFun,important]);
 
 	//alert("调用完毕，等待回调");
 }

@@ -8,7 +8,6 @@ function loadLanguage(lang){
 	//alert("加载语言");
 	_GetJSON("js/lang/" + lang+".json",function(data){
 		//console.log("语言加载成功");
-             alert("json----ee");
 		lang_json=data;
 		//console.log(lang_json);
 	});
