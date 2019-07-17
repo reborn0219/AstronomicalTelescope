@@ -209,6 +209,9 @@
 
         [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"loadUrlA"];
         [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"loadUrl"];
+        [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"gohome"];
+
+        
 //        [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"getJSON"];
 //        [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"getJSON"];
 
@@ -319,6 +322,10 @@
     }else if ([message.name isEqualToString:@"loadUrlA"]){
         
         [self loadUrlA:parameter];
+        
+    }else if ([message.name isEqualToString:@"gohome"]){
+        
+        [self gohome];
         
     }
     
@@ -633,7 +640,9 @@
         NSLog(@"：%@",jsonDic);
         NSLog(@"======：%@",[self getRandomStr]);
         NSString * randomStr = [self getRandomStr];
-        NSString * ocJS = [NSString stringWithFormat:@"'var _callback_%@=%@;_callback_%@(%@);_callback_%@=undefined;'",randomStr,jsFunction,randomStr,[dataDic mj_JSONString],randomStr];
+        NSString * ocJS = [NSString stringWithFormat:@"_%@('var _callback_%@=%@;_callback_%@(%@);_callback_%@=undefined;')",jsFunction,randomStr,jsFunction,randomStr,[dataDic mj_JSONString],randomStr];
+//        NSString * param = [NSString stringWithFormat:@"_SetHost('%@')",host];
+
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf.webView evaluateJavaScript:ocJS completionHandler:^(id _Nullable item, NSError * _Nullable error) {
                 NSLog(@"%@",error);

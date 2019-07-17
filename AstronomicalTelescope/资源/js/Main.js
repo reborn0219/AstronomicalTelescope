@@ -83,12 +83,19 @@ function BrowserReady(){
 	window.addEventListener('contextmenu', function(e){
 		e.preventDefault();
 	});
-	$("#MainForm").removeClass("Hide");	//显示主界面	
+//    alert("支持长按出菜单");
+
+	$("#MainForm").removeClass("Hide");	//显示主界面
+//    alert("显示主界面");
+
 	$("#LoadForm").addClass("Hide");	//隐藏加载界面
+//    alert("隐藏加载界面");
+
 	setTimeout(function(){ShowView();},100); //隐藏APP的界面
+//    alert("隐藏APP的界面");
+
 	_StartDeviceStatusGetterLine();		//启动状态监控线程
 	//设置绘图大小
-//    alert("启动状态监控线程");
 
 }
 
@@ -552,7 +559,7 @@ function MoveTime(){
 }
 
 function SetDisplayStatus(_r){
-	alert(_r);
+	alert("怎么肥事");
 	var r =  AnythingToJson(_r);
 	var requstData;
 	if(r.result == 1){
@@ -664,7 +671,7 @@ var __Guider_Status_Counter=0;//导星状态改变计数器，等2的时候才�
 //所有状态的刷新
 var _DeviceStatusGetterLine=0;
 function _DeviceStatusGetterFunction(){
-    Alert("请输入正确的赤道仪时间，格式为：年-月-日 时:分:秒\n\n如：2019-03-14 22:03:14");
+//    alert("请输入正确的赤道仪时间，格式为：年-月-日 时:分:秒\n\n如：2019-03-14 22:03:14");
 	RefreshDatetime();//刷新时间显示
 	//*20190521异步修改*/
 	__A__GetStatus(SetDisplayStatus);
@@ -690,10 +697,13 @@ function _getNow(s) {
  同时把启动定时器的指针存放到_DeviceStatusGetterLine中用于结束定时器。
 */
 function _StartDeviceStatusGetterLine(){
+
 	_StopDeviceStatusGetterLine();
+//    alert("_StopDeviceStatusGetterLine");
 	//RefreshDatetime();
 	//setInterval(RefreshDatetime,1000);
 	_DeviceStatusGetterFunction();
+//    alert("_DeviceStatusGetterFunction");
 	_DeviceStatusGetterLine = setInterval(_DeviceStatusGetterFunction,1000);//每秒钟获取一次状态
 }
 

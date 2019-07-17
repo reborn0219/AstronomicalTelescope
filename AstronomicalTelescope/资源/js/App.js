@@ -137,6 +137,12 @@ function GoHome(){
 function _BrowserReady(){
 	BrowserReady();
 }
+
+function _SetDisplayStatus(status){
+    alert("怎么肥事"+status);
+    
+}
+
 //var HOST="http://192.168.31.92";
 var HOST="http://192.168.31.218";
 var Host_Page = "/stargazer-web/stargazer.aspx";
@@ -190,7 +196,7 @@ function SendCommandA(cmd,params,callback,important){
 //    PhoneInterface.loadUrlA(HOST+Host_Page+"?cmd="+cmd, "params=" + JSON.stringify(jsonData),cbFun,important);
     window.webkit.messageHandlers.loadUrlA.postMessage([HOST+Host_Page+"?cmd="+cmd, "params=" + JSON.stringify(jsonData),cbFun,important]);
 
-	//alert("调用完毕，等待回调");
+//    alert("调用完毕，等待回调");
 }
 
 function _GetJSON(path , callback){
